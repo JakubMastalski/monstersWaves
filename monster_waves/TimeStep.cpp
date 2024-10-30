@@ -17,7 +17,17 @@ void TimeStep::reset()
     m_lastTime = m_clock.restart();
 }
 
-float TimeStep::getTotalTime() const
+float TimeStep::getTotalTimeInSeconds() const
 {
     return m_clock.getElapsedTime().asSeconds();
+}
+
+sf::Int32 TimeStep::getTotalTimeInMilliseconds() const
+{
+    return m_clock.getElapsedTime().asMilliseconds();
+}
+
+sf::Int64 TimeStep::getTotalTimeInMicroseconds() const
+{
+    return m_clock.getElapsedTime().asMicroseconds();
 }
