@@ -16,3 +16,8 @@ void TimeStep::reset()
 {
     m_lastTime = m_clock.restart();
 }
+
+float TimeStep::getTotalTime() const
+{
+    return m_clock.getElapsedTime().asSeconds();
+}
