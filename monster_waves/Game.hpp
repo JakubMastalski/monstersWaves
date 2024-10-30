@@ -1,5 +1,6 @@
 #pragma once
 #include "Window.hpp"
+#include "TimeStep.hpp"
 #include <cmath>
 
 class Game
@@ -12,5 +13,6 @@ private:
     void update(const float& dt);
     void draw();
     Window m_window;
+    TimeStep m_timeStep;
     const sf::Clock m_stopwatch{};
 };

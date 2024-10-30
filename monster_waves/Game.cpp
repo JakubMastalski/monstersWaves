@@ -1,5 +1,4 @@
 #include "Game.hpp"
-#include "Game.hpp"
 
 Game::Game()
 {
@@ -7,10 +6,11 @@ Game::Game()
 }
 void Game::run()
 {
+    const float deltaTime = m_timeStep.getDeltaTime();
     while (!m_window.isDone())
     {
         handleEvents();
-        // update( 5.0f );
+        update(deltaTime);
         draw();
     }
 }
