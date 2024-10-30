@@ -11,3 +11,8 @@ float TimeStep::getDeltaTime()
     m_lastTime = currentTime;
     return deltaTime.asSeconds();
 }
+
+void TimeStep::reset()
+{
+    m_lastTime = m_clock.restart();
+}
