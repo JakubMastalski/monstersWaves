@@ -4,7 +4,8 @@ find_package(SFML REQUIRED COMPONENTS system window graphics audio network)
 add_library(${MONSTER_WAVES_LIB}
 			Window.cpp 
             Game.cpp
-			TimeStep.cpp)
+			TimeStep.cpp 
+			RandomGenerator.cpp)
 
 include_directories(${ROOT_DIR}/${SFML_INCLUDE_DIR})
 
