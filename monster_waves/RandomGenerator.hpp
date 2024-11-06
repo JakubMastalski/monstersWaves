@@ -1,5 +1,6 @@
 #include <ctime>
 #include <cstdlib>
+#include <algorithm>
 
 class RandomNumber
 {

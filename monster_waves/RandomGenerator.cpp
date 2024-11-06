@@ -2,10 +2,14 @@
 
 RandomNumber::RandomNumber()
 {
-   srand(time(NULL));
+    srand(static_cast<unsigned int>(time(nullptr)));
 }
 
-int RandomNumber::getNumber(const int min, const int max)
+int RandomNumber::getNumber(int min, int max)
 {
-    return (std::rand() % max) + min;
+    if (min > max)
+    {
+        std::swap(min, max);
+    }
+    return min + (std::rand() % (max - min + 1));
 }
