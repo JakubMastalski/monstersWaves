@@ -1,11 +1,11 @@
 #include "RandomGenerator.hpp"
 
-RandomNumber::RandomNumber()
+RandomNumber::RandomNumber(unsigned int minNumber, unsigned int maxNumber) : min(maxNumber),max(maxNumber),number(0)
 {
-    srand(static_cast<unsigned int>(time(nullptr)));
+   srand(static_cast<unsigned int>(time(nullptr)));
 }
 
-int RandomNumber::getNumber(int min, int max)
+int RandomNumber::getNumber()
 {
     if (min > max)
     {

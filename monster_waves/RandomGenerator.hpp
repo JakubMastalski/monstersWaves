@@ -5,9 +5,10 @@
 class RandomNumber
 {
 public:
-    RandomNumber();
+    RandomNumber(unsigned int minNumber, unsigned int maxNumber);
 
-    int getNumber(const int min, const int max);
+    int getNumber();
 private:
     unsigned int number;
+    unsigned int min, max;
 };
