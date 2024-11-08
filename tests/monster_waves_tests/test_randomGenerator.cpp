@@ -10,7 +10,7 @@ protected:
 
 TEST_F(RandomNumberTest, TestInRange)
 {
-    int number = randGen.getNumber();
+    int number = randGen.getIntNumber();
 
     EXPECT_GE(number, 1);
     EXPECT_LE(number, 10);
@@ -18,7 +18,7 @@ TEST_F(RandomNumberTest, TestInRange)
 
 TEST_F(RandomNumberTest, TestMinMaxOrder)
 {
-    int number = randGen.getNumber();
+    float number = randGen.getFloatNumber();
 
     EXPECT_GE(number, 1);
     EXPECT_LE(number, 10);
@@ -28,7 +28,7 @@ TEST_F(RandomNumberTest, ExpectExactResult)
 {
     RandomNumber randomGenEE(5, 5);
 
-    int number = randomGenEE.getNumber();
+    int number = randomGenEE.getIntNumber();
 
     EXPECT_EQ(number, 5);
 }
