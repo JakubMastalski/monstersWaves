@@ -1,7 +1,7 @@
-#include <SFML/Graphics.hpp>
 #include "Game.hpp"
-#include <iostream>
 #include "RandomGenerator.hpp"
+#include <SFML/Graphics.hpp>
+#include <iostream>
 
 int main()
 {
