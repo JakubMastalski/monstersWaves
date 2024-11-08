@@ -1,15 +1,12 @@
 #include "RandomGenerator.hpp"
 
-RandomNumber::RandomNumber(unsigned int minNumber, unsigned int maxNumber) : min(maxNumber),max(maxNumber),number(0)
+RandomNumber::RandomNumber(unsigned int minNumber, unsigned int maxNumber):dist(minNumber,maxNumber)
 {
-   srand(static_cast<unsigned int>(time(nullptr)));
+    std::random_device rd;
+    mt.seed(rd());
 }
 
 int RandomNumber::getNumber()
 {
-    if (min > max)
-    {
-        std::swap(min, max);
-    }
-    return min + (std::rand() % (max - min + 1));
+    return dist(mt);
 }
