@@ -6,7 +6,19 @@ RandomNumber::RandomNumber(unsigned int minNumber, unsigned int maxNumber):dist(
     mt.seed(rd());
 }
 
-int RandomNumber::getNumber()
+int RandomNumber::getIntNumber()
 {
-    return dist(mt);
+    return static_cast<int>(dist(mt));
 }
+
+unsigned int RandomNumber::getUIntNumber()
+{
+    return static_cast<int>(dist(mt));
+}
+
+float RandomNumber::getFloatNumber()
+{
+    return static_cast<float>(dist(mt));
+}
+
+
