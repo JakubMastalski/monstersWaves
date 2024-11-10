@@ -6,22 +6,21 @@ RandomNumber::RandomNumber()
     mt.seed(rd());
 }
 
-int RandomNumber::getIntNumber(int minNumber,int maxNumber)
+template<typename T>
+
+T RandomNumber::getNumber(T minNumber, T maxNumber)
 {
-    std::uniform_int_distribution<int> dist(minNumber,maxNumber);
-    return dist(mt);
+    if constexpr (std::is_integral<T>::value)
+    {
+        std::uniform_int_distribution<T> dist(minNumber, maxNumber);
+        return dist(mt);
+    }
+    else if constexpr(std::is_floating_point<T>::value)
+    {
+        std::uniform_real_distribution<T> dist(minNumber, maxNumber);
+        return dist(mt)
+    }
 }
 
-unsigned int RandomNumber::getUIntNumber(unsigned int minNumber,unsigned int maxNumber)
-{
-    std::uniform_int_distribution<unsigned int> dist(minNumber,maxNumber);
-    return dist(mt);
-}
-
-float RandomNumber::getFloatNumber(float minNumber,float maxNumber)
-{
-    std::uniform_real_distribution<float> dist(minNumber,maxNumber);
-    return dist(mt);
-}
 
 
