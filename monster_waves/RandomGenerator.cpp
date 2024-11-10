@@ -1,24 +1,27 @@
 #include "RandomGenerator.hpp"
 
-RandomNumber::RandomNumber(unsigned int minNumber, unsigned int maxNumber):dist(minNumber,maxNumber)
+RandomNumber::RandomNumber()
 {
     std::random_device rd;
     mt.seed(rd());
 }
 
-int RandomNumber::getIntNumber()
+int RandomNumber::getIntNumber(int minNumber,int maxNumber)
 {
-    return static_cast<int>(dist(mt));
+    std::uniform_int_distribution<int> dist(minNumber,maxNumber);
+    return dist(mt);
 }
 
-unsigned int RandomNumber::getUIntNumber()
+unsigned int RandomNumber::getUIntNumber(unsigned int minNumber,unsigned int maxNumber)
 {
-    return static_cast<int>(dist(mt));
+    std::uniform_int_distribution<unsigned int> dist(minNumber,maxNumber);
+    return dist(mt);
 }
 
-float RandomNumber::getFloatNumber()
+float RandomNumber::getFloatNumber(float minNumber,float maxNumber)
 {
-    return static_cast<float>(dist(mt));
+    std::uniform_real_distribution<float> dist(minNumber,maxNumber);
+    return dist(mt);
 }
 
 
