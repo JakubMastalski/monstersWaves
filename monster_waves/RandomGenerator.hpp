@@ -3,12 +3,11 @@
 class RandomNumber
 {
 public:
-    RandomNumber(unsigned int minNumber, unsigned int maxNumber);
+    RandomNumber();
 
-    int getIntNumber();
-    unsigned int getUIntNumber();
-    float getFloatNumber();
+    int getIntNumber(int minNumber, int maxNumber);
+    unsigned int getUIntNumber(unsigned int minNumber, unsigned int maxNumber);
+    float getFloatNumber(float minNumber, float maxNumber);
 private:
     std::mt19937 mt;
-    std::uniform_int_distribution<unsigned int> dist;
 };
