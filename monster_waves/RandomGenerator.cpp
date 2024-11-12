@@ -1,9 +1,8 @@
 #include "RandomGenerator.hpp"
 
-RandomNumber::RandomNumber()
+RandomNumber::RandomNumber() : mt(std::random_device{}())
 {
-    std::random_device rd;
-    mt.seed(rd());
+   //EMPTY BODY
 }
 
 template<typename T>
