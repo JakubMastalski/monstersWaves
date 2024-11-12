@@ -7,7 +7,7 @@ RandomNumber::RandomNumber() : mt(std::random_device{}())
 
 template<typename T>
 
-T RandomNumber::getNumber(T minNumber, T maxNumber)
+T RandomNumber::getNumber(T minNumber,T maxNumber)
 {
     if constexpr (std::is_integral<T>::value)
     {
