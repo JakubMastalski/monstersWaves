@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+
 #include "Window.hpp"
 
 class WindowTest : public ::testing::Test
