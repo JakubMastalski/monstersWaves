@@ -20,6 +20,3 @@ T RandomNumber::getNumber(T minNumber,T maxNumber)
         return dist(mt);
     }
 }
-
-
-
