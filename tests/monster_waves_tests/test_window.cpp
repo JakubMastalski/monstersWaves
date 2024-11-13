@@ -11,5 +11,3 @@ protected:
 
     std::unique_ptr< Window > m_window;
 };
-
-
