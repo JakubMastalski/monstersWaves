@@ -17,7 +17,7 @@ T RandomNumber::getNumber(T minNumber,T maxNumber)
     else if constexpr(std::is_floating_point<T>::value)
     {
         std::uniform_real_distribution<T> dist(minNumber, maxNumber);
-        return dist(mt)
+        return dist(mt);
     }
 }
 
