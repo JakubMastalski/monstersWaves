@@ -21,3 +21,13 @@ endif()
 set(SFML_STATIC_LIBRARIES TRUE)
 # Find SFML package
 find_package(SFML REQUIRED COMPONENTS system window graphics audio network)
+
+# Add subdirectories for project
+add_subdirectory(MonsterWaves)
+add_subdirectory(tests)
+# Add include directories for search
+include_directories(${MONSTER_WAVES_DIR})
+# Create executable file
+add_executable(MonsterWaves main.cpp)
+# Link all dependencies for MonsterWaves
+target_link_libraries(MonsterWaves PRIVATE MonsterWavesLib sfml-system sfml-window sfml-graphics sfml-audio sfml-network)
