@@ -1,12 +1,8 @@
-set(SFML_STATIC_LIBRARIES TRUE)
-find_package(SFML REQUIRED COMPONENTS system window graphics audio network)
+# Add subdirectories with modules
+add_subdirectory(Core Screen Utils)
 
-add_library(${MONSTER_WAVES_LIB}
-        Screen/Window.cpp
-        Core/Game.cpp
-        Utils/TimeStep.cpp
-        Utils/RandomGenerator.cpp)
+# Create library which link all modules
+add_library(MonsterWavesLib INTERFACE)
 
-include_directories(${ROOT_DIR}/${SFML_INCLUDE_DIR})
-
-target_link_libraries(${MONSTER_WAVES_LIB} sfml-system sfml-window sfml-graphics sfml-audio sfml-network)
+# Link all modules to MonsterWavesLib
+target_link_libraries(MonsterWavesLib INTERFACE CoreModule ScreenModule UtilsModule)
