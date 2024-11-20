@@ -2,10 +2,10 @@ set(SFML_STATIC_LIBRARIES TRUE)
 find_package(SFML REQUIRED COMPONENTS system window graphics audio network)
 
 add_library(${MONSTER_WAVES_LIB}
-            Game.cpp
-			TimeStep.cpp 
-			RandomGenerator.cpp
-			Window.cpp)
+        Screen/Window.cpp
+        Core/Game.cpp
+        Utils/TimeStep.cpp
+        Utils/RandomGenerator.cpp)
 
 include_directories(${ROOT_DIR}/${SFML_INCLUDE_DIR})
 
