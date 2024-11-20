@@ -1,6 +1,6 @@
 #pragma once
-#include "Window.hpp"
-#include "TimeStep.hpp"
+#include "Screen/Window.hpp"
+#include "Utils/TimeStep.hpp"
 #include <cmath>
 
 class Game
