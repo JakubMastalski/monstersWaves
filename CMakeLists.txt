@@ -4,7 +4,7 @@ project(MonsterWaves)
 set(CMAKE_CXX_STANDARD 20)
 
 set(ROOT_DIR ${CMAKE_SOURCE_DIR})
-set(MONSTER_WAVES_DIR ${ROOT_DIR}/monster_waves)
+set(MONSTER_WAVES_DIR ${ROOT_DIR}/MonsterWaves)
 set(MONSTER_WAVES_LIB monster_waves)
 set(SFML_INCLUDE_DIR libs/SFML-2.6.1/include)
 set(SFML_DIR ${ROOT_DIR}/libs/SFML-2.6.1/lib/cmake/SFML)
