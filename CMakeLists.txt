@@ -1,3 +1,6 @@
+cmake_minimum_required(VERSION 3.29)
+project(MonsterWaves)
+
 set(CMAKE_CXX_STANDARD 20)
 
 # Create output directory for binary and library compilation
@@ -25,9 +28,12 @@ find_package(SFML REQUIRED COMPONENTS system window graphics audio network)
 # Add subdirectories for project
 add_subdirectory(MonsterWaves)
 add_subdirectory(tests)
+
 # Add include directories for search
 include_directories(${MONSTER_WAVES_DIR})
+
 # Create executable file
 add_executable(MonsterWaves main.cpp)
+
 # Link all dependencies for MonsterWaves
 target_link_libraries(MonsterWaves PRIVATE MonsterWavesLib sfml-system sfml-window sfml-graphics sfml-audio sfml-network)
