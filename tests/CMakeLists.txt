@@ -1,3 +1,4 @@
+# Set project for tests
 project(tests)
 
 # Add external test libraries from the libs directory
