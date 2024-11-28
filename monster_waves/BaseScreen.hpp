@@ -1,11 +1,15 @@
 #include "Window.hpp"
 
-class Screen
+class BaseScreen
 {
 public:
-	virtual Screen() = default;
-	virtual void update(Window& window) = 0;
-	virtual void render(Window& window) = 0;
-	virtual void handleEvent(sf::Event& event, Window& window) = 0;
+	virtual BaseScreen() = default;
+	virtual ~BaseScreen() = default;
+protected:
+	virtual void update() = 0;
+	virtual void render() = 0;
+	virtual void handleEvent() = 0;
+private:
+	Window m_window;
 }; 
 	
