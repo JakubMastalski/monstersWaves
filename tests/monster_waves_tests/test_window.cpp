@@ -1,4 +1,5 @@
 #include "Screen/Window.hpp"
+
 #include <gtest/gtest.h>
 
 
