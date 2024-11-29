@@ -3,11 +3,12 @@
 class BaseScreen
 {
 public:
-	virtual BaseScreen() = default;
+	BaseScreen() = default;
 	virtual ~BaseScreen() = default;
 protected:
 	virtual void update() = 0;
 	virtual void render() = 0;
+	virtual void draw() = 0;
 	virtual void handleEvent() = 0;
 	virtual bool windowIsDone() = 0;
 protected:
