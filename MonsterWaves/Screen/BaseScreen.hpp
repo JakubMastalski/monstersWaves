@@ -10,7 +10,6 @@ protected:
 	virtual void render() = 0;
 	virtual void draw() = 0;
 	virtual void handleEvent() = 0;
-	virtual bool windowIsDone() = 0;
 protected:
 	Window m_window;
 }; 

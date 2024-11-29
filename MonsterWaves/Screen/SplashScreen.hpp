@@ -11,8 +11,6 @@ public:
     void render() override;
     void draw() override;
     void handleEvent() override;
-
-   virtual bool windowIsDone();
 private:
     void initWindow();
 

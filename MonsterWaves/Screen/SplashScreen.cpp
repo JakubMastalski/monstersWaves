@@ -18,7 +18,7 @@ void SplashScreen::update()
 
 void SplashScreen::render()
 {
-	while (!windowIsDone())
+	while (!m_window.isDone())
 	{
 		draw();
 		handleEvent();
@@ -41,9 +41,4 @@ void SplashScreen::handleEvent()
 void SplashScreen::initWindow()
 {
 
-}
-
-bool SplashScreen::windowIsDone()
-{
-	return !m_window.isDone();
 }
