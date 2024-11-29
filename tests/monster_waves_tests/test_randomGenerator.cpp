@@ -1,7 +1,6 @@
-#include <gtest/gtest.h>
-
 #include "Utils/RandomGenerator.hpp"
 
+#include <gtest/gtest.h>
 
 class RandomNumberTest : public ::testing::Test
 {
