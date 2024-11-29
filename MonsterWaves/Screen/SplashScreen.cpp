@@ -3,6 +3,7 @@
 SplashScreen::SplashScreen(Window window, float duration)
 	: m_window(std::move(window)), m_windowDuration(duration)
 {
+	m_window.setup({ 800, 600 }, "Splash Screen");
 }
 
 void SplashScreen::update()
