@@ -1,7 +1,7 @@
 #include "SplashScreen.hpp"
 
-SplashScreen::SplashScreen(float duration)
-	: m_windowDuration(duration)
+SplashScreen::SplashScreen(Window window,float duration) 
+	: m_window(window), m_windowDuration(duration)
 {
 	initWindow();
 }

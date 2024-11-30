@@ -4,7 +4,7 @@
 class SplashScreen : public BaseScreen
 {
 public:
-    explicit SplashScreen(float duration = 5.f);
+    explicit SplashScreen(Window window, float duration = 5.f);
     ~SplashScreen() = default;
 public:
     void update() override;
