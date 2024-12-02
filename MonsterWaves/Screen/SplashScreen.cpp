@@ -1,18 +1,18 @@
 #include "SplashScreen.hpp"
 
-SplashScreen::SplashScreen(Window window,float duration) 
-	: m_window(window), m_windowDuration(duration)
+SplashScreen::SplashScreen(float duration)
+	: m_windowDuration(duration)
 {
 	initWindow();
 }
 
 void SplashScreen::update()
 {
-	float deltaTime = m_timeStep.getDeltaTime();
+	float deltaTime = m_timer.getDeltaTime();
 
-	if (m_timeStep.getTotalTimeInSeconds() >= m_windowDuration)
+	if (m_timer.getTotalTimeInSeconds() >= m_windowDuration)
 	{
-		m_window.close();
+		m_window.getRenderer().close();
 	}
 }
 
@@ -40,16 +40,14 @@ void SplashScreen::handleEvent()
 
 void SplashScreen::initWindow()
 {
-	m_window.setup({ 1000, 800 }, "Splash Screen");
-
-	if (!font.loadFromFile("bebasFont.ttf")) {
+	if (!m_font.loadFromFile("bebasFont.ttf")) {
 		std::cerr << "The font could not be loaded!" << std::endl;
 		return;
 	}
 
-	text.setFont(font);
-	text.setString("Siema!"); 
-	text.setCharacterSize(30); 
-	text.setFillColor(sf::Color::White);
-	text.setPosition(200, 300);
+	m_text.setFont(m_font);
+	m_text.setString("Siema!"); 
+	m_text.setCharacterSize(30); 
+	m_text.setFillColor(sf::Color::White);
+	m_text.setPosition(200, 300);
 }

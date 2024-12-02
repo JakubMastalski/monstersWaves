@@ -1,10 +1,12 @@
+#include <iostream>
+
 #include "Screen/BaseScreen.hpp"
 #include "Utils/TimeStep.hpp"
 
 class SplashScreen : public BaseScreen
 {
 public:
-    explicit SplashScreen(Window window, float duration = 5.f);
+    explicit SplashScreen(float duration = 5.f);
     ~SplashScreen() = default;
 public:
     void update() override;
@@ -16,7 +18,7 @@ private:
 
     sf::Font m_font;
     sf::Text m_text;
-
+    Window m_window;
     float m_windowDuration;
     TimeStep m_timer;
 };
