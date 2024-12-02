@@ -18,7 +18,6 @@ private:
 
     sf::Font m_font;
     sf::Text m_text;
-    Window m_window;
     float m_windowDuration;
     TimeStep m_timer;
 };

@@ -42,7 +42,7 @@ void SplashScreen::initWindow()
 {
 	m_window.setup(sf::Vector2u(1000, 800), "Splash Screen");
 
-	if (!m_font.loadFromFile("bebasFont.ttf")) {
+	if (!m_font.loadFromFile("C:\\Users\\USER\\Desktop\\font.cff")) {
 		std::cerr << "The font could not be loaded!" << std::endl;
 		return;
 	}
