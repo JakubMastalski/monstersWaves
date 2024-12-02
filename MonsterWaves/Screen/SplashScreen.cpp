@@ -13,6 +13,7 @@ void SplashScreen::update()
 	if (m_timer.getTotalTimeInSeconds() >= m_windowDuration)
 	{
 		m_window.getRenderer().close();
+		splashIsDone = true;
 	}
 }
 
@@ -24,6 +25,11 @@ void SplashScreen::render()
 		handleEvent();
 		update();
 	}
+}
+
+bool SplashScreen::getsplashIsDone()
+{
+	return splashIsDone;
 }
 
 void SplashScreen::draw()

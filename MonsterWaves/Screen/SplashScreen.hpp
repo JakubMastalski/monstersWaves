@@ -11,8 +11,11 @@ public:
 public:
     void update() override;
     void render() override;
+    bool getsplashIsDone();
     void draw() override;
     void handleEvent() override;
+
+    bool splashIsDone = { false };
 private:
     void initWindow();
 
@@ -20,4 +23,5 @@ private:
     sf::Text m_text;
     float m_windowDuration;
     TimeStep m_timer;
+
 };
