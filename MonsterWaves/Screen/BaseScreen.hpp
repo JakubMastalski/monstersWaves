@@ -1,4 +1,4 @@
-#include "Window.hpp"
+#include "Screen/Window.hpp"
 
 class BaseScreen
 {
