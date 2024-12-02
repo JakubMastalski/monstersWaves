@@ -13,12 +13,12 @@ public:
 	void beginDraw(const sf::Color& screenColor = sf::Color::Black);
     void draw(const sf::Drawable& drawable);
 	void endDraw();
-	
+	void setup(const sf::Vector2u& windowSize, const std::string& windowTitle);
+
 	bool isDone() const;
 	sf::Vector2u getSize() const;
     sf::RenderWindow& getRenderer();
 private:
-	 void setup(const sf::Vector2u& windowSize, const std::string& windowTitle);
 	 void create();
 	
 	 sf::RenderWindow m_renderer;
