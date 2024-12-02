@@ -9,12 +9,17 @@ Game::Game()
 }
 void Game::run()
 {
-    const float deltaTime = m_timeStep.getDeltaTime();
-    while (!m_window.isDone())
+    splashScreen.render();
+
+    if (splashScreen.getsplashIsDone())
     {
-        handleEvents();
-        update(deltaTime);
-        draw();
+        const float deltaTime = m_timeStep.getDeltaTime();
+        while (!m_window.isDone())
+        {
+            handleEvents();
+            update(deltaTime);
+            draw();
+        }
     }
 }
 void Game::handleEvents()

@@ -19,7 +19,7 @@ void SplashScreen::update()
 
 void SplashScreen::render()
 {
-	while (!m_window.isDone())
+	while (!m_window.isDone() && !getsplashIsDone())
 	{
 		draw();
 		handleEvent();

@@ -15,6 +15,7 @@ private:
     void draw();
 
     sf::CircleShape m_circle;
+    SplashScreen splashScreen;
     Window m_window;
     TimeStep m_timeStep;
     const sf::Clock m_stopwatch{};
