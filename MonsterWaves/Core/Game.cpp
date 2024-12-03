@@ -1,9 +1,11 @@
 #include "Core/Game.hpp"
 #include "Screen/SplashScreen.hpp"
+#include "Screen/MenuScreen.hpp"
 
 Game::Game()
 {
-	m_screen = new SplashScreen(m_window);
+	//m_screen = new SplashScreen(m_window);
+	m_screen = new MenuScreen(m_window);
 }
 
 Game::~Game()
