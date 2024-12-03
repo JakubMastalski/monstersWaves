@@ -6,7 +6,8 @@ Game::Game()
 {
 	//m_screen = new SplashScreen(m_window);
 	//m_screen = new MenuScreen(m_window);
-	m_screen = new GameScreen(m_window);
+	//m_screen = new GameScreen(m_window);
+	m_screen = new InventoryScreen(m_window);
 }
 
 Game::~Game()
