@@ -1,27 +1,17 @@
-#include <iostream>
-
+#pragma once
 #include "Screen/BaseScreen.hpp"
 #include "Utils/TimeStep.hpp"
-
-class SplashScreen : public BaseScreen
+class SplashScreen final : public BaseScreen
 {
 public:
-    explicit SplashScreen(float duration = 5.f);
-    ~SplashScreen() = default;
+    explicit SplashScreen(Window& window, float duration = 5.0f);
 public:
-    void update() override;
+    void handleEvents() override;
+    void update(float dt) override;
     void render() override;
-    bool getsplashIsDone();
-    void draw() override;
-    void handleEvent() override;
-
-    bool splashIsDone = { false };
 private:
-    void initWindow();
-
-    sf::Font m_font;
-    sf::Text m_text;
-    float m_windowDuration;
-    TimeStep m_timer;
-
+    TimeStep    m_timeStep;
+    sf::Font    m_font;
+    sf::Text    m_text;
+    float       m_duration;
 };

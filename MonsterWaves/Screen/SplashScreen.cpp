@@ -1,61 +1,31 @@
 #include "SplashScreen.hpp"
-
-SplashScreen::SplashScreen(float duration)
-	: m_windowDuration(duration)
+SplashScreen::SplashScreen(Window& window, const float duration) : BaseScreen(window), m_duration(duration)
 {
-	initWindow();
+    m_font.loadFromFile("res/fonts/aleo/Aleo-Light.otf");
+    m_text.setFont(m_font);
+    m_text.setString("Welcome to the Game!");
+    m_text.setCharacterSize(64);
+    m_text.setFillColor(sf::Color::White);
+    m_text.setPosition(static_cast<float>(m_window.getSize().x * 0.5 - m_text.getGlobalBounds().width * 0.5),
+        static_cast<float>(m_window.getSize().y * 0.5 - m_text.getGlobalBounds().height * 0.5));
 }
-
-void SplashScreen::update()
+void SplashScreen::handleEvents()
 {
-	float deltaTime = m_timer.getDeltaTime();
-
-	if (m_timer.getTotalTimeInSeconds() >= m_windowDuration)
-	{
-		m_window.getRenderer().close();
-		splashIsDone = true;
-	}
+    // Window events
+    m_window.handleEvents();
+    // Screen individual events
 }
-
+void SplashScreen::update(const float dt)
+{
+    if (m_timeStep.getTotalTimeInSeconds() >= m_duration)
+    {
+        // Change screen to MenuScreen
+    }
+}
 void SplashScreen::render()
 {
-	while (!m_window.isDone() && !getsplashIsDone())
-	{
-		draw();
-		handleEvent();
-		update();
-	}
-}
+    m_window.beginDraw();
 
-bool SplashScreen::getsplashIsDone()
-{
-	return splashIsDone;
-}
-
-void SplashScreen::draw()
-{
-	m_window.beginDraw();
-	m_window.draw(m_text);
-	m_window.endDraw();
-}
-
-void SplashScreen::handleEvent()
-{
-	m_window.handleInput();
-}
-
-void SplashScreen::initWindow()
-{
-	m_window.setup(sf::Vector2u(1000, 800), "Splash Screen");
-
-	if (!m_font.loadFromFile("C:\\Users\\USER\\Desktop\\font.cff")) {
-		std::cerr << "The font could not be loaded!" << std::endl;
-		return;
-	}
-
-	m_text.setFont(m_font);
-	m_text.setString("Siema!"); 
-	m_text.setCharacterSize(30); 
-	m_text.setFillColor(sf::Color::White);
-	m_text.setPosition(200, 300);
+    m_window.draw(m_text);
+    m_window.endDraw();
 }
