@@ -1,6 +1,6 @@
 #include "BaseScreen.hpp"
 
-BaseScreen::BaseScreen(Window& window) : m_window(window)
+explicit BaseScreen::BaseScreen(Window* window) : m_window(window)
 {
     // Empty body.
 }

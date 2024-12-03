@@ -1,16 +1,19 @@
+#pragma once
+
 #include "Screen/Window.hpp"
 
 class BaseScreen
 {
 public:
-	BaseScreen() = default;
+	explicit BaseScreen(Window* window);
 	virtual ~BaseScreen() = default;
 protected:
-	virtual void update() = 0;
+	virtual void update(float dt) = 0;
 	virtual void render() = 0;
-	virtual void draw() = 0;
 	virtual void handleEvent() = 0;
+public:
+	bool isRunning() const;
 protected:
-	Window m_window;
+	Window* m_window;
 }; 
 	
