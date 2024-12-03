@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Screen/SplashScreen.hpp"
+#include "Screen/BaseScreen.hpp"
 #include "Screen/Window.hpp"
 #include "Utils/TimeStep.hpp"
 
@@ -10,15 +10,11 @@ class Game
 {
 public:
     Game();
+    ~Game();
+
     void run();
 private:
-    void handleEvents();
-    void update(const float& dt);
-    void draw();
-
-    sf::CircleShape m_circle;
-    SplashScreen splashScreen;
+    BaseScreen* m_screen;
     Window m_window;
     TimeStep m_timeStep;
-    const sf::Clock m_stopwatch{};
 };
