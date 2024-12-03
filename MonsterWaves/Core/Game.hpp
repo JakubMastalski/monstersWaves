@@ -1,4 +1,6 @@
 #pragma once
+
+#include "Screen/SplashScreen.hpp"
 #include "Screen/Window.hpp"
 #include "Utils/TimeStep.hpp"
 
