@@ -5,7 +5,7 @@ Window::Window(const sf::Vector2u& windowSize, const std::string& windowTitle)
     setup(windowSize, windowTitle);
 }
 
-void Window::handleInput()
+void Window::handleEvents()
 {
     sf::Event event{};
     while (m_renderer.pollEvent(event))
@@ -13,12 +13,12 @@ void Window::handleInput()
         switch (event.type)
         {
         case sf::Event::Closed:
-            m_isDone = true;
+            close();
             break;
         case sf::Event::KeyPressed:
             if (event.key.code == sf::Keyboard::Escape)
             {
-                m_isDone = true;
+                close();
             }
             break;
         }
@@ -40,9 +40,15 @@ void Window::endDraw()
     m_renderer.display();
 }
 
-bool Window::isDone() const
+void Window::close()
 {
-    return m_isDone;
+    m_isRunning = false;
+    m_renderer.close();
+}
+
+bool Window::isRunning() const
+{
+    return m_isRunning;
 }
 
 sf::Vector2u Window::getSize() const
