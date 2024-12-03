@@ -5,9 +5,9 @@
 class BaseScreen
 {
 public:
-	explicit BaseScreen(Window& window);
+	BaseScreen(Window& window);
 	virtual ~BaseScreen() = default;
-protected:
+public:
 	virtual void update(float dt) = 0;
 	virtual void render() = 0;
 	virtual void handleEvents() = 0;
