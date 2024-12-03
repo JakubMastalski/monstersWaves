@@ -37,3 +37,10 @@ add_executable(MonsterWaves main.cpp)
 
 # Link all dependencies for MonsterWaves
 target_link_libraries(MonsterWaves PRIVATE MonsterWavesLib sfml-system sfml-window sfml-graphics sfml-audio sfml-network)
+
+# Move resources to directory with exe file
+set(RES_DIR ${CMAKE_SOURCE_DIR}/res)
+set(DESTINATION_DIR ${CMAKE_BINARY_DIR}/bin)
+if (NOT EXISTS ${DESTINATION_DIR}/res)
+    file(COPY ${RES_DIR} DESTINATION ${DESTINATION_DIR})
+endif()
