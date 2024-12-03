@@ -1,6 +1,8 @@
 #pragma once
+
 #include "Screen/BaseScreen.hpp"
 #include "Utils/TimeStep.hpp"
+
 class SplashScreen final : public BaseScreen
 {
 public:
