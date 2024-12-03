@@ -1,7 +1,7 @@
 # Create static library for module Screen
 add_library(ScreenModule STATIC Window.cpp
                                 SplashScreen.cpp
-                                BaseScreen.hpp)
+                                BaseScreen.cpp)
 
 # Add include directories for search
 include_directories(${MONSTER_WAVES_DIR} ${SFML_INCLUDE_DIR})
