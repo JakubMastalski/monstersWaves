@@ -1,4 +1,4 @@
-#include "Game.hpp"
+#include "Core/Game.hpp"
 
 Game::Game()
 {
@@ -9,18 +9,13 @@ Game::Game()
 }
 void Game::run()
 {
-    splashScreen.render();
-
-    if (splashScreen.getsplashIsDone())
-    {
-        const float deltaTime = m_timeStep.getDeltaTime();
+   const float deltaTime = m_timeStep.getDeltaTime();
         while (!m_window.isDone())
         {
             handleEvents();
             update(deltaTime);
             draw();
         }
-    }
 }
 void Game::handleEvents()
 {
