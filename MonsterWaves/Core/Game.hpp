@@ -1,7 +1,11 @@
 #pragma once
 
+#include "Screen/GameScreen.hpp"
+#include "Screen/BaseScreen.hpp"
+#include "Screen/InventoryScreen.hpp"
 #include "Screen/Window.hpp"
 #include "Utils/TimeStep.hpp"
+
 
 #include <cmath>
 
@@ -9,13 +13,11 @@ class Game
 {
 public:
     Game();
+    ~Game();
+
     void run();
 private:
-    void handleEvents();
-    void update(const float& dt);
-    void draw();
-    sf::CircleShape m_circle;
+    BaseScreen* m_screen;
     Window m_window;
     TimeStep m_timeStep;
-    const sf::Clock m_stopwatch{};
 };
