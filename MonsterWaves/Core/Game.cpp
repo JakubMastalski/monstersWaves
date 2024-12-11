@@ -7,12 +7,14 @@ Game::Game()
 	//m_screen = new SplashScreen(m_window);
 	//m_screen = new MenuScreen(m_window);
 	//m_screen = new GameScreen(m_window);
-	m_screen = new InventoryScreen(m_window);
+	m_window = std::make_unique<Window>();
+
+	m_screen = std::make_unique<InventoryScreen>(*m_window);
 }
 
 Game::~Game()
 {
-	delete m_screen;
+	//EMPTY BODY
 }
 
 void Game::run()

@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Screen/GameScreen.hpp"
 #include "Screen/BaseScreen.hpp"
 #include "Screen/InventoryScreen.hpp"
 #include "Screen/Window.hpp"
@@ -17,7 +16,7 @@ public:
 
     void run();
 private:
-    BaseScreen* m_screen;
-    Window m_window;
+    std::unique_ptr<BaseScreen> m_screen;
+    std::unique_ptr<Window> m_window;
     TimeStep m_timeStep;
 };
