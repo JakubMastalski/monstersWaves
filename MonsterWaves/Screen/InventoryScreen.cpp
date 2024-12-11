@@ -2,7 +2,7 @@
 
 #include <random>
 
-InventoryScreen::InventoryScreen(Window& window) : BaseScreen(window)
+InventoryScreen::InventoryScreen(std::unique_ptr<Window> window) : BaseScreen(std::move(window))
 {
     constexpr int   gridSize{ 100 };
     constexpr float radius{ gridSize * 0.25 };
@@ -10,9 +10,9 @@ InventoryScreen::InventoryScreen(Window& window) : BaseScreen(window)
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> distribution(0, static_cast<int>(colors.size() - 1));
-    for (int x = 0; x < m_window.getSize().x; x += gridSize)
+    for (int x = 0; x < m_window->getSize().x; x += gridSize)
     {
-        for (int y = 0; y < m_window.getSize().y; y += gridSize)
+        for (int y = 0; y < m_window->getSize().y; y += gridSize)
         {
             sf::RectangleShape square(sf::Vector2f(gridSize, gridSize));
             square.setPosition(static_cast<float>(x), static_cast<float>(y));
@@ -33,12 +33,12 @@ InventoryScreen::InventoryScreen(Window& window) : BaseScreen(window)
 void InventoryScreen::handleEvents()
 {
     // Window events
-    m_window.handleEvents();
+    m_window->handleEvents();
 
     // Screen individual events
     sf::Event event{};
 
-    while (m_window.getRenderer().pollEvent(event))
+    while (m_window->getRenderer().pollEvent(event))
     {
         switch (event.type)
         {
@@ -61,14 +61,14 @@ void InventoryScreen::update(const float dt)
 }
 void InventoryScreen::render()
 {
-    m_window.beginDraw();
+    m_window->beginDraw();
     for (const auto& square : m_squares)
     {
-        m_window.draw(square);
+        m_window->draw(square);
     }
     for (const auto& circle : m_circles)
     {
-        m_window.draw(circle);
+        m_window->draw(circle);
     }
-    m_window.endDraw();
+    m_window->endDraw();
 }
