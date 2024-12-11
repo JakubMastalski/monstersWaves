@@ -32,9 +32,6 @@ void GameScreen::handleEvents()
             default:
                 break;
             }
-
-        default:
-            break;
         }
     }
 }
