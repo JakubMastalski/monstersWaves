@@ -2,10 +2,12 @@
 
 #include "Screen/Window.hpp"
 
+#include "memory"
+
 class BaseScreen
 {
 public:
-	BaseScreen(Window& window);
+	BaseScreen(std::unique_ptr<Window> Window);
 	virtual ~BaseScreen() = default;
 public:
 	virtual void update(float dt) = 0;
@@ -14,6 +16,6 @@ public:
 public:
 	bool isRunning() const;
 protected:
-	Window& m_window;
+	std::unique_ptr<Window> m_window;
 }; 
 	
