@@ -32,7 +32,28 @@ InventoryScreen::InventoryScreen(Window& window) : BaseScreen(window)
 }
 void InventoryScreen::handleEvents()
 {
+    // Window events
     m_window.handleEvents();
+
+    // Screen individual events
+    sf::Event event{};
+
+    while (m_window.getRenderer().pollEvent(event))
+    {
+        switch (event.type)
+        {
+        case sf::Event::KeyPressed:
+            switch (event.key.code)
+            {
+            case sf::Keyboard::G:
+                // Back to the Game Screen
+                return;
+
+            default:
+                break;
+            }
+        }
+    }
 }
 void InventoryScreen::update(const float dt)
 {

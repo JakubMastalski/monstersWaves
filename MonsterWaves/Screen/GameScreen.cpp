@@ -12,7 +12,31 @@ GameScreen::GameScreen(Window& window) : BaseScreen(window)
 
 void GameScreen::handleEvents()
 {
-	m_window.handleEvents();
+    // Window events
+    m_window.handleEvents();
+
+    // Screen individual events
+    sf::Event event{};
+
+    while (m_window.getRenderer().pollEvent(event))
+    {
+        switch (event.type)
+        {
+        case sf::Event::KeyPressed:
+            switch (event.key.code)
+            {
+            case sf::Keyboard::I:
+                // Open Inventory Screen
+                return;
+
+            default:
+                break;
+            }
+
+        default:
+            break;
+        }
+    }
 }
 
 void GameScreen::update(float dt)
