@@ -1,10 +1,8 @@
 #include "ScreenManager.hpp"
 
-ScreenManager::ScreenManager(BaseScreen* ScreenPtr)
+ScreenManager::ScreenManager(Window& window): BaseScreen(window)
 {
-	if (ScreenPtr) {
-		pushScreen(std::shared_ptr<BaseScreen>(ScreenPtr));
-	}
+	;
 }
 
 void ScreenManager::pushScreen(std::shared_ptr<BaseScreen> screen)

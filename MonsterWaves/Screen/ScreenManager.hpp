@@ -4,7 +4,7 @@
 
 class ScreenManager : public BaseScreen
 {
-	explicit ScreenManager(BaseScreen* windowPtr);
+	explicit ScreenManager(Window& window);
 	void pushScreen(std::shared_ptr<BaseScreen> screen);
 	void popScreen();
 	void update(float deltaTime) override;
