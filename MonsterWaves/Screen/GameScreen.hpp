@@ -8,7 +8,7 @@
 class GameScreen final : public BaseScreen
 {
 public:
-	explicit GameScreen(Window& window);
+	explicit GameScreen(Window* window);
 
 public:
     void handleEvents() override;

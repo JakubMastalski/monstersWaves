@@ -4,7 +4,7 @@
 class InventoryScreen final : public BaseScreen
 {
 public:
-    explicit InventoryScreen(std::unique_ptr<Window> window);
+    explicit InventoryScreen(Window* window);
 
 public:
     void handleEvents() override;

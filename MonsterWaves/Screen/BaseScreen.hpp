@@ -7,7 +7,7 @@
 class BaseScreen
 {
 public:
-	BaseScreen(std::unique_ptr<Window> Window);
+	BaseScreen(Window* window);
 	virtual ~BaseScreen() = default;
 public:
 	virtual void update(float dt) = 0;

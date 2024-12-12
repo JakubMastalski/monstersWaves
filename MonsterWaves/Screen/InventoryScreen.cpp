@@ -2,7 +2,7 @@
 
 #include <random>
 
-InventoryScreen::InventoryScreen(std::unique_ptr<Window> window) : BaseScreen(std::move(window))
+InventoryScreen::InventoryScreen(Window* window) : BaseScreen(window)
 {
     constexpr int   gridSize{ 100 };
     constexpr float radius{ gridSize * 0.25 };

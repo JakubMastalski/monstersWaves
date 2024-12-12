@@ -6,7 +6,7 @@
 class SplashScreen final : public BaseScreen
 {
 public:
-    explicit SplashScreen(Window& window, float duration = 5.0f);
+    explicit SplashScreen(Window* window, float duration = 5.0f);
 public:
     void handleEvents() override;
     void update(float dt) override;
