@@ -7,9 +7,9 @@ Game::Game()
 	//m_screen = new SplashScreen(m_window);
 	//m_screen = new MenuScreen(m_window);
 	//m_screen = new GameScreen(m_window);
-	m_window = std::make_unique<Window>();
+	auto m_window = new Window();
 
-	m_screen = std::make_unique<InventoryScreen>(*m_window);
+	m_screen = std::make_unique<InventoryScreen>(m_window);
 }
 
 Game::~Game()

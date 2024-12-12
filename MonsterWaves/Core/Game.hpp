@@ -17,6 +17,5 @@ public:
     void run();
 private:
     std::unique_ptr<BaseScreen> m_screen;
-    std::unique_ptr<Window> m_window;
     TimeStep m_timeStep;
 };
