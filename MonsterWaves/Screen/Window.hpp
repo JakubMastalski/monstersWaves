@@ -29,7 +29,6 @@ public:
 private:
     void setup(const sf::Vector2u& windowSize, const std::string& windowTitle);
 private:
-	 void create();
 	 sf::RenderWindow m_renderer;
 	 sf::Vector2u m_Size;
 	 std::string m_Title;
