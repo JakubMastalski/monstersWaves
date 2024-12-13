@@ -1,6 +1,4 @@
 #include "Core/Game.hpp"
-#include "Screen/SplashScreen.hpp"
-#include "Screen/MenuScreen.hpp"
 
 Game::Game()
 {
@@ -9,7 +7,10 @@ Game::Game()
 	//m_screen = new GameScreen(m_window);
 	auto m_window = new Window();
 
-	m_screen = std::make_unique<InventoryScreen>(m_window);
+	//m_screen = std::make_unique<InventoryScreen>(m_window);
+	//m_screen = std::make_unique<MenuScreen>(m_window);
+	//m_screen = std::make_unique<SplashScreen>(m_window);
+	m_screen = std::make_unique<GameScreen>(m_window);
 }
 
 Game::~Game()

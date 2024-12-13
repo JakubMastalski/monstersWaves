@@ -1,7 +1,11 @@
 #pragma once
 
 #include "Screen/BaseScreen.hpp"
+#include "Screen/GameScreen.hpp"
 #include "Screen/InventoryScreen.hpp"
+#include "Screen/SplashScreen.hpp"
+#include "Screen/MenuScreen.hpp"
+
 #include "Screen/Window.hpp"
 #include "Utils/TimeStep.hpp"
 
