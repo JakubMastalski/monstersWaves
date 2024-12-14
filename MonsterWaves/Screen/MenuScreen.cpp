@@ -14,6 +14,15 @@ MenuScreen::MenuScreen(Window* window) : BaseScreen(window)
 void MenuScreen::handleEvents()
 {
     BaseScreen::handleEvents();
+    sf::Event event;
+
+    while (m_window->getRenderer().pollEvent(event)) {
+        switch (event.type) {
+        case sf::Event::KeyPressed: switch (event.key.code) {
+        case sf::Keyboard::Enter:  
+        return; default: break; } default: break; 
+        } 
+    }
 }
 
 void MenuScreen::update(float dt)
