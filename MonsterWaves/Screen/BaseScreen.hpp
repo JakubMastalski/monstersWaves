@@ -12,7 +12,7 @@ public:
 public:
 	virtual void update(float dt) = 0;
 	virtual void render() = 0;
-	void handleEvents();
+	virtual void handleEvents();
 public:
 	bool isRunning() const;
 protected:
