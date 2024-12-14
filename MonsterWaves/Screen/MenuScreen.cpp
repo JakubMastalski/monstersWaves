@@ -20,7 +20,8 @@ void MenuScreen::handleEvents()
         switch (event.type) {
         case sf::Event::KeyPressed: switch (event.key.code) {
         case sf::Keyboard::Enter:  
-        return; default: break; } default: break; 
+        return; default: break; }
+        default: break; 
         } 
     }
 }
