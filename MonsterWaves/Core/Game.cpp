@@ -2,35 +2,27 @@
 
 Game::Game()
 {
-    m_circle.setRadius(100.0f);
-    m_circle.setPosition(static_cast<float>(m_window.getSize().x) * 0.5f,
-        static_cast<float>(m_window.getSize().y) * 0.5f);
-    m_circle.setFillColor(sf::Color::Yellow);
+	//m_screen = new SplashScreen(m_window);
+	//m_screen = new MenuScreen(m_window);
+	//m_screen = new GameScreen(m_window);
+	auto m_window = new Window();
+
+	//m_screen = std::make_unique<InventoryScreen>(m_window);
+	//m_screen = std::make_unique<MenuScreen>(m_window);
+	//m_screen = std::make_unique<SplashScreen>(m_window);
+	m_screen = std::make_unique<GameScreen>(m_window);
 }
+
 void Game::run()
 {
-    const float deltaTime = m_timeStep.getDeltaTime();
-    while (!m_window.isDone())
-    {
-        handleEvents();
-        update(deltaTime);
-        draw();
-    }
+	while (m_screen->isRunning())
+	{
+		const float deltaTime = m_timeStep.getDeltaTime();
+
+		m_screen->handleEvents();
+		m_screen->update(deltaTime);
+		m_screen->render();
+	}
 }
-void Game::handleEvents()
-{
-    m_window.handleInput();
-}
-void Game::update(const float& dt)
-{
-    m_circle.setRadius(std::sin(m_timeStep.getTotalTimeInSeconds()) *
-        static_cast<float>(m_window.getSize().x) / 8 +
-        static_cast<float>(m_window.getSize().y) / 4);
-    m_circle.setOrigin(sf::Vector2f(m_circle.getRadius(), m_circle.getRadius()));
-}
-void Game::draw()
-{
-    m_window.beginDraw();
-    m_window.draw(m_circle);
-    m_window.endDraw();
-}
+
+

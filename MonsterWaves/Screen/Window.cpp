@@ -1,3 +1,4 @@
+#include "Window.hpp"
 #include "Screen/Window.hpp"
 
 Window::Window(const sf::Vector2u& windowSize, const std::string& windowTitle)
@@ -5,7 +6,25 @@ Window::Window(const sf::Vector2u& windowSize, const std::string& windowTitle)
     setup(windowSize, windowTitle);
 }
 
-void Window::handleInput()
+Window::~Window()
+{
+    destroy();
+}
+
+void Window::create()
+{
+    constexpr auto style = sf::Style::Default;
+
+    m_renderer.create({ m_Size.x, m_Size.y }, m_Title, style);
+    m_renderer.setFramerateLimit(60);
+}
+
+void Window::destroy()
+{
+    m_renderer.close();
+}
+
+void Window::handleEvents()
 {
     sf::Event event{};
     while (m_renderer.pollEvent(event))
@@ -13,12 +32,12 @@ void Window::handleInput()
         switch (event.type)
         {
         case sf::Event::Closed:
-            m_isDone = true;
+            close();
             break;
         case sf::Event::KeyPressed:
             if (event.key.code == sf::Keyboard::Escape)
             {
-                m_isDone = true;
+                close();
             }
             break;
         }
@@ -40,14 +59,20 @@ void Window::endDraw()
     m_renderer.display();
 }
 
-bool Window::isDone() const
+void Window::close()
 {
-    return m_isDone;
+    m_isRunning = false;
+    m_renderer.close();
+}
+
+bool Window::isRunning() const
+{
+    return m_isRunning;
 }
 
 sf::Vector2u Window::getSize() const
 {
-    return m_windowSize;
+    return m_Size;
 }
 
 sf::RenderWindow& Window::getRenderer()
@@ -57,15 +82,7 @@ sf::RenderWindow& Window::getRenderer()
 
 void Window::setup(const sf::Vector2u& windowSize, const std::string& windowTitle)
 {
-    m_windowSize = windowSize;
-    m_windowTitle = windowTitle;
+    m_Size = windowSize;
+    m_Title = windowTitle;
     create();
-}
-
-void Window::create()
-{
-    constexpr auto style = sf::Style::Default;
-
-    m_renderer.create({ m_windowSize.x, m_windowSize.y }, m_windowTitle, style);
-    m_renderer.setFramerateLimit( 60 );
 }
