@@ -13,11 +13,6 @@ Game::Game()
 	m_screen = std::make_unique<GameScreen>(m_window);
 }
 
-Game::~Game()
-{
-	//EMPTY BODY
-}
-
 void Game::run()
 {
 	while (m_screen->isRunning())
