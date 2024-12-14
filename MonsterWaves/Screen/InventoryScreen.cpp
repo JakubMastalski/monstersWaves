@@ -33,7 +33,7 @@ InventoryScreen::InventoryScreen(Window* window) : BaseScreen(window)
 void InventoryScreen::handleEvents()
 {
     // Window events
-    m_window->handleEvents();
+    BaseScreen::handleEvents();
 
     // Screen individual events
     sf::Event event{};

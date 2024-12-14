@@ -13,7 +13,7 @@ MenuScreen::MenuScreen(Window* window) : BaseScreen(window)
 
 void MenuScreen::handleEvents()
 {
-    m_window->handleEvents();
+    BaseScreen::handleEvents();
 }
 
 void MenuScreen::update(float dt)

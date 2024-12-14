@@ -13,7 +13,7 @@ GameScreen::GameScreen(Window* window) : BaseScreen(window)
 void GameScreen::handleEvents()
 {
     // Window events
-    m_window->handleEvents();
+    BaseScreen::handleEvents();
 
     // Screen individual events
     sf::Event event{};

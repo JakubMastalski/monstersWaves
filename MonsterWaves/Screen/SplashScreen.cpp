@@ -12,7 +12,7 @@ SplashScreen::SplashScreen(Window* window, const float duration) : BaseScreen(wi
 void SplashScreen::handleEvents()
 {
     // Window events
-    m_window->handleEvents();
+    BaseScreen::handleEvents();
     // Screen individual events
 }
 void SplashScreen::update(const float dt)
