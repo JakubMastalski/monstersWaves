@@ -1,5 +1,4 @@
 #include "Window.hpp"
-#include "Window.hpp"
 #include "Screen/Window.hpp"
 
 Window::Window(const sf::Vector2u& windowSize, const std::string& windowTitle)
