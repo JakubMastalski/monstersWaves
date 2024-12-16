@@ -38,6 +38,11 @@ ScreenManager::ScreenManager()
     m_activeScreen = m_screens[ScreenType::SPLASH].get();
 }
 
+ScreenManager::~ScreenManager()
+{
+    ShutDown();
+}
+
 void ScreenManager::run()
 {
     while (isRunning())

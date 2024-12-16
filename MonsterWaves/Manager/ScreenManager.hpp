@@ -22,7 +22,7 @@ public:
 
 private:
     ScreenManager();
-    ~ScreenManager() = default;
+    ~ScreenManager();
 
     bool isRunning() const;
 public:
