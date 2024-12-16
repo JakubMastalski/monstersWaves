@@ -1,4 +1,4 @@
-#include "Screen/MenuScreen.hpp"
+#include "MenuScreen.hpp"
 
 #include <Manager/ScreenManager.hpp>
 
@@ -15,62 +15,45 @@ MenuScreen::MenuScreen(Window* window) : BaseScreen(window)
 
 void MenuScreen::handleEvents()
 {
-<<<<<<< HEAD
-        while (m_window->getRenderer().pollEvent(m_event))
-        {
-                switch (m_event.type)
-                {
-                case sf::Event::Closed:
-                    m_window->close();
-                    break;
-                case sf::Event::KeyPressed:
-                    switch (m_event.key.code)
-                    {
-                    case sf::Keyboard::Escape:
-                        m_window->close();
-                        break;
-                    case sf::Keyboard::Enter:
-                        // Switch to Game Screen
-                        ScreenManager::GetInstance().setScreen(ScreenType::GAME);
-                        return;
-                    default:
-                        break;
-                    }
-                }
-        }
-=======
     while (m_window->getRenderer().pollEvent(m_event))
     {
         switch (m_event.type)
         {
         case sf::Event::Closed:
-            {
-                m_window->close();
-                break;
+            m_window->close();
+            break;
+
         case sf::Event::KeyPressed:
             switch (m_event.key.code)
             {
             case sf::Keyboard::Escape:
                 m_window->close();
                 break;
+
             case sf::Keyboard::Enter:
-                // Switch to Game Screen
+                ScreenManager::GetInstance().setScreen(ScreenType::GAME);
                 return;
+
+            default:
+                break;
             }
-            }
+
+        default:
+            break;
         }
     }
->>>>>>> develop
 }
 
-void MenuScreen::update(float dt)
+void MenuScreen::update(const float dt)
 {
-
+    // Empty body.
 }
 
 void MenuScreen::render()
 {
     m_window->beginDraw(sf::Color::Blue);
+
     m_window->draw(m_text);
+
     m_window->endDraw();
 }

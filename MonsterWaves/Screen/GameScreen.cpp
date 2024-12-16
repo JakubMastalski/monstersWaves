@@ -1,4 +1,6 @@
-#include "Screen/GameScreen.hpp"
+#include "GameScreen.hpp"
+
+#include <cmath>
 
 GameScreen::GameScreen(Window* window) : BaseScreen(window)
 {
@@ -12,39 +14,36 @@ GameScreen::GameScreen(Window* window) : BaseScreen(window)
 
 void GameScreen::handleEvents()
 {
-<<<<<<< HEAD
-=======
-
->>>>>>> develop
     while (m_window->getRenderer().pollEvent(m_event))
     {
         switch (m_event.type)
         {
         case sf::Event::Closed:
-<<<<<<< HEAD
             m_window->close();
             break;
-=======
-        {
-            m_window->close();
-            break;
-        }
->>>>>>> develop
+
         case sf::Event::KeyPressed:
             switch (m_event.key.code)
             {
             case sf::Keyboard::Escape:
                 m_window->close();
                 break;
+
             case sf::Keyboard::I:
                 // Open Inventory Screen
                 return;
+
+            default:
+                break;
             }
+
+        default:
+            break;
         }
     }
 }
 
-void GameScreen::update(float dt)
+void GameScreen::update(const float dt)
 {
     m_circle.setRadius(std::sin(m_timeStep.getTotalTimeInSeconds()) *
         static_cast<float>(m_window->getSize().x) / 8 +
@@ -55,6 +54,8 @@ void GameScreen::update(float dt)
 void GameScreen::render()
 {
     m_window->beginDraw();
+
     m_window->draw(m_circle);
+
     m_window->endDraw();
 }
