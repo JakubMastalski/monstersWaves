@@ -1,4 +1,7 @@
 #include "SplashScreen.hpp"
+
+#include <Manager/ScreenManager.hpp>
+
 SplashScreen::SplashScreen(Window* window, const float duration) : BaseScreen(window), m_duration(duration)
 {
     m_font.loadFromFile("res/fonts/aleo/Aleo-Light.otf");
@@ -19,7 +22,7 @@ void SplashScreen::update(const float dt)
 {
     if (m_timeStep.getTotalTimeInSeconds() >= m_duration)
     {
-        // Change screen to MenuScreen
+        ScreenManager::GetInstance().setScreen(ScreenType::MENU);
     }
 }
 void SplashScreen::render()
