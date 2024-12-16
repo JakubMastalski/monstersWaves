@@ -4,11 +4,14 @@
 #include <Screen/MenuScreen.hpp>
 #include <Screen/SplashScreen.hpp>
 
+#include <cassert>
+
 static ScreenManager* s_Instance = nullptr;
 
 void ScreenManager::Init()
 {
-    static_assert(!s_Instance);
+    assert(!s_Instance);
+
     s_Instance = new ScreenManager();
 }
 
@@ -20,7 +23,8 @@ void ScreenManager::ShutDown()
 
 ScreenManager& ScreenManager::GetInstance()
 {
-    static_assert(s_Instance);
+    assert(s_Instance);
+
     return *s_Instance;
 }
 
@@ -32,6 +36,21 @@ ScreenManager::ScreenManager()
     m_screens[ScreenType::GAME] = std::make_unique< GameScreen >(mainWindow);
     mainWindow->create();
     m_activeScreen = m_screens[ScreenType::SPLASH].get();
+}
+
+void ScreenManager::run()
+{
+    while (isRunning())
+    {
+        const float deltaTime = m_timeStep.getDeltaTime();
+        handleEvents();
+        update(deltaTime);
+        render();
+    }
+}
+bool ScreenManager::isRunning() const
+{
+    return m_activeScreen->isRunning();
 }
 
 void ScreenManager::setScreen(const ScreenType screenType)

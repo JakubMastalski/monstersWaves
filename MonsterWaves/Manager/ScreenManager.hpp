@@ -2,6 +2,8 @@
 
 #include "Screen/BaseScreen.hpp"
 #include "Screen/ScreenType.hpp"
+#include "Utils/TimeStep.hpp"
+
 #include <unordered_map>
 
 class ScreenManager
@@ -22,19 +24,18 @@ private:
     ScreenManager();
     ~ScreenManager() = default;
 
+    bool isRunning() const;
 public:
     void setScreen(ScreenType screenType);
 
 public:
-    bool isRunning() const
-    {
-        return m_activeScreen->isRunning();
-    }
+    void run();
     void handleEvents() const;
     void update(float dt) const;
     void render() const;
 
 private:
-    std::unordered_map< ScreenType, ScreenPointer >     m_screens;
-    BaseScreen* m_activeScreen{ nullptr };
+    std::unordered_map< ScreenType, ScreenPointer > m_screens;
+    BaseScreen* m_activeScreen{ nullptr };\
+    TimeStep    m_timeStep;
 };
