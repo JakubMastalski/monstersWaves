@@ -13,16 +13,26 @@ MenuScreen::MenuScreen(Window* window) : BaseScreen(window)
 
 void MenuScreen::handleEvents()
 {
-    BaseScreen::handleEvents();
-    sf::Event event;
-
-    while (m_window->getRenderer().pollEvent(event)) {
-        switch (event.type) {
-        case sf::Event::KeyPressed: switch (event.key.code) {
-        case sf::Keyboard::Enter:  
-        return; default: break; }
-        default: break; 
-        } 
+    while (m_window->getRenderer().pollEvent(m_event))
+    {
+        switch (m_event.type)
+        {
+        case sf::Event::Closed:
+            {
+                m_window->close();
+                break;
+        case sf::Event::KeyPressed:
+            switch (m_event.key.code)
+            {
+            case sf::Keyboard::Escape:
+                m_window->close();
+                break;
+            case sf::Keyboard::Enter:
+                // Switch to Game Screen
+                return;
+            }
+            }
+        }
     }
 }
 
