@@ -7,12 +7,6 @@ Game::Game()
     ScreenManager::Init();
 }
 
-Game::~Game()
-{
-    // Bug to fix
-    // ScreenManager::ShutDown();
-}
-
 void Game::run()
 {
     while (ScreenManager::GetInstance().isRunning())
