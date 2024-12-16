@@ -1,5 +1,7 @@
 #include "Screen/MenuScreen.hpp"
 
+#include "Manager/ScreenManager.hpp"
+
 MenuScreen::MenuScreen(Window* window) : BaseScreen(window)
 {
     m_font.loadFromFile("res/fonts/aleo/Aleo-Italic.otf");
@@ -28,7 +30,7 @@ void MenuScreen::handleEvents()
                 m_window->close();
                 break;
             case sf::Keyboard::Enter:
-                // Switch to Game Screen
+                ScreenManager::GetInstance().setScreen(ScreenType::GAME);
                 return;
             }
             }
