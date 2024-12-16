@@ -1,5 +1,7 @@
 #include "Screen/MenuScreen.hpp"
 
+#include <Manager/ScreenManager.hpp>
+
 MenuScreen::MenuScreen(Window* window) : BaseScreen(window)
 {
     m_font.loadFromFile("res/fonts/aleo/Aleo-Italic.otf");
@@ -13,17 +15,28 @@ MenuScreen::MenuScreen(Window* window) : BaseScreen(window)
 
 void MenuScreen::handleEvents()
 {
-    BaseScreen::handleEvents();
-    sf::Event event;
-
-    while (m_window->getRenderer().pollEvent(event)) {
-        switch (event.type) {
-        case sf::Event::KeyPressed: switch (event.key.code) {
-        case sf::Keyboard::Enter:  
-        return; default: break; }
-        default: break; 
-        } 
-    }
+        while (m_window->getRenderer().pollEvent(m_event))
+        {
+                switch (m_event.type)
+                {
+                case sf::Event::Closed:
+                    m_window->close();
+                    break;
+                case sf::Event::KeyPressed:
+                    switch (m_event.key.code)
+                    {
+                    case sf::Keyboard::Escape:
+                        m_window->close();
+                        break;
+                    case sf::Keyboard::Enter:
+                        // Switch to Game Screen
+                        ScreenManager::GetInstance().setScreen(ScreenType::GAME);
+                        return;
+                    default:
+                        break;
+                    }
+                }
+        }
 }
 
 void MenuScreen::update(float dt)

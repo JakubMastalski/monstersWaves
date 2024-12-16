@@ -14,9 +14,26 @@ SplashScreen::SplashScreen(Window* window, const float duration) : BaseScreen(wi
 }
 void SplashScreen::handleEvents()
 {
-    // Window events
-    BaseScreen::handleEvents();
-    // Screen individual events
+    while (m_window->getRenderer().pollEvent(m_event))
+    {
+        switch (m_event.type)
+        {
+        case sf::Event::Closed:
+            m_window->close();
+            break;
+        case sf::Event::KeyPressed:
+            switch (m_event.key.code)
+            {
+            case sf::Keyboard::Escape:
+                m_window->close();
+                break;
+            default:
+                break;
+            }
+        default:
+            break;
+        }
+    }
 }
 void SplashScreen::update(const float dt)
 {

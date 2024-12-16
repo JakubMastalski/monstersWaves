@@ -15,7 +15,6 @@ public:
     void create();
     void destroy();
 public:
-    void handleEvents();
     void beginDraw(const sf::Color& screenColor = sf::Color::Black);
     void draw(const sf::Drawable& drawable);
     void endDraw();

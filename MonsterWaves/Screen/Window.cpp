@@ -23,26 +23,6 @@ void Window::destroy()
     m_renderer.close();
 }
 
-void Window::handleEvents()
-{
-    sf::Event event{};
-    while (m_renderer.pollEvent(event))
-    {
-        switch (event.type)
-        {
-        case sf::Event::Closed:
-            close();
-            break;
-        case sf::Event::KeyPressed:
-            if (event.key.code == sf::Keyboard::Escape)
-            {
-                close();
-            }
-            break;
-        }
-    }
-}
-
 void Window::beginDraw(const sf::Color& screenColor)
 {
     m_renderer.clear(screenColor);
