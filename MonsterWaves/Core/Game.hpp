@@ -1,4 +1,7 @@
 #pragma once
+
+#include "Screen/BaseScreen.hpp"
+#include "Screen/GameScreen.hpp"
 #include "Screen/Window.hpp"
 #include "Utils/TimeStep.hpp"
 #include <cmath>
