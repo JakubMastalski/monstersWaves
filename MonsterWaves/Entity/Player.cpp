@@ -24,6 +24,14 @@ void Player::update(const float dt)
     {
         m_circleShape.move(100 * dt, 0);
     }
+    else if (isMovingUp)
+    {
+        m_circleShape.move(0, -100 * dt);
+    }
+    else if (isMovingDown)
+    {
+        m_circleShape.move(0, 100 * dt);
+    }
 }
 
 void Player::draw(Window* window)

@@ -33,17 +33,25 @@ void GameScreen::handleEvents()
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
     {
         m_player.isMovingLeft = true;
-        m_player.isMovingRight = false;
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
     {
         m_player.isMovingRight = true;
-        m_player.isMovingLeft = false;
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+    {
+        m_player.isMovingUp = true;
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+    {
+        m_player.isMovingDown = true;
     }
     else
     {
         m_player.isMovingLeft = false;
         m_player.isMovingRight = false;
+        m_player.isMovingUp = false;
+        m_player.isMovingDown = false;
     }
 }
 

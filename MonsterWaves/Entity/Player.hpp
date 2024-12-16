@@ -13,6 +13,8 @@ public:
     void draw(Window* window);
     bool isMovingLeft{ false };
     bool isMovingRight{ false };
+    bool isMovingUp{ false };
+    bool isMovingDown{ false };
 
 private:
     sf::CircleShape m_circleShape;
