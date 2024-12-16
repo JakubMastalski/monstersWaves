@@ -1,28 +1,20 @@
-#include "Core/Game.hpp"
+#include "Game.hpp"
+
+#include "Manager/ScreenManager.hpp"
 
 Game::Game()
 {
-	//m_screen = new SplashScreen(m_window);
-	//m_screen = new MenuScreen(m_window);
-	//m_screen = new GameScreen(m_window);
-	auto m_window = new Window();
-
-	//m_screen = std::make_unique<InventoryScreen>(m_window);
-	//m_screen = std::make_unique<MenuScreen>(m_window);
-	//m_screen = std::make_unique<SplashScreen>(m_window);
-	m_screen = std::make_unique<GameScreen>(m_window);
+    ScreenManager::Init();
 }
 
 void Game::run()
 {
-	while (m_screen->isRunning())
-	{
-		const float deltaTime = m_timeStep.getDeltaTime();
-
-		m_screen->handleEvents();
-		m_screen->update(deltaTime);
-		m_screen->render();
-	}
+    while (ScreenManager::GetInstance().isRunning())
+    {
+        const float deltaTime = m_timeStep.getDeltaTime();
+        ScreenManager::GetInstance().handleEvents();
+        ScreenManager::GetInstance().update(deltaTime);
+        ScreenManager::GetInstance().render();
+    }
 }
-
 
