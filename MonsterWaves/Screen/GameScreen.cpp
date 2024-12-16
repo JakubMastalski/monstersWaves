@@ -12,13 +12,24 @@ GameScreen::GameScreen(Window* window) : BaseScreen(window)
 
 void GameScreen::handleEvents()
 {
+<<<<<<< HEAD
+=======
+
+>>>>>>> develop
     while (m_window->getRenderer().pollEvent(m_event))
     {
         switch (m_event.type)
         {
         case sf::Event::Closed:
+<<<<<<< HEAD
             m_window->close();
             break;
+=======
+        {
+            m_window->close();
+            break;
+        }
+>>>>>>> develop
         case sf::Event::KeyPressed:
             switch (m_event.key.code)
             {

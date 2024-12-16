@@ -16,7 +16,11 @@ public:
 public:
 	bool isRunning() const;
 protected:
+<<<<<<< HEAD
 	std::unique_ptr< Window >   m_window;
+=======
+	std::unique_ptr<Window> m_window;
+>>>>>>> develop
 	sf::Event m_event{};
 }; 
 	

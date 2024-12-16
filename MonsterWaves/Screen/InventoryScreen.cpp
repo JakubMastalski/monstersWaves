@@ -32,6 +32,7 @@ InventoryScreen::InventoryScreen(Window* window) : BaseScreen(window)
 }
 void InventoryScreen::handleEvents()
 {
+<<<<<<< HEAD
         while (m_window->getRenderer().pollEvent(m_event))
         {
             switch (m_event.type)
@@ -51,6 +52,24 @@ void InventoryScreen::handleEvents()
                 default:
                     break;
                 }
+=======
+    while (m_window->getRenderer().pollEvent(m_event))
+    {
+        switch (m_event.type)
+        {
+        case sf::Event::Closed:
+            m_window->close();
+            break;
+        case sf::Event::KeyPressed:
+            switch (m_event.key.code)
+            {
+            case sf::Keyboard::Escape:
+                m_window->close();
+                break;
+            case sf::Keyboard::G:
+                // Back to the Game Screen
+                return;
+>>>>>>> develop
             }
         }
 }

@@ -30,8 +30,6 @@ void SplashScreen::handleEvents()
             default:
                 break;
             }
-        default:
-            break;
         }
     }
 }

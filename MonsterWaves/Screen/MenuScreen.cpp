@@ -15,6 +15,7 @@ MenuScreen::MenuScreen(Window* window) : BaseScreen(window)
 
 void MenuScreen::handleEvents()
 {
+<<<<<<< HEAD
         while (m_window->getRenderer().pollEvent(m_event))
         {
                 switch (m_event.type)
@@ -37,6 +38,29 @@ void MenuScreen::handleEvents()
                     }
                 }
         }
+=======
+    while (m_window->getRenderer().pollEvent(m_event))
+    {
+        switch (m_event.type)
+        {
+        case sf::Event::Closed:
+            {
+                m_window->close();
+                break;
+        case sf::Event::KeyPressed:
+            switch (m_event.key.code)
+            {
+            case sf::Keyboard::Escape:
+                m_window->close();
+                break;
+            case sf::Keyboard::Enter:
+                // Switch to Game Screen
+                return;
+            }
+            }
+        }
+    }
+>>>>>>> develop
 }
 
 void MenuScreen::update(float dt)
