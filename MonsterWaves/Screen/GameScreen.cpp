@@ -30,19 +30,19 @@ void GameScreen::handleEvents()
         }
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A))
     {
         m_player.isMovingLeft = true;
     }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D))
     {
         m_player.isMovingRight = true;
     }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W))
     {
         m_player.isMovingUp = true;
     }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S))
     {
         m_player.isMovingDown = true;
     }
