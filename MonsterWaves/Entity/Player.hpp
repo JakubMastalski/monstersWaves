@@ -11,6 +11,8 @@ public:
 public:
     void update(float dt);
     void draw(Window* window);
+    void control();
+
     bool isMovingLeft{ false };
     bool isMovingRight{ false };
     bool isMovingUp{ false };

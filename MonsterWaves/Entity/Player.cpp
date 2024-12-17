@@ -38,3 +38,30 @@ void Player::draw(Window* window)
 {
     window->draw(m_circleShape);
 }
+
+void Player::control()
+{
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+    {
+        this->isMovingLeft = true;
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+    {
+        this->isMovingRight = true;
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+    {
+        this->isMovingUp = true;
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+    {
+        this->isMovingDown = true;
+    }
+    else
+    {
+        this->isMovingLeft = false;
+        this->isMovingRight = false;
+        this->isMovingUp = false;
+        this->isMovingDown = false;
+    }
+}
