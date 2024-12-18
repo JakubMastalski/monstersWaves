@@ -30,7 +30,21 @@ void GameScreen::handleEvents()
         }
     }
 
-    m_player.control();
+    // if( sf::Keyboard::isKeyPressed( sf::Keyboard::Left ) )
+    // {
+    //     m_player.m_isMovingLeft = true;
+    //     m_player.m_isMovingRight = false;
+    // }
+    // else if( sf::Keyboard::isKeyPressed( sf::Keyboard::Right ) )
+    // {
+    //     m_player.m_isMovingRight = true;
+    //     m_player.m_isMovingLeft = false;
+    // }
+    // else
+    // {
+    //     m_player.m_isMovingLeft = false;
+    //     m_player.m_isMovingRight = false;
+    // }
 }
 
 void GameScreen::update(float dt)

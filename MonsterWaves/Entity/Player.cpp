@@ -2,66 +2,73 @@
 
 Player::Player(const Window* window)
 {
-    m_circleShape.setRadius(50.0f);
-    m_circleShape.setOrigin(
-        m_circleShape.getLocalBounds().width * 0.5f,
-        m_circleShape.getLocalBounds().height * 0.5f
-    );
-    m_circleShape.setPosition(
+    m_movingTexture.loadFromFile("res/images/Run.png");
+    m_idleTexture.loadFromFile("res/images/Idle.png");
+    m_attackTexture.loadFromFile("res/images/Attack1.png");
+
+    m_sprite.setTexture(m_idleTexture);
+    m_sprite.setPosition(
         static_cast<float>(window->getSize().x) * 0.5f,
         static_cast<float>(window->getSize().y) * 0.5f
     );
-    m_circleShape.setFillColor(sf::Color::Yellow);
+
+    for (int i = 0; i < m_idleRects.size(); ++i)
+    {
+        m_idleRects[i] = sf::IntRect{ i * 162, 0, 162, 162 };
+    }
 }
 
 void Player::update(const float dt)
 {
-    if (m_isMovingLeft)
-    {
-        m_circleShape.move(-100 * dt, 0);
-    }
-    else if (m_isMovingRight)
-    {
-        m_circleShape.move(100 * dt, 0);
-    }
-    else if (m_isMovingUp)
-    {
-        m_circleShape.move(0, -100 * dt);
-    }
-    else if (m_isMovingDown)
-    {
-        m_circleShape.move(0, 100 * dt);
-    }
+    updateAnimation(dt);
+
+    // if( !m_isMovingLeft && !m_isMovingRight )
+    // {
+    //     m_isIdle = true;
+    // }
+    // if( m_isMovingLeft )
+    // {
+    //     m_circleShape.move( -100 * dt, 0 );
+    // }
+    // else if( m_isMovingRight )
+    // {
+    //     m_circleShape.move( 100 * dt, 0 );
+    // }
 }
 
 void Player::draw(Window* window)
 {
-    window->draw(m_circleShape);
+    window->draw(m_sprite);
 }
 
-void Player::control()
+void Player::moveLeft(float dt)
 {
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+}
+
+void Player::moveRight(float dt)
+{
+}
+
+void Player::stopMoving()
+{
+}
+
+void Player::attack()
+{
+}
+
+sf::FloatRect Player::getBounds() const
+{
+    return m_sprite.getGlobalBounds();
+}
+
+void Player::updateAnimation(const float dt)
+{
+    m_sprite.setTextureRect(m_idleRects[m_currentFrame]);
+
+    ++m_currentFrame;
+    if (m_currentFrame >= m_idleRects.size())
     {
-        this->m_isMovingLeft = true;
-    }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-    {
-        this->m_isMovingRight = true;
-    }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-    {
-        this->m_isMovingUp = true;
-    }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-    {
-        this->m_isMovingDown = true;
-    }
-    else
-    {
-        this->m_isMovingLeft = false;
-        this->m_isMovingRight = false;
-        this->m_isMovingUp = false;
-        this->m_isMovingDown = false;
+        m_currentFrame = 0;
     }
 }
