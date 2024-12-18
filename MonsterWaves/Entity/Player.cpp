@@ -16,19 +16,19 @@ Player::Player(const Window* window)
 
 void Player::update(const float dt)
 {
-    if (isMovingLeft)
+    if (m_isMovingLeft)
     {
         m_circleShape.move(-100 * dt, 0);
     }
-    else if (isMovingRight)
+    else if (m_isMovingRight)
     {
         m_circleShape.move(100 * dt, 0);
     }
-    else if (isMovingUp)
+    else if (m_isMovingUp)
     {
         m_circleShape.move(0, -100 * dt);
     }
-    else if (isMovingDown)
+    else if (m_isMovingDown)
     {
         m_circleShape.move(0, 100 * dt);
     }
@@ -43,25 +43,25 @@ void Player::control()
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A))
     {
-        this->isMovingLeft = true;
+        this->m_isMovingLeft = true;
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D))
     {
-        this->isMovingRight = true;
+        this->m_isMovingRight = true;
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W))
     {
-        this->isMovingUp = true;
+        this->m_isMovingUp = true;
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S))
     {
-        this->isMovingDown = true;
+        this->m_isMovingDown = true;
     }
     else
     {
-        this->isMovingLeft = false;
-        this->isMovingRight = false;
-        this->isMovingUp = false;
-        this->isMovingDown = false;
+        this->m_isMovingLeft = false;
+        this->m_isMovingRight = false;
+        this->m_isMovingUp = false;
+        this->m_isMovingDown = false;
     }
 }
