@@ -11,4 +11,4 @@ add_library(ScreenModule STATIC Window.cpp
 include_directories(${MONSTER_WAVES_DIR} ${SFML_INCLUDE_DIR})
 
 # Link all dependencies for ScreenModule
-target_link_libraries(ScreenModule PRIVATE sfml-system sfml-window sfml-graphics sfml-audio sfml-network)
+target_link_libraries(ScreenModule PRIVATE EntityModule sfml-system sfml-window sfml-graphics sfml-audio sfml-network)

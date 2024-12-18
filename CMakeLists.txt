@@ -33,7 +33,7 @@ add_subdirectory(tests)
 include_directories(${MONSTER_WAVES_DIR})
 
 # Create executable file
-add_executable(MonsterWaves main.cpp)
+add_executable(MonsterWaves main.cpp "MonsterWaves/Entity/Player.cpp")
 
 # Link all dependencies for MonsterWaves
 target_link_libraries(MonsterWaves PRIVATE MonsterWavesLib sfml-system sfml-window sfml-graphics sfml-audio sfml-network)
