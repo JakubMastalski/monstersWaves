@@ -19,4 +19,5 @@ public:
 private:
     Player m_player;
     TimeStep m_timeStep;
+    Direction m_playerDirection{ Direction::None };
 };

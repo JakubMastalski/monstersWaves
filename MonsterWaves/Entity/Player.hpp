@@ -4,6 +4,14 @@
 
 #include <array>
 
+enum class Direction
+{
+    None,
+    Left,
+    Right
+};
+
+
 class Player
 {
 public:
@@ -21,6 +29,7 @@ public:
 
 public:
     sf::FloatRect getBounds() const;
+    void setDirection(const Direction direction, const float dt);
 
 private:
     void updateAnimation(float dt);

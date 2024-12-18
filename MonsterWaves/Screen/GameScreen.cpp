@@ -30,25 +30,20 @@ void GameScreen::handleEvents()
         }
     }
 
-    // if( sf::Keyboard::isKeyPressed( sf::Keyboard::Left ) )
-    // {
-    //     m_player.m_isMovingLeft = true;
-    //     m_player.m_isMovingRight = false;
-    // }
-    // else if( sf::Keyboard::isKeyPressed( sf::Keyboard::Right ) )
-    // {
-    //     m_player.m_isMovingRight = true;
-    //     m_player.m_isMovingLeft = false;
-    // }
-    // else
-    // {
-    //     m_player.m_isMovingLeft = false;
-    //     m_player.m_isMovingRight = false;
-    // }
+    m_playerDirection = Direction::None;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+    {
+        m_playerDirection = Direction::Left;
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+    {
+        m_playerDirection = Direction::Right;
+    }
 }
 
 void GameScreen::update(float dt)
 {
+    m_player.setDirection(m_playerDirection, dt);
     m_player.update(dt);
 }
 
