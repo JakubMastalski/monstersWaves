@@ -2,9 +2,9 @@
 
 Player::Player(const Window* window)
 {
-    m_movingTexture.loadFromFile("res/images/Run.png");
-    m_idleTexture.loadFromFile("res/images/Idle.png");
-    m_attackTexture.loadFromFile("res/images/Attack1.png");
+    m_movingTexture.loadFromFile("C:/Users/USER/Desktop/monstersWaves/res/images/Run.png");
+    m_idleTexture.loadFromFile("C:/Users/USER/Desktop/monstersWaves/res/images/Idle.png");
+    m_attackTexture.loadFromFile("C:/Users/USER/Desktop/monstersWaves/res/images/Attack1.png");
 
     m_sprite.setTexture(m_idleTexture);
     m_sprite.setPosition(
