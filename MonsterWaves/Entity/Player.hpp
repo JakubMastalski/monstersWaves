@@ -11,7 +11,6 @@ enum class Direction
     Right
 };
 
-
 class Player
 {
 public:
@@ -22,6 +21,8 @@ public:
     void draw(Window* window);
 
 public:
+    void setDirection(Direction direction, float dt);
+
     void moveLeft(float dt);
     void moveRight(float dt);
     void stopMoving();
@@ -29,7 +30,6 @@ public:
 
 public:
     sf::FloatRect getBounds() const;
-    void setDirection(const Direction direction, const float dt);
 
 private:
     void updateAnimation(float dt);
@@ -41,12 +41,12 @@ private:
     sf::Sprite  m_sprite;
 
 private:
-    std::array< sf::IntRect, 8 >  m_moveLeftRects;
-    std::array< sf::IntRect, 8 >  m_moveRightRects;
-    std::array< sf::IntRect, 10 > m_idleRects;
-    std::array< sf::IntRect, 7 >  m_attackLeftRects;
-    std::array< sf::IntRect, 7 >  m_attackRightRects;
-    int m_currentFrame{ 0 };
+    std::array< sf::IntRect, 8 >    m_moveLeftRects;
+    std::array< sf::IntRect, 8 >    m_moveRightRects;
+    std::array< sf::IntRect, 10 >   m_idleRects;
+    std::array< sf::IntRect, 7 >    m_attackLeftRects;
+    std::array< sf::IntRect, 7 >    m_attackRightRects;
+    int                             m_currentFrame{ 0 };
 
 private:
     float m_animationTime{ 0.0f };

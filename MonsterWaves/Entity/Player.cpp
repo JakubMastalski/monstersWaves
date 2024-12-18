@@ -12,6 +12,11 @@ Player::Player(const Window* window)
         static_cast<float>(window->getSize().y) * 0.5f - 162 * 0.5f
     );
 
+    for (int i = 0; i < m_idleRects.size(); ++i)
+    {
+        m_idleRects[i] = sf::IntRect{ i * 162, 0, 162, 162 };
+    }
+
     for (int i = 0; i < m_moveLeftRects.size(); ++i)
     {
         // m_moveLeftRects[ i ] = sf::IntRect{ i * 162, 0, 162, 162 };
@@ -27,6 +32,22 @@ void Player::update(const float dt)
 void Player::draw(Window* window)
 {
     window->draw(m_sprite);
+}
+
+void Player::setDirection(const Direction direction, const float dt)
+{
+    if (direction == Direction::Left)
+    {
+        moveLeft(dt);
+    }
+    else if (direction == Direction::Right)
+    {
+        moveRight(dt);
+    }
+    else
+    {
+        stopMoving();
+    }
 }
 
 void Player::moveLeft(float dt)
@@ -60,24 +81,6 @@ void Player::stopMoving()
 
 void Player::attack()
 {
-    if (m_isMovingRight)
-    {
-        m_sprite.setTextureRect(m_moveRightRects[m_currentFrame]);
-        ++m_currentFrame;
-        if (m_currentFrame >= m_moveRightRects.size())
-        {
-            m_currentFrame = 0;
-        }
-    }
-    else if (m_isIdle)
-    {
-        m_sprite.setTextureRect(m_idleRects[m_currentFrame]);
-        ++m_currentFrame;
-        if (m_currentFrame >= m_idleRects.size())
-        {
-            m_currentFrame = 0;
-        }
-    }
 }
 
 sf::FloatRect Player::getBounds() const
@@ -87,35 +90,29 @@ sf::FloatRect Player::getBounds() const
 
 void Player::updateAnimation(const float dt)
 {
-    m_sprite.setTextureRect(m_idleRects[m_currentFrame]);
+    m_animationTime += dt;
 
-    ++m_currentFrame;
+    if (m_animationTime >= m_frameDuration)
+    {
+        m_animationTime = 0.0f;
 
-    if (m_currentFrame >= m_idleRects.size())
+        if (m_isMovingRight)
         {
-            m_animationTime = 0.0f;
-            m_sprite.setTextureRect(m_idleRects[m_currentFrame - 1]);
-
+            m_sprite.setTextureRect(m_moveRightRects[m_currentFrame]);
+            ++m_currentFrame;
+            if (m_currentFrame >= m_moveRightRects.size())
+            {
+                m_currentFrame = 0;
+            }
+        }
+        else if (m_isIdle)
+        {
+            m_sprite.setTextureRect(m_idleRects[m_currentFrame]);
             ++m_currentFrame;
             if (m_currentFrame >= m_idleRects.size())
             {
                 m_currentFrame = 0;
             }
         }
-}
-
-void Player::setDirection(const Direction direction, const float dt)
-{
-    if (direction == Direction::Left)
-    {
-        moveLeft(dt);
-    }
-    else if (direction == Direction::Right)
-    {
-        moveRight(dt);
-    }
-    else
-    {
-        stopMoving();
     }
 }
