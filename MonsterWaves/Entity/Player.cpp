@@ -67,8 +67,15 @@ void Player::updateAnimation(const float dt)
     m_sprite.setTextureRect(m_idleRects[m_currentFrame]);
 
     ++m_currentFrame;
+
     if (m_currentFrame >= m_idleRects.size())
-    {
-        m_currentFrame = 0;
-    }
+        {
+            m_animationTime = 0.0f;
+            m_sprite.setTextureRect(m_idleRects[m_currentFrame]);
+            ++m_currentFrame;
+            if (m_currentFrame >= m_idleRects.size())
+            {
+                m_currentFrame = 0;
+            }
+        }
 }

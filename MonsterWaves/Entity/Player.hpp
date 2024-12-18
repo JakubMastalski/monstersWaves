@@ -40,6 +40,10 @@ private:
     int m_currentFrame{ 0 };
 
 private:
+    float m_animationTime{ 0.0f };
+    float m_frameDuration{ 0.07f };
+
+private:
     bool m_isMovingLeft{ false };
     bool m_isMovingRight{ false };
     bool m_isIdle{ true };
