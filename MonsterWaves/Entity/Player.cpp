@@ -8,8 +8,8 @@ Player::Player(const Window* window)
 
     m_sprite.setTexture(m_idleTexture);
     m_sprite.setPosition(
-        static_cast<float>(window->getSize().x) * 0.5f,
-        static_cast<float>(window->getSize().y) * 0.5f
+        static_cast<float>(window->getSize().x) * 0.5f - 162 * 0.5f,
+        static_cast<float>(window->getSize().y) * 0.5f - 162 * 0.5f
     );
 
     for (int i = 0; i < m_idleRects.size(); ++i)
