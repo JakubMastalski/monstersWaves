@@ -19,6 +19,9 @@ public:
 
     void moveLeft(float dt);
     void moveRight(float dt);
+    void moveUp(float dt);
+    void moveDown(float dt);
+
     void stopMoving();
     void attack();
 
@@ -37,6 +40,8 @@ private:
 private:
     std::array< sf::IntRect, 8 >    m_moveLeftRects;
     std::array< sf::IntRect, 8 >    m_moveRightRects;
+    std::array< sf::IntRect, 8 >    m_moveUpRects;
+    std::array< sf::IntRect, 8 >    m_moveDownRects;
     std::array< sf::IntRect, 10 >   m_idleRects;
     std::array< sf::IntRect, 7 >    m_attackLeftRects;
     std::array< sf::IntRect, 7 >    m_attackRightRects;
@@ -49,6 +54,8 @@ private:
 private:
     bool m_isMovingLeft{ false };
     bool m_isMovingRight{ false };
+    bool m_isMovingUp{ false };
+    bool m_isMovingDown{ false };
     bool m_isIdle{ true };
     bool m_isAttacking{ false };
 

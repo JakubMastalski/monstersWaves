@@ -31,6 +31,7 @@ void GameScreen::handleEvents()
     }
 
     m_playerDirection = Direction::None;
+
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
     {
         m_playerDirection = Direction::Left;
@@ -38,6 +39,14 @@ void GameScreen::handleEvents()
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
     {
         m_playerDirection = Direction::Right;
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+    {
+        m_playerDirection = Direction::Up;
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+    {
+        m_playerDirection = Direction::Down;
     }
 }
 
