@@ -12,6 +12,7 @@ public:
 
 public:
     void update(float dt);
+    void stopAttack();
     void draw(Window* window) const;
 
 public:
@@ -28,7 +29,8 @@ public:
     sf::FloatRect getBounds() const;
 
 private:
-    void updateAnimation(float dt);
+    void updateMoveAnimation(const float dt);
+    void updateAttackAnimation(const float dt);
 
 private:
     sf::Texture m_movingTexture;
@@ -43,7 +45,8 @@ private:
     int                             m_currentFrame{ 0 };
 
 private:
-    float m_animationTime{ 0.0f };
+    float m_attackAnimationTime{ 0.0f };
+    float m_animationMoveIdleTime{ 0.0f };
     float m_frameDuration{ 0.07f };
 
 private:
