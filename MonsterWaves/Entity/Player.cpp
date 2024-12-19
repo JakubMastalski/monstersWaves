@@ -19,7 +19,7 @@ Player::Player(const Window* window)
 
     for (int i = 0; i < m_moveLeftRects.size(); ++i)
     {
-       // m_moveLeftRects[ i ] = sf::IntRect{ i * 162, 0, 162, 162 };
+        m_moveLeftRects[ i ] = sf::IntRect{ i * 162, 0, 162, 162 };
         m_moveRightRects[i] = sf::IntRect{ i * 162, 0, 162, 162 };
     }
 }
@@ -55,13 +55,12 @@ void Player::moveLeft(float dt)
     m_sprite.move(-100 * dt, 0);
     if (!m_isMovingLeft)
     {
-        m_isMovingRight = false;
         m_isMovingLeft = true;
+        m_isMovingRight = false;
         m_isIdle = false;
         m_currentFrame = 0;
-        m_sprite.setTexture(m_attackTexture);
+        m_sprite.setTexture(m_movingTexture);
     }
-
 }
 
 void Player::moveRight(float dt)
@@ -111,6 +110,15 @@ void Player::updateAnimation(const float dt)
             m_sprite.setTextureRect(m_moveRightRects[m_currentFrame]);
             ++m_currentFrame;
             if (m_currentFrame >= m_moveRightRects.size())
+            {
+                m_currentFrame = 0;
+            }
+        }
+        else if (m_isMovingLeft)
+        {
+            m_sprite.setTextureRect(m_moveLeftRects[m_currentFrame]);
+            ++m_currentFrame;
+            if (m_currentFrame >= m_moveLeftRects.size())
             {
                 m_currentFrame = 0;
             }
