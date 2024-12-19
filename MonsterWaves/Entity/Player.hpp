@@ -1,15 +1,9 @@
 #pragma once
 
+#include "Entity/Direction.cpp"
 #include "Screen/Window.hpp"
 
 #include <array>
-
-enum class Direction
-{
-    None,
-    Left,
-    Right
-};
 
 class Player
 {
