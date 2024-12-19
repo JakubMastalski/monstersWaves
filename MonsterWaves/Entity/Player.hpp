@@ -57,4 +57,6 @@ private:
     bool m_isMovingRight{ false };
     bool m_isIdle{ true };
     bool m_isAttacking{ false };
+
+    Direction m_lastDirection{ Direction::None };
 };

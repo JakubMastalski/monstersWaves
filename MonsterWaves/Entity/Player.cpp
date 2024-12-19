@@ -61,9 +61,10 @@ void Player::moveLeft(float dt)
         m_isIdle = false;
         m_currentFrame = 0;
         m_sprite.setTexture(m_movingTexture);
+        m_lastDirection = Direction::Left;
 
-    m_sprite.setScale(-1.0f, 1.0f);
-    m_sprite.setOrigin(162.0f, 0.0f);
+        m_sprite.setScale(-1.0f, 1.0f);
+        m_sprite.setOrigin(162.0f, 0.0f);
     }
 }
 
@@ -77,6 +78,7 @@ void Player::moveRight(float dt)
         m_isIdle = false;
         m_currentFrame = 0;
         m_sprite.setTexture(m_movingTexture);
+        m_lastDirection = Direction::Left;
 
         m_sprite.setScale(1.0f, 1.0f);
         m_sprite.setOrigin(0.0f, 0.0f);
@@ -92,6 +94,17 @@ void Player::stopMoving()
         m_isMovingRight = false;
         m_sprite.setTexture(m_idleTexture);
         m_currentFrame = 0;
+    }
+
+    if (m_lastDirection == Direction::Left)
+    {
+        m_sprite.setScale(-1.0f, 1.0f);
+        m_sprite.setOrigin(162.0f, 0.0f);
+    }
+    else if (m_lastDirection == Direction::Right)
+    {
+        m_sprite.setScale(1.0f, 1.0f);
+        m_sprite.setOrigin(0.0f, 0.0f);
     }
 }
 
