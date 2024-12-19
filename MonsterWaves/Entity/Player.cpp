@@ -22,6 +22,8 @@ Player::Player(const Window* window)
         m_moveLeftRects[ i ] = sf::IntRect{ i * 162, 0, 162, 162 };
         m_moveRightRects[i] = sf::IntRect{ i * 162, 0, 162, 162 };
     }
+
+    m_sprite.setTextureRect(m_idleRects[m_currentFrame]);
 }
 
 void Player::update(const float dt)
