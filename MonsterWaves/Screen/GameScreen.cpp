@@ -23,6 +23,9 @@ void GameScreen::handleEvents()
             case sf::Keyboard::Escape:
                 m_window->close();
                 break;
+            case sf::Keyboard::Space:
+                m_player.attack();
+                break;
             case sf::Keyboard::I:
                 // Open Inventory Screen
                 return;

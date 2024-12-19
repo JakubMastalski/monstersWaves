@@ -12,7 +12,7 @@ public:
 
 public:
     void update(float dt);
-    void draw(Window* window);
+    void draw(Window* window) const;
 
 public:
     void setDirection(Direction direction, float dt);
@@ -21,7 +21,6 @@ public:
     void moveRight(float dt);
     void moveUp(float dt);
     void moveDown(float dt);
-
     void stopMoving();
     void attack();
 
@@ -38,13 +37,9 @@ private:
     sf::Sprite  m_sprite;
 
 private:
-    std::array< sf::IntRect, 8 >    m_moveLeftRects;
-    std::array< sf::IntRect, 8 >    m_moveRightRects;
-    std::array< sf::IntRect, 8 >    m_moveUpRects;
-    std::array< sf::IntRect, 8 >    m_moveDownRects;
+    std::array< sf::IntRect, 8 >    m_movingRects;
     std::array< sf::IntRect, 10 >   m_idleRects;
-    std::array< sf::IntRect, 7 >    m_attackLeftRects;
-    std::array< sf::IntRect, 7 >    m_attackRightRects;
+    std::array< sf::IntRect, 7 >    m_attackRects;
     int                             m_currentFrame{ 0 };
 
 private:
