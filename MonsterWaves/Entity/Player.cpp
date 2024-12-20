@@ -11,7 +11,7 @@ Player::Player(const Window* window)
         static_cast<float>(window->getSize().x) * 0.5f - 162 * 0.5f,
         static_cast<float>(window->getSize().y) * 0.5f - 162 * 0.5f
     );
-    m_sprite.setScale(1.5f, 1.5);
+    m_sprite.setScale(1.5f, 1.5f);
 
     for (int i = 0; i < m_idleRects.size(); ++i)
     {
@@ -113,7 +113,7 @@ void Player::moveLeft(const float dt)
 
         m_lastDirection = Direction::Left;
 
-        m_sprite.setScale(-1.0f, 1.0f);
+        m_sprite.setScale(-1.5f, 1.5f);
         m_sprite.setOrigin(162.0f, 0.0f);
     }
 }
@@ -133,7 +133,7 @@ void Player::moveRight(const float dt)
         m_sprite.setTexture(m_movingTexture); 
         m_lastDirection = Direction::Right;
 
-        m_sprite.setScale(1.0f, 1.0f); 
+        m_sprite.setScale(1.5f, 1.5f); 
         m_sprite.setOrigin(0.0f, 0.0f);
     }
 }
@@ -152,9 +152,6 @@ void Player::moveUp(float dt)
         m_sprite.setTexture(m_movingTexture);
 
         m_lastDirection = Direction::Up;
-
-        m_sprite.setScale(1.0f, 1.0f);
-        m_sprite.setOrigin(2.0f, 2.0f);
     }
 }
 
@@ -186,18 +183,8 @@ void Player::stopMoving()
         m_isMovingDown = false;
         m_sprite.setTexture(m_idleTexture);
         m_currentFrame = 0;
-
-        if (m_lastDirection == Direction::Left)
-        {
-            m_sprite.setScale(-1.0f, 1.0f);
-            m_sprite.setOrigin(162.0f, 0.0f);
-        }
-        else if (m_lastDirection == Direction::Right)
-        {
-            m_sprite.setScale(1.0f, 1.0f);
-            m_sprite.setOrigin(0.0f, 0.0f);
-        }
     }
+   
 }
 
 void Player::attack()
