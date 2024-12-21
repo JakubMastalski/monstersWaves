@@ -178,21 +178,85 @@ void Player::moveUp(float dt)
 void Player::moveDiagonaly_UpRight(float dt)
 {
     m_sprite.move(80 * dt, -80 * dt);
+
+    if (!m_isMovingRight)
+    {
+        m_isMovingLeft = false;
+        m_isMovingRight = true;
+        m_isMovingUp = false;
+        m_isMovingDown = false;
+        m_isIdle = false;
+        m_currentFrame = 0;
+
+        m_sprite.setTexture(m_movingTexture);
+        m_lastDirection = Direction::Right;
+
+        m_sprite.setScale(1.5f, 1.5f);
+        m_sprite.setOrigin(0.0f, 0.0f);
+    }
 } 
 
 void Player::moveDiagonaly_UpLeft(float dt)
 {
     m_sprite.move(-80 * dt, -80 * dt);
+
+    if (!m_isMovingLeft)
+    {
+        m_isMovingLeft = true;
+        m_isMovingRight = false;
+        m_isMovingUp = false;
+        m_isMovingDown = false;
+        m_isIdle = false;
+        m_currentFrame = 0;
+        m_sprite.setTexture(m_movingTexture);
+
+        m_lastDirection = Direction::Left;
+
+        m_sprite.setScale(-1.5f, 1.5f);
+        m_sprite.setOrigin(162.0f, 0.0f);
+    }
 }
 
 void Player::moveDiagonaly_DownRight(float dt)
 {
     m_sprite.move(80 * dt, 80 * dt);
+
+    if (!m_isMovingRight)
+    {
+        m_isMovingLeft = false;
+        m_isMovingRight = true;
+        m_isMovingUp = false;
+        m_isMovingDown = false;
+        m_isIdle = false;
+        m_currentFrame = 0;
+
+        m_sprite.setTexture(m_movingTexture);
+        m_lastDirection = Direction::Right;
+
+        m_sprite.setScale(1.5f, 1.5f);
+        m_sprite.setOrigin(0.0f, 0.0f);
+    }
 }
 
 void Player::moveDiagonaly_DownLeft(float dt)
 {
     m_sprite.move(-80 * dt, 80 * dt);
+
+    if (!m_isMovingLeft)
+    {
+        m_isMovingLeft = true;
+        m_isMovingRight = false;
+        m_isMovingUp = false;
+        m_isMovingDown = false;
+        m_isIdle = false;
+        m_currentFrame = 0;
+        m_sprite.setTexture(m_movingTexture);
+
+        m_lastDirection = Direction::Left;
+
+        m_sprite.setScale(-1.5f, 1.5f);
+        m_sprite.setOrigin(162.0f, 0.0f);
+    }
 }
 
 
