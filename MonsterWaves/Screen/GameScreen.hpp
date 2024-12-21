@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Entity/Player.hpp"
 #include "Screen/BaseScreen.hpp"
 #include "Utils/TimeStep.hpp"
 
@@ -16,6 +17,7 @@ public:
     void render() override;
 
 private:
-    sf::CircleShape m_circle;
+    Player m_player;
     TimeStep m_timeStep;
+    Direction m_playerDirection{ Direction::None };
 };
