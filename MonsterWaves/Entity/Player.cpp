@@ -100,7 +100,7 @@ void Player::setDirection(const Direction direction, const float dt)
 
 void Player::moveLeft(const float dt)
 {
-    m_sprite.move(-100 * dt, 0);
+    m_sprite.move(-125 * dt, 0);
     if (!m_isMovingLeft)
     {
         m_isMovingLeft = true;
@@ -120,7 +120,7 @@ void Player::moveLeft(const float dt)
 
 void Player::moveRight(const float dt)
 {
-    m_sprite.move(100 * dt, 0);
+    m_sprite.move(125 * dt, 0);
     if (!m_isMovingRight)
     {
         m_isMovingLeft = false;
@@ -140,7 +140,7 @@ void Player::moveRight(const float dt)
 
 void Player::moveUp(float dt)
 {
-    m_sprite.move(0, -100 * dt);
+    m_sprite.move(0, -125 * dt);
     if (!m_isMovingUp)
     {
         m_isMovingRight = false;
@@ -157,7 +157,7 @@ void Player::moveUp(float dt)
 
 void Player::moveDown(float dt)
 {
-    m_sprite.move(0, 100 * dt);
+    m_sprite.move(0, 125 * dt);
     if (!m_isMovingDown)
     {
         m_isMovingRight = false;
