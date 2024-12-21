@@ -1,6 +1,7 @@
 #include "Screen/GameScreen.hpp"
 
-GameScreen::GameScreen(Window* window) : BaseScreen(window), m_player({ window })
+GameScreen::GameScreen(Window* window) :
+    BaseScreen(window), m_player({ window }), m_enemy({ window, m_player.getPosition(), 75.0f })
 {
    //EMPTY BODY
 }
@@ -94,6 +95,8 @@ void GameScreen::update(float dt)
 {
     m_player.setDirection(m_playerDirection, dt);
     m_player.update(dt);
+
+    m_enemy.update(dt, m_player.getPosition());
 }
 
 void GameScreen::render()
@@ -101,6 +104,7 @@ void GameScreen::render()
     m_window->beginDraw();
 
     m_player.draw(m_window.get());
+    m_enemy.draw(m_window.get());
 
     m_window->endDraw();
 }
