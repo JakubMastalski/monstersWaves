@@ -32,6 +32,7 @@ public:
 
 public:
     sf::FloatRect getBounds() const;
+    bool getIdle();
 
 private:
     void updateMoveAnimation(const float dt);
@@ -59,13 +60,14 @@ private:
     bool m_isMovingRight{ false };
     bool m_isMovingUp{ false };
     bool m_isMovingDown{ false };
-    bool m_isIdle{ true };
     bool m_isAttacking{ false };
 
     bool m_moveDiagonaly_UpRight{ false };
     bool m_moveDiagonaly_UpLeft{ false };
     bool m_moveDiagonaly_DownRight{ false };
     bool m_moveDiagonaly_DownLeft{ false };
+
+    bool m_isIdle{ true };
 
     Direction m_lastDirection{ Direction::None };
 };

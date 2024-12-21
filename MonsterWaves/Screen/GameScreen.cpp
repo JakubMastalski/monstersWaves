@@ -24,7 +24,10 @@ void GameScreen::handleEvents()
                 m_window->close();
                 break;
             case sf::Keyboard::Space:
-                m_player.attack();
+                if (m_player.getIdle())
+                {
+                    m_player.attack();
+                }
                 break;
             case sf::Keyboard::I:
                 // Open Inventory Screen

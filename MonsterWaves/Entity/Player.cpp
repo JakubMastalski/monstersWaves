@@ -286,10 +286,20 @@ void Player::stopMoving()
         m_isMovingRight = false;
         m_isMovingUp = false;
         m_isMovingDown = false;
+
+        m_moveDiagonaly_DownRight = false;
+        m_moveDiagonaly_DownLeft = false;
+        m_moveDiagonaly_UpRight = false;
+        m_moveDiagonaly_UpLeft = false;
+
         m_sprite.setTexture(m_idleTexture);
         m_currentFrame = 0;
     }
-   
+}
+
+bool Player::getIdle()
+{
+    return this->m_isIdle;
 }
 
 void Player::attack()
