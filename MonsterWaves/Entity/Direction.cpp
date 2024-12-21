@@ -5,5 +5,10 @@ enum class Direction
     Left,
     Right,
     Up,
-    Down
+    Down,
+
+    Diagonaly_UpRight,
+    Diagonaly_UpLeft,
+    Diagonaly_DownRight,
+    Diagonaly_DownLeft,
 };

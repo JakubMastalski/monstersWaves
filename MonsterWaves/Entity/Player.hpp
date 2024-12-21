@@ -25,6 +25,11 @@ public:
     void stopMoving();
     void attack();
 
+    void moveDiagonaly_UpRight(float dt);
+    void moveDiagonaly_UpLeft(float dt);
+    void moveDiagonaly_DownRight(float dt);
+    void moveDiagonaly_DownLeft(float dt);
+
 public:
     sf::FloatRect getBounds() const;
 
@@ -56,6 +61,11 @@ private:
     bool m_isMovingDown{ false };
     bool m_isIdle{ true };
     bool m_isAttacking{ false };
+
+    bool m_moveDiagonaly_UpRight{ false };
+    bool m_moveDiagonaly_UpLeft{ false };
+    bool m_moveDiagonaly_DownRight{ false };
+    bool m_moveDiagonaly_DownLeft{ false };
 
     Direction m_lastDirection{ Direction::None };
 };

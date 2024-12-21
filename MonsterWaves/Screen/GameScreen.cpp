@@ -35,22 +35,56 @@ void GameScreen::handleEvents()
 
     m_playerDirection = Direction::None;
 
+    bool isMovingDiagonally = false;
+
+
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && m_player.getBounds().left > -50)
     {
+        if (m_playerDirection != Direction::None) isMovingDiagonally = true;
         m_playerDirection = Direction::Left;
     }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && (m_player.getBounds().left + m_player.getBounds().width < 1050))
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && (m_player.getBounds().left + m_player.getBounds().width < 1050))
     {
+        if (m_playerDirection != Direction::None) isMovingDiagonally = true;
         m_playerDirection = Direction::Right;
     }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && m_player.getBounds().top > -50)
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && m_player.getBounds().top > -50)
     {
+        if (m_playerDirection != Direction::None) isMovingDiagonally = true;
         m_playerDirection = Direction::Up;
     }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && (m_player.getBounds().top + m_player.getBounds().height < 850))
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && (m_player.getBounds().top + m_player.getBounds().height < 850))
     {
+        if (m_playerDirection != Direction::None) isMovingDiagonally = true;
         m_playerDirection = Direction::Down;
     }
+
+    if (isMovingDiagonally)
+    {
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+        {
+            m_playerDirection = Direction::Diagonaly_UpRight;
+        }
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+        {
+            m_playerDirection = Direction::Diagonaly_UpLeft;
+        }
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+        {
+            m_playerDirection = Direction::Diagonaly_DownRight;
+        }
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+        {
+            m_playerDirection = Direction::Diagonaly_DownLeft;
+        }
+    }
+
 }
 
 void GameScreen::update(float dt)

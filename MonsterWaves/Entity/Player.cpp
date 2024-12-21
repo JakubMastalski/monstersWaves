@@ -93,6 +93,26 @@ void Player::setDirection(const Direction direction, const float dt)
            moveDown(dt);
            break;
        }
+       case Direction::Diagonaly_UpRight:
+       {
+           moveDiagonaly_UpRight(dt);
+           break;
+       }
+       case Direction::Diagonaly_UpLeft:
+       {
+           moveDiagonaly_UpLeft(dt);
+           break;
+       }
+       case Direction::Diagonaly_DownRight:
+       {
+           moveDiagonaly_DownRight(dt);
+           break;
+       }
+       case Direction::Diagonaly_DownLeft:
+       {
+           moveDiagonaly_DownLeft(dt);
+           break;
+       }
        default:
            stopMoving();
    }
@@ -154,6 +174,27 @@ void Player::moveUp(float dt)
         m_lastDirection = Direction::Up;
     }
 }
+
+void Player::moveDiagonaly_UpRight(float dt)
+{
+    m_sprite.move(80 * dt, -80 * dt);
+} 
+
+void Player::moveDiagonaly_UpLeft(float dt)
+{
+    m_sprite.move(-80 * dt, -80 * dt);
+}
+
+void Player::moveDiagonaly_DownRight(float dt)
+{
+    m_sprite.move(80 * dt, 80 * dt);
+}
+
+void Player::moveDiagonaly_DownLeft(float dt)
+{
+    m_sprite.move(-80 * dt, 80 * dt);
+}
+
 
 void Player::moveDown(float dt)
 {
