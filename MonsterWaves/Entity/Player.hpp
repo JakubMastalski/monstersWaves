@@ -31,6 +31,7 @@ public:
     void moveDiagonaly_DownLeft(float dt);
 
 public:
+    sf::Vector2f getPosition() const;
     sf::FloatRect getBounds() const;
     bool getIdle();
 
