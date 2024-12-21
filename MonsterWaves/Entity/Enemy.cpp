@@ -37,12 +37,12 @@ Enemy::Enemy(const Window* window, const sf::Vector2f& playerPosition, const flo
 void Enemy::update(const float dt, const sf::Vector2f& playerPosition)
 {
     updateMove(dt, playerPosition);
-    updateMoveAnimation();
+    updateMoveAnimation(dt);
 }
 
 void Enemy::updateMove(const float dt, const sf::Vector2f& playerPosition)
 {
-    const sf::Vector2f direction = playerPosition - m_position;
+        const sf::Vector2f direction = playerPosition - m_position;
     const float length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
     if (length != 0)
     {
@@ -50,20 +50,24 @@ void Enemy::updateMove(const float dt, const sf::Vector2f& playerPosition)
     }
 
     m_position += m_direction * m_speed * dt;
-    m_sprite.setPosition(m_position);
 
+    m_sprite.setPosition(m_position);
+}
+void Enemy::updateMoveAnimation(const float dt)
+{
     m_animationTimer += dt;
 
-    if (m_animationTimer >= 0.07f)
+    if (m_animationTimer >= m_frameDuration)
     {
-        m_animationTimer = 0.40f;
+        m_animationTimer = 0.0f;
+        ++m_currentFrame;
 
-        m_sprite.setTexture(m_movingTexture);
+        if (m_currentFrame >= m_movingRects.size())
+        {
+            m_currentFrame = 0;
+        }
+        m_sprite.setTextureRect(m_movingRects[m_currentFrame]);
     }
-}
-void Enemy::updateMoveAnimation()
-{
-    
 }
 
 void Enemy::draw(Window* window) const
