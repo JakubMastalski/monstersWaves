@@ -97,7 +97,7 @@ void Enemy::updateMoveAnimation(const float dt)
             m_sprite.setScale(1.5f, 1.5f);
             m_sprite.setOrigin(0.0f, 0.0f);
         }
-        else if (m_direction.x < 0)
+        if (m_direction.x < 0)
         {
             m_sprite.setScale(-1.5f, 1.5f);
             m_sprite.setOrigin(80.0f, 0.0f);
