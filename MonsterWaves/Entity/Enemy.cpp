@@ -6,12 +6,15 @@ Enemy::Enemy(const Window* window, const sf::Vector2f& playerPosition, const flo
 {
     RandomNumber randomGenerator;
 
-    const float startX = static_cast<float>(
-        randomGenerator.getNumber(0, static_cast<int>(window->getSize().x))
-        );
+    const int side = randomGenerator.getNumber(0, 1) == 0 ? -1 : 1;
+    const float startX = side == -1
+        ? -20.0f
+        : static_cast<float>(window->getSize().x) + 20.0f;
+
     const float startY = static_cast<float>(
         randomGenerator.getNumber(0, static_cast<int>(window->getSize().y))
         );
+
     m_position = sf::Vector2f{ startX, startY };
 
     const sf::Vector2f direction = playerPosition - m_position;
@@ -97,6 +100,7 @@ void Enemy::updateMoveAnimation(const float dt)
             m_sprite.setScale(1.5f, 1.5f);
             m_sprite.setOrigin(0.0f, 0.0f);
         }
+
         if (m_direction.x < 0)
         {
             m_sprite.setScale(-1.5f, 1.5f);
