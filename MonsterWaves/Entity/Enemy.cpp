@@ -23,6 +23,7 @@ Enemy::Enemy(const Window* window, const sf::Vector2f& playerPosition, const flo
 
     m_movingTexture.loadFromFile("res/images/EnemyRun.png");
     m_deadTexture.loadFromFile("res/images/EnemyDead.png");
+    m_attackTexture.loadFromFile("res/images/EnemyAttack.png");
 
     m_sprite.setTexture(m_movingTexture);
 
@@ -39,6 +40,11 @@ Enemy::Enemy(const Window* window, const sf::Vector2f& playerPosition, const flo
         m_deadRects[i] = sf::IntRect{ i * 80, 0, 80, 80 };
     }
 
+    for (int i = 0; i < m_attackRects.size(); ++i)
+    {
+        m_attackRects[i] = sf::IntRect{ i * 80, 0, 80, 80 };
+    }
+
     m_sprite.setTextureRect(m_movingRects[m_currentFrame]);
     m_sprite.setScale(1.5f, 1.5f);
 }
@@ -48,6 +54,10 @@ void Enemy::update(float dt, const sf::Vector2f& playerPosition, const sf::Vecto
     if (enemyDead)
     {
         updateDeadAnimation(dt); 
+    }
+    else if (enemyAttacking)
+    {
+        updateAttackAnimation(dt);
     }
     else
     {
@@ -63,7 +73,7 @@ void Enemy::updateMove(const float dt, const sf::Vector2f& playerPosition, const
     const sf::Vector2f newDirection = playerCenter - m_position;
     const float length = std::sqrt(newDirection.x * newDirection.x + newDirection.y * newDirection.y);
 
-    if (length > 1.5f) 
+    if (length > 60.0f) 
     {
         const sf::Vector2f normalizedDirection = newDirection / length;
 
@@ -75,9 +85,9 @@ void Enemy::updateMove(const float dt, const sf::Vector2f& playerPosition, const
     }
     else
     {
-        enemyDead = true;
+        enemyAttacking = true;
         m_currentFrame = 0;
-        m_sprite.setTexture(m_deadTexture);
+        m_sprite.setTexture(m_attackTexture);
     }
 }
 void Enemy::updateMoveAnimation(const float dt)
@@ -108,6 +118,31 @@ void Enemy::updateMoveAnimation(const float dt)
         {
             m_sprite.setScale(-1.5f, 1.5f);
             m_sprite.setOrigin(80.0f, 0.0f);
+        }
+    }
+}
+
+void Enemy::updateAttackAnimation(const float dt)
+{
+    if (!enemyDead && enemyAttacking)
+    {
+        m_animationTimer += dt;
+
+        if (m_animationTimer >= m_frameDuration)
+        {
+            m_animationTimer = 0.0f;
+            ++m_currentFrame;
+
+            if (m_currentFrame >= m_deadRects.size())
+            {
+                m_currentFrame = m_deadRects.size() - 1;
+                enemyAttacking = false;
+                m_sprite.setTextureRect(m_movingRects[0]);
+                return;
+            }
+
+          
+            m_sprite.setTextureRect(m_attackRects[m_currentFrame]);
         }
     }
 }
