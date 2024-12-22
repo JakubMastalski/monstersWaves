@@ -10,7 +10,7 @@ public:
     Enemy(const Window* window, const sf::Vector2f& playerPosition, float speed);
 
 public:
-    void update(float dt, const sf::Vector2f& playerPosition);
+    void update(float dt, const sf::Vector2f& playerPosition, const sf::Vector2f& playerSize);
     void draw(Window* window) const;
 
 private:
@@ -41,5 +41,5 @@ private:
     void updateMoveAnimation(const float dt);
     void updateDeadAnimation(const float dt);
 
-    void updateMove(const float dt, const sf::Vector2f& playerPosition);
+    void updateMove(const float dt, const sf::Vector2f& playerPosition, const sf::Vector2f& playerSize);
 };

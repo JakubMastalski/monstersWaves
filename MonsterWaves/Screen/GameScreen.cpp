@@ -96,7 +96,8 @@ void GameScreen::update(float dt)
     m_player.setDirection(m_playerDirection, dt);
     m_player.update(dt);
 
-    m_enemy.update(dt, m_player.getPosition());
+    m_enemy.update(dt, m_player.getPosition(),
+        { m_player.getBounds().width / 2 , m_player.getBounds().height - 100 });
 }
 
 void GameScreen::render()

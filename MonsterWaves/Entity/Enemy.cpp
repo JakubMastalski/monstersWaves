@@ -28,7 +28,6 @@ Enemy::Enemy(const Window* window, const sf::Vector2f& playerPosition, const flo
 
 
     m_sprite.setPosition(m_position);
-    m_sprite.setOrigin(20.0f, 20.0f);
 
     for (int i = 0; i < m_movingRects.size(); ++i)
     {
@@ -44,7 +43,7 @@ Enemy::Enemy(const Window* window, const sf::Vector2f& playerPosition, const flo
     m_sprite.setScale(1.5f, 1.5f);
 }
 
-void Enemy::update(const float dt, const sf::Vector2f& playerPosition)
+void Enemy::update(float dt, const sf::Vector2f& playerPosition, const sf::Vector2f& playerSize)
 {
     if (enemyDead)
     {
@@ -52,29 +51,33 @@ void Enemy::update(const float dt, const sf::Vector2f& playerPosition)
     }
     else
     {
-        updateMove(dt, playerPosition);
+        updateMove(dt, playerPosition, playerSize);
         updateMoveAnimation(dt);
     }
 }
 
-void Enemy::updateMove(const float dt, const sf::Vector2f& playerPosition)
+void Enemy::updateMove(const float dt, const sf::Vector2f& playerPosition, const sf::Vector2f& playerSize)
 {
-    const sf::Vector2f direction = playerPosition - m_position;
-    const float length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+    const sf::Vector2f playerCenter = playerPosition + playerSize * 0.5f;
 
-    if (length < 1.0f) 
+    const sf::Vector2f newDirection = playerCenter - m_position;
+    const float length = std::sqrt(newDirection.x * newDirection.x + newDirection.y * newDirection.y);
+
+    if (length > 1.5f) 
     {
-        enemyDead = true; 
-        m_currentFrame = 0; 
-        m_sprite.setTexture(m_deadTexture);
-        return;
-    }
-    
-    if (!enemyDead)
-    {
-        m_direction = direction / length;
+        const sf::Vector2f normalizedDirection = newDirection / length;
+
+        m_direction = m_direction + (normalizedDirection - m_direction) * 0.1f;
+
         m_position += m_direction * m_speed * dt;
+
         m_sprite.setPosition(m_position);
+    }
+    else
+    {
+        enemyDead = true;
+        m_currentFrame = 0;
+        m_sprite.setTexture(m_deadTexture);
     }
 }
 void Enemy::updateMoveAnimation(const float dt)
