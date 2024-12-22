@@ -1,7 +1,7 @@
 #include "Screen/GameScreen.hpp"
 
 GameScreen::GameScreen(Window* window) :
-    BaseScreen(window), m_player({ window }), m_enemy({ window, m_player.getPosition(), 75.0f })
+    BaseScreen(window), m_player({ window }), m_enemy({ window, m_player.getPosition(), 90.0f })
 {
    //EMPTY BODY
 }
