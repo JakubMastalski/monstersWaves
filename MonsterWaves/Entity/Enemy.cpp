@@ -53,13 +53,13 @@ void Enemy::update(float dt, const sf::Vector2f& playerPosition, const sf::Vecto
 {
     if (enemyDead)
     {
-        updateDeadAnimation(dt); 
+        updateDeadAnimation(dt);
     }
     else if (enemyAttacking)
     {
         updateAttackAnimation(dt);
     }
-    else
+    else if
     {
         updateMove(dt, playerPosition, playerSize);
         updateMoveAnimation(dt);
@@ -73,7 +73,7 @@ void Enemy::updateMove(const float dt, const sf::Vector2f& playerPosition, const
     const sf::Vector2f newDirection = playerCenter - m_position;
     const float length = std::sqrt(newDirection.x * newDirection.x + newDirection.y * newDirection.y);
 
-    if (length > 60.0f) 
+    if (length > 60.0f)
     {
         const sf::Vector2f normalizedDirection = newDirection / length;
 
@@ -82,12 +82,22 @@ void Enemy::updateMove(const float dt, const sf::Vector2f& playerPosition, const
         m_position += m_direction * m_speed * dt;
 
         m_sprite.setPosition(m_position);
+
+        if (enemyAttacking)
+        {
+            enemyAttacking = false;
+            m_sprite.setTexture(m_movingTexture);
+            m_currentFrame = 0;
+        }
     }
     else
     {
-        enemyAttacking = true;
-        m_currentFrame = 0;
-        m_sprite.setTexture(m_attackTexture);
+        if (!enemyAttacking)
+        {
+            enemyAttacking = true;
+            m_currentFrame = 0; 
+            m_sprite.setTexture(m_attackTexture);
+        }
     }
 }
 void Enemy::updateMoveAnimation(const float dt)
@@ -124,7 +134,7 @@ void Enemy::updateMoveAnimation(const float dt)
 
 void Enemy::updateAttackAnimation(const float dt)
 {
-    if (!enemyDead && enemyAttacking)
+    if (enemyAttacking)
     {
         m_animationTimer += dt;
 
@@ -133,15 +143,11 @@ void Enemy::updateAttackAnimation(const float dt)
             m_animationTimer = 0.0f;
             ++m_currentFrame;
 
-            if (m_currentFrame >= m_deadRects.size())
+            if (m_currentFrame >= m_attackRects.size())
             {
-                m_currentFrame = m_deadRects.size() - 1;
-                enemyAttacking = false;
-                m_sprite.setTextureRect(m_movingRects[0]);
-                return;
+                m_currentFrame = 0;
             }
 
-          
             m_sprite.setTextureRect(m_attackRects[m_currentFrame]);
         }
     }
