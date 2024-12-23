@@ -59,7 +59,7 @@ void Enemy::update(float dt, const sf::Vector2f& playerPosition, const sf::Vecto
     {
         updateAttackAnimation(dt);
     }
-    else if
+    else
     {
         updateMove(dt, playerPosition, playerSize);
         updateMoveAnimation(dt);
