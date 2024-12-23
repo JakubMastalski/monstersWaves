@@ -51,18 +51,24 @@ Enemy::Enemy(const Window* window, const sf::Vector2f& playerPosition, const flo
 
 void Enemy::update(float dt, const sf::Vector2f& playerPosition, const sf::Vector2f& playerSize)
 {
-    if (enemyDead)
+    switch (enemyState)
     {
-        updateDeadAnimation(dt);
-    }
-    else if (enemyAttacking)
-    {
-        updateAttackAnimation(dt);
-    }
-    else
-    {
-        updateMove(dt, playerPosition, playerSize);
+    case EnemyState::EnemyMoving:
+
+        updateMove(dt, playerPosition,playerSize);
         updateMoveAnimation(dt);
+
+        break;
+    case EnemyState::EnemyAttacking:
+        updateAttackAnimation(dt, playerPosition, playerSize);
+
+        break;
+    case EnemyState::EnemyDead:
+        updateDeadAnimation(dt);
+
+        break;
+    default:
+        break;
     }
 }
 
@@ -82,28 +88,15 @@ void Enemy::updateMove(const float dt, const sf::Vector2f& playerPosition, const
         m_position += m_direction * m_speed * dt;
 
         m_sprite.setPosition(m_position);
-
-        if (enemyAttacking)
-        {
-            enemyAttacking = false;
-            m_sprite.setTexture(m_movingTexture);
-            m_currentFrame = 0;
-        }
     }
     else
     {
-        if (!enemyAttacking)
-        {
-            enemyAttacking = true;
-            m_currentFrame = 0; 
-            m_sprite.setTexture(m_attackTexture);
-        }
+        enemyState = EnemyAttacking;
+        m_sprite.setTexture(m_attackTexture);
     }
 }
 void Enemy::updateMoveAnimation(const float dt)
 {
-    if (!enemyDead)
-    {
         m_animationTimer += dt;
 
         if (m_animationTimer >= m_frameDuration)
@@ -129,27 +122,35 @@ void Enemy::updateMoveAnimation(const float dt)
             m_sprite.setScale(-1.5f, 1.5f);
             m_sprite.setOrigin(80.0f, 0.0f);
         }
-    }
 }
 
-void Enemy::updateAttackAnimation(const float dt)
+void Enemy::updateAttackAnimation(const float dt,const sf::Vector2f& playerPosition, const sf::Vector2f& playerSize)
 {
-    if (enemyAttacking)
+    const sf::Vector2f playerCenter = playerPosition + playerSize * 0.5f;
+
+    const sf::Vector2f newDirection = playerCenter - m_position;
+    const float length = std::sqrt(newDirection.x * newDirection.x + newDirection.y * newDirection.y);
+         
+    if (length > 80)
     {
-        m_animationTimer += dt;
+        enemyState = EnemyState::EnemyMoving;
+        m_sprite.setTexture(m_movingTexture);
+        return;
+    }
 
-        if (m_animationTimer >= m_frameDuration)
+    m_animationTimer += dt;
+    if (m_animationTimer >= m_frameDuration)
+    {
+        m_animationTimer = 0.0f;
+        ++m_currentFrame;
+
+        if (m_currentFrame >= m_attackRects.size())
         {
-            m_animationTimer = 0.0f;
-            ++m_currentFrame;
+            m_currentFrame = 0;
 
-            if (m_currentFrame >= m_attackRects.size())
-            {
-                m_currentFrame = 0;
-            }
-
-            m_sprite.setTextureRect(m_attackRects[m_currentFrame]);
         }
+
+        m_sprite.setTextureRect(m_attackRects[m_currentFrame]);
     }
 }
 

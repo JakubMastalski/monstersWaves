@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Entity/EnemyState.cpp"
 #include <Screen/Window.hpp>
 
 #include <array>
@@ -27,10 +28,6 @@ private:
    const float m_frameDuration{ 0.07f };
 
 private:
-   bool enemyAttacking = false;
-   bool enemyDead = false;
-
-private:
     sf::Texture m_movingTexture;
     sf::Texture m_deadTexture;
     sf::Texture m_attackTexture;
@@ -44,10 +41,11 @@ private:
 private:
     float m_frameTime{ 0.07f };
     int  m_currentFrame{ 0 };
+    EnemyState enemyState = EnemyState::EnemyMoving;
 private:
     void updateMoveAnimation(const float dt);
     void updateDeadAnimation(const float dt);
-    void updateAttackAnimation(const float dt);
+    void updateAttackAnimation(const float dt, const sf::Vector2f& playerPosition, const sf::Vector2f& playerSize);
 
     void updateMove(const float dt, const sf::Vector2f& playerPosition, const sf::Vector2f& playerSize);
 };
