@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Entity/Enemy.hpp"
 #include "Entity/Player.hpp"
 #include "Screen/BaseScreen.hpp"
 #include "Utils/TimeStep.hpp"
@@ -20,4 +21,6 @@ private:
     Player m_player;
     TimeStep m_timeStep;
     Direction m_playerDirection{ Direction::None };
+
+    Enemy m_enemy;
 };

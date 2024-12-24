@@ -317,6 +317,11 @@ sf::FloatRect Player::getBounds() const
     return m_sprite.getGlobalBounds();
 }
 
+sf::Vector2f Player::getPosition() const
+{
+    return m_sprite.getPosition();
+}
+
 void Player::updateMoveAnimation(const float dt)
 {
     if (!m_isAttacking)
