@@ -4,6 +4,7 @@
 #include "Screen/Window.hpp"
 
 #include <array>
+#include <vector>
 
 class Player
 {
@@ -71,4 +72,8 @@ private:
     bool m_isIdle{ true };
 
     Direction m_lastDirection{ Direction::None };
+private:
+    std::vector< sf::CircleShape > m_circleLives;
+    int       m_lives{ 3 };
+
 };

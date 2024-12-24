@@ -29,6 +29,14 @@ Player::Player(const Window* window)
     }
 
     m_sprite.setTextureRect(m_idleRects[m_currentFrame]);
+
+    for (int i = 0; i < 3; ++i)
+    {
+        sf::CircleShape lifeShape{ 5 };
+        lifeShape.setPosition(i * 20 + 10, 20);
+        lifeShape.setFillColor(sf::Color::Red);
+        m_circleLives.push_back(lifeShape);
+    }
 }
 
 void Player::update(const float dt)
@@ -66,6 +74,10 @@ void Player::stopAttack()
 
 void Player::draw(Window* window) const
 {
+    for (const auto& lifeCircle : m_circleLives)
+    {
+        window->draw(lifeCircle);
+    }
     window->draw(m_sprite);
 }
 
