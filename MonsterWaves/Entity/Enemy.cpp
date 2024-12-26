@@ -79,7 +79,7 @@ void Enemy::updateMove(const float dt, const sf::Vector2f& playerPosition, const
     const sf::Vector2f newDirection = playerCenter - m_position;
     const float length = std::sqrt(newDirection.x * newDirection.x + newDirection.y * newDirection.y);
 
-    if (length > 60.0f)
+    if (length > 40.0f)
     {
         const sf::Vector2f normalizedDirection = newDirection / length;
 
@@ -174,4 +174,25 @@ void Enemy::updateDeadAnimation(const float dt)
 void Enemy::draw(Window* window) const
 {
     window->draw(m_sprite);
+}
+
+bool Enemy::checkCollisionWithPlayer(const sf::Sprite& player) const
+{
+    const sf::FloatRect enemyBounds = m_sprite.getGlobalBounds();
+    const sf::FloatRect playerBounds = player.getGlobalBounds();
+    return enemyBounds.intersects(playerBounds);
+}
+
+bool Enemy::checkCollisionWithPlayerAttack(const sf::Sprite& player) const
+{
+    const sf::FloatRect enemyBounds = m_sprite.getGlobalBounds();
+    const sf::FloatRect playerAttackBounds = player.getGlobalBounds();
+    return enemyBounds.intersects(playerAttackBounds);
+}
+
+void Enemy::enemyDie()
+{
+    enemyState = EnemyState::EnemyDead;
+    m_currentFrame = 0;
+    m_sprite.setTexture(m_deadTexture);
 }

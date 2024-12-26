@@ -46,6 +46,10 @@ private:
     void updateMoveAnimation(const float dt);
     void updateDeadAnimation(const float dt);
     void updateAttackAnimation(const float dt, const sf::Vector2f& playerPosition, const sf::Vector2f& playerSize);
-
     void updateMove(const float dt, const sf::Vector2f& playerPosition, const sf::Vector2f& playerSize);
+public:
+    bool checkCollisionWithPlayerAttack(const sf::Sprite& player) const;
+    bool checkCollisionWithPlayer(const sf::Sprite& player) const;
+
+    void enemyDie();
 };
