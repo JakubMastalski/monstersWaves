@@ -122,7 +122,7 @@ void GameScreen::render()
 
     for (const auto& enemy : m_enemies)
     {
-        enemy->draw(m_window.get());
+        if (!enemy->enemyisDead) enemy->draw(m_window.get());
     }
 
     m_window->endDraw();
