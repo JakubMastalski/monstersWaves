@@ -75,5 +75,7 @@ private:
 private:
     std::vector< sf::CircleShape > m_circleLives;
     int       m_lives{ 3 };
-
+public:
+    bool isAttacking() const;
+    const sf::Sprite& getSprite() const;
 };

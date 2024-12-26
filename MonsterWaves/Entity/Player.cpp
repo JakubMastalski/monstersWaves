@@ -367,3 +367,13 @@ void Player::updateMoveAnimation(const float dt)
         }
     }
 }
+
+bool Player::isAttacking() const
+{
+    return m_isAttacking;
+}
+
+const sf::Sprite& Player::getSprite() const
+{
+    return m_sprite;
+}

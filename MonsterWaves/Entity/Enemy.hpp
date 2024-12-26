@@ -24,8 +24,8 @@ private:
     float m_animationTimer{ 0.0f };
     int   m_animationDirection{ 1 };
 
-   float m_animationMoveIdleTime{ 0.0f };
-   const float m_frameDuration{ 0.07f };
+    float m_animationMoveIdleTime{ 0.0f };
+    const float m_frameDuration{ 0.07f };
 
 private:
     sf::Texture m_movingTexture;
@@ -41,7 +41,6 @@ private:
 private:
     float m_frameTime{ 0.07f };
     int  m_currentFrame{ 0 };
-    EnemyState enemyState = EnemyState::EnemyMoving;
 private:
     void updateMoveAnimation(const float dt);
     void updateDeadAnimation(const float dt);
@@ -52,4 +51,5 @@ public:
     bool checkCollisionWithPlayer(const sf::Sprite& player) const;
 
     void enemyDie();
+    EnemyState enemyState = EnemyState::EnemyMoving;
 };
