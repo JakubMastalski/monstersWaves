@@ -37,7 +37,7 @@ Enemy::Enemy(const Window* window, const sf::Vector2f& playerPosition, const flo
 
     for (int i = 0; i < m_deadRects.size(); ++i)
     {
-        m_deadRects[i] = sf::IntRect{ i * 80, 0, 80, 80 };
+        m_deadRects[i] = sf::IntRect{ i * 80, 35, 80, 115};
     }
 
     for (int i = 0; i < m_attackRects.size(); ++i)
@@ -165,7 +165,8 @@ void Enemy::updateDeadAnimation(const float dt)
 
         if (m_currentFrame >= m_deadRects.size())
         {
-            m_currentFrame = m_deadRects.size() - 1;
+            m_currentFrame = m_deadRects.size() -1;
+            enemyisDead = true;
         }
         m_sprite.setTextureRect(m_deadRects[m_currentFrame]);
     }

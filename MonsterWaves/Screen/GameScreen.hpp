@@ -23,6 +23,5 @@ private:
     TimeStep m_timeStep;
     Direction m_playerDirection{ Direction::None };
 
-    Enemy m_enemy;
-    std::vector<Enemy> m_enemies;
+    std::vector<std::unique_ptr<Enemy>> m_enemies;
 };

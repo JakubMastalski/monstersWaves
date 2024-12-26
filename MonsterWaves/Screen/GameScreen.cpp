@@ -1,9 +1,14 @@
 #include "Screen/GameScreen.hpp"
 
 GameScreen::GameScreen(Window* window) :
-    BaseScreen(window), m_player({ window }), m_enemy({ window, m_player.getPosition(), 90.0f })
+    BaseScreen(window), m_player({ window })
 {
-   //EMPTY BODY
+    m_enemies.reserve(20);
+
+    for (int i = 0; i < 5; ++i)
+    {
+        m_enemies.push_back(std::make_unique<Enemy>(window, m_player.getPosition(), 90.0f));
+    }
 }
 
 void GameScreen::handleEvents()
@@ -93,26 +98,20 @@ void GameScreen::handleEvents()
 
 void GameScreen::update(float dt)
 {
-    // Aktualizuj pozycjê gracza
     m_player.setDirection(m_playerDirection, dt);
     m_player.update(dt);
 
-    // Aktualizuj pozycjê przeciwnika
-    m_enemy.update(dt, m_player.getPosition(),
-        { m_player.getBounds().width / 2 , m_player.getBounds().height - 100 });
-
-    // Sprawdzanie kolizji miêdzy graczem a przeciwnikiem
-    if (m_enemy.checkCollisionWithPlayer(m_player.getSprite()))
+    for (const auto& enemy : m_enemies)
     {
-        // Kolizja gracza z przeciwnikiem
-        // Tu mo¿esz dodaæ logikê np. zmniejszenie ¿ycia gracza
-        //std::cout << "Kolizja gracza z przeciwnikiem!" << std::endl;
-    }
+        enemy->update(dt, m_player.getPosition(),
+            { m_player.getBounds().width / 2 , m_player.getBounds().height - 100 });
 
-    if (m_enemy.checkCollisionWithPlayerAttack(m_player.getSprite()) && m_player.isAttacking())
-    {
-        m_enemy.enemyDie();
+        if (enemy->checkCollisionWithPlayerAttack(m_player.getSprite()) && m_player.isAttacking())
+        {
+            enemy->enemyDie();
+        }
     }
+  
 }
 
 void GameScreen::render()
@@ -120,7 +119,11 @@ void GameScreen::render()
     m_window->beginDraw();
 
     m_player.draw(m_window.get());
-    m_enemy.draw(m_window.get());
+
+    for (const auto& enemy : m_enemies)
+    {
+        enemy->draw(m_window.get());
+    }
 
     m_window->endDraw();
 }
