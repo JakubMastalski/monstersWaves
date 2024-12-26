@@ -6,6 +6,7 @@
 #include "Utils/TimeStep.hpp"
 
 #include <cmath>
+#include <vector>
 
 class GameScreen final : public BaseScreen
 {
@@ -23,4 +24,5 @@ private:
     Direction m_playerDirection{ Direction::None };
 
     Enemy m_enemy;
+    std::vector<Enemy> m_enemies;
 };
