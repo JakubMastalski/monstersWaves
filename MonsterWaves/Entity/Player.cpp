@@ -377,3 +377,17 @@ const sf::Sprite& Player::getSprite() const
 {
     return m_sprite;
 }
+
+int Player::getLives() const
+{
+    return m_lives;
+}
+void Player::loseLife()
+{
+    --m_lives;
+
+    if (m_lives <= 0)
+    {
+        ScreenManager::GetInstance().setScreen(ScreenType::MENU);
+    }
+}

@@ -134,6 +134,7 @@ void Enemy::updateAttackAnimation(const float dt,const sf::Vector2f& playerPosit
     if (length > 80)
     {
         enemyState = EnemyState::EnemyMoving;
+        attackCasted = false;
         m_sprite.setTexture(m_movingTexture);
         return;
     }
@@ -146,8 +147,8 @@ void Enemy::updateAttackAnimation(const float dt,const sf::Vector2f& playerPosit
 
         if (m_currentFrame >= m_attackRects.size())
         {
+            attackCasted = true;
             m_currentFrame = 0;
-
         }
 
         m_sprite.setTextureRect(m_attackRects[m_currentFrame]);

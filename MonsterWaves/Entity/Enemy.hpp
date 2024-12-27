@@ -39,7 +39,7 @@ private:
     std::array<sf::IntRect, 23> m_deadRects;
 
 private:
-    float m_frameTime{ 0.07f };
+    float m_frameTime{ 0.05f };
     int  m_currentFrame{ 0 };
 private:
     void updateMoveAnimation(const float dt);
@@ -51,6 +51,8 @@ public:
     bool checkCollisionWithPlayer(const sf::Sprite& player) const;
     
     bool enemyisDead = { false };
+    bool attackCasted = { false };
+
     void enemyDie();
     EnemyState enemyState = EnemyState::EnemyMoving;
 };

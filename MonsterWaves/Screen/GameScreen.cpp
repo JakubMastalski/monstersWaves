@@ -106,12 +106,20 @@ void GameScreen::update(float dt)
         enemy->update(dt, m_player.getPosition(),
             { m_player.getBounds().width / 2 , m_player.getBounds().height - 100 });
 
-        if (enemy->checkCollisionWithPlayerAttack(m_player.getSprite()) && m_player.isAttacking() && enemy->enemyState != EnemyDead)
+        if (enemy->checkCollisionWithPlayerAttack(m_player.getSprite())
+            && m_player.isAttacking()
+            && enemy->enemyState != EnemyDead)
         {
             enemy->enemyDie();
         }
+        else if (enemy->checkCollisionWithPlayer(m_player.getSprite()) &&
+            !m_player.isAttacking() &&
+            enemy->enemyState != EnemyDead &&
+            enemy->attackCasted)
+        {
+            m_player.loseLife();
+        } 
     }
-  
 }
 
 void GameScreen::render()

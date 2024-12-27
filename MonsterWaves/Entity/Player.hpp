@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Entity/Direction.cpp"
+#include "Manager/ScreenManager.hpp"
 #include "Screen/Window.hpp"
 
 #include <array>
@@ -78,4 +79,7 @@ private:
 public:
     bool isAttacking() const;
     const sf::Sprite& getSprite() const;
+public:
+    int getLives() const;
+    void loseLife();
 };
