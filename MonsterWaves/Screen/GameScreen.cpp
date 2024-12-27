@@ -106,7 +106,7 @@ void GameScreen::update(float dt)
         enemy->update(dt, m_player.getPosition(),
             { m_player.getBounds().width / 2 , m_player.getBounds().height - 100 });
 
-        if (enemy->checkCollisionWithPlayerAttack(m_player.getSprite()) && m_player.isAttacking())
+        if (enemy->checkCollisionWithPlayerAttack(m_player.getSprite()) && m_player.isAttacking() && enemy->enemyState != EnemyDead)
         {
             enemy->enemyDie();
         }
