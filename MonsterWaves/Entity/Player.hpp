@@ -76,10 +76,12 @@ private:
 private:
     std::vector< sf::CircleShape > m_circleLives;
     int       m_lives{ 3 };
+    float     m_speed{ 100.0f };
 public:
     bool isAttacking() const;
     const sf::Sprite& getSprite() const;
 public:
     int getLives() const;
     void loseLife();
+    void setSpeed(float multiplayer);
 };
