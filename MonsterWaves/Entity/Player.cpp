@@ -310,6 +310,11 @@ void Player::stopMoving()
     }
 }
 
+void Player::setSpeed(const float multiplayer)
+{
+    m_speed = multiplayer;
+}
+
 bool Player::getIdle()
 {
     return this->m_isIdle;
@@ -394,4 +399,9 @@ void Player::loseLife()
         --m_lives;
         m_circleLives.erase(m_circleLives.end() - 1);
     }
+}
+
+float Player::getSpeed()
+{
+    return m_speed;
 }

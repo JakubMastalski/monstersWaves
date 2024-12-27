@@ -3,12 +3,12 @@
 GameScreen::GameScreen(Window* window) :
     BaseScreen(window), m_player({ window })
 {
-    m_enemies.reserve(20);
+    m_enemies.reserve(60);
 
-    for (int i = 0; i < 5; ++i)
+    for (int i = 0; i < m_amountOfEnemies; ++i)
     {
-        m_enemies.push_back(std::make_unique<Enemy>(window, m_player.getPosition(), 90.0f));
-    }
+        m_enemies.push_back(std::make_unique<Enemy>(window, m_player.getPosition(), m_enemiesSpeed));
+    }  
 
     m_font.loadFromFile("res/fonts/aleo/Aleo-Italic.otf");
     m_scoreText.setFont(m_font);
@@ -117,7 +117,7 @@ void GameScreen::update(float dt)
     m_player.setDirection(m_playerDirection, dt);
     m_player.update(dt);
 
-    for (const auto& enemy : m_enemies)
+    for (auto& enemy : m_enemies)
     {
         enemy->update(dt, m_player.getPosition(),
             { m_player.getBounds().width / 2 , m_player.getBounds().height - 100 });
@@ -127,11 +127,9 @@ void GameScreen::update(float dt)
             && enemy->enemyState != EnemyDead)
         {
             enemy->enemyDie();
-
             m_score += 20;
             m_scoreText.setString(std::to_string(m_score));
         }
-
         else if (enemy->checkCollisionWithPlayer(m_player.getSprite()) &&
             !m_player.isAttacking() &&
             enemy->enemyState != EnemyDead &&
@@ -139,7 +137,40 @@ void GameScreen::update(float dt)
         {
             m_player.loseLife();
             enemy->attackCasted = false;
-        } 
+        }
+    }
+
+    m_enemies.erase(
+        std::remove_if(m_enemies.begin(), m_enemies.end(),
+            [](const std::unique_ptr<Enemy>& enemy)
+            {
+                return enemy->enemyState == EnemyDead;
+            }),
+        m_enemies.end());
+
+    if (m_enemies.empty())
+    {
+        ++m_level;
+        m_levelText.setString("Level " + std::to_string(m_level));
+
+        if (m_level % 2 == 0)
+        {
+            m_amountOfEnemies *= 2;
+        }
+        else
+        {
+            m_enemiesSpeed *= 1.5f;
+        }
+
+        for (int i = 0; i < m_amountOfEnemies; ++i)
+        {
+            m_enemies.push_back(std::make_unique<Enemy>(m_window.get(), m_player.getPosition(), m_enemiesSpeed));
+        }
+
+        if (m_level % 3 == 0)
+        {
+            m_player.setSpeed(m_player.getSpeed() * 1.2f);
+        }
     }
 }
 

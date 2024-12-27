@@ -84,4 +84,5 @@ public:
     int getLives() const;
     void loseLife();
     void setSpeed(float multiplayer);
+    float getSpeed();
 };

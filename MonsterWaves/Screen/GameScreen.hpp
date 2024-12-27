@@ -24,6 +24,8 @@ private:
     Direction m_playerDirection{ Direction::None };
 
     std::vector<std::unique_ptr<Enemy>> m_enemies;
+    int   m_amountOfEnemies{ 5 };
+    float m_enemiesSpeed{ 65.0f };
 private:
     sf::Font m_font;
     sf::Text m_scoreText;
@@ -31,4 +33,5 @@ private:
     int  m_score{ 0 };
     int  m_level{ 1 };
 
+    bool enemiesDead = { false };
 };
