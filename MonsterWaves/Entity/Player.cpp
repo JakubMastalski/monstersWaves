@@ -32,9 +32,10 @@ Player::Player(const Window* window)
 
     for (int i = 0; i < 3; ++i)
     {
-        sf::CircleShape lifeShape{ 5 };
+        sf::CircleShape lifeShape{ 7 };
         lifeShape.setPosition(i * 20 + 10, 20);
         lifeShape.setFillColor(sf::Color::Red);
+
         m_circleLives.push_back(lifeShape);
     }
 }
@@ -384,10 +385,13 @@ int Player::getLives() const
 }
 void Player::loseLife()
 {
-    --m_lives;
-
-    if (m_lives <= 0)
+     if (m_circleLives.empty())
+     {
+        ScreenManager::GetInstance().setScreen(ScreenType::MENU); 
+     }
+    else if (!m_circleLives.empty())
     {
-        ScreenManager::GetInstance().setScreen(ScreenType::MENU);
+        --m_lives;
+        m_circleLives.erase(m_circleLives.end() - 1);
     }
 }

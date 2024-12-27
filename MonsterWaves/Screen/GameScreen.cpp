@@ -118,6 +118,7 @@ void GameScreen::update(float dt)
             enemy->attackCasted)
         {
             m_player.loseLife();
+            enemy->attackCasted = false;
         } 
     }
 }
