@@ -24,4 +24,11 @@ private:
     Direction m_playerDirection{ Direction::None };
 
     std::vector<std::unique_ptr<Enemy>> m_enemies;
+private:
+    sf::Font m_font;
+    sf::Text m_scoreText;
+    sf::Text m_levelText;
+    int  m_score{ 0 };
+    int  m_level{ 1 };
+
 };

@@ -9,6 +9,22 @@ GameScreen::GameScreen(Window* window) :
     {
         m_enemies.push_back(std::make_unique<Enemy>(window, m_player.getPosition(), 90.0f));
     }
+
+    m_font.loadFromFile("res/fonts/aleo/Aleo-Italic.otf");
+    m_scoreText.setFont(m_font);
+    m_scoreText.setString("0");
+    m_scoreText.setCharacterSize(26);
+    m_scoreText.setFillColor(sf::Color::White);
+    m_scoreText.setPosition(
+        static_cast<float>(m_window->getSize().x *
+            0.5 - m_scoreText.getGlobalBounds().width * 0.5), 20);
+    m_levelText.setFont(m_font);
+    m_levelText.setString("Level  " +std::to_string(m_level));
+    m_levelText.setCharacterSize(26);
+    m_levelText.setFillColor(sf::Color::White);
+    m_levelText.setPosition(
+        static_cast<float>(m_window->getSize().x - m_levelText.getGlobalBounds().width * 0.5 - 60),
+        10);
 }
 
 void GameScreen::handleEvents()
@@ -111,7 +127,11 @@ void GameScreen::update(float dt)
             && enemy->enemyState != EnemyDead)
         {
             enemy->enemyDie();
+
+            m_score += 20;
+            m_scoreText.setString(std::to_string(m_score));
         }
+
         else if (enemy->checkCollisionWithPlayer(m_player.getSprite()) &&
             !m_player.isAttacking() &&
             enemy->enemyState != EnemyDead &&
@@ -126,6 +146,9 @@ void GameScreen::update(float dt)
 void GameScreen::render()
 {
     m_window->beginDraw();
+
+    m_window->draw(m_scoreText);
+    m_window->draw(m_levelText);
 
     m_player.draw(m_window.get());
 
