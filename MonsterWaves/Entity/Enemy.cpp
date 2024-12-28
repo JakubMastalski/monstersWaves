@@ -203,21 +203,18 @@ bool Enemy::checkCollisionWithPlayerAttack(const sf::Sprite& player) const
 {
     const sf::FloatRect enemyBounds = m_sprite.getGlobalBounds();
 
-    // Zmniejsz granice ataku gracza
     sf::FloatRect playerAttackBounds = player.getGlobalBounds();
-    const float reductionX = 50.0f; // Redukcja w poziomie
-    const float reductionY = 20.0f; // Redukcja w pionie
+    const float reductionX = 70.0f;
+    const float reductionY = 100.0f;
 
     playerAttackBounds.left += reductionX;
     playerAttackBounds.top += reductionY;
     playerAttackBounds.width -= 2 * reductionX;
     playerAttackBounds.height -= 2 * reductionY;
 
-    // Sprawdü kolizjÍ
     if (!enemyBounds.intersects(playerAttackBounds))
         return false;
 
-    // Sprawdü, czy przeciwnik nadchodzi z lewej lub prawej strony
     const float windowHeight = 1000.0f;
     if (m_position.y <= 0.0f || m_position.y >= windowHeight)
         return false;
