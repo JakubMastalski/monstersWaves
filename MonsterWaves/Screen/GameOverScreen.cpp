@@ -3,6 +3,8 @@
 
 GameOverScreen::GameOverScreen(Window* window) : BaseScreen(window)
 {
+    m_timeStep.reset();
+
     m_font.loadFromFile("res/fonts/aleo/Aleo-Italic.otf");
     m_text.setFont(m_font);
     m_text.setString("Gave Over!");
@@ -35,14 +37,12 @@ void GameOverScreen::handleEvents()
 }
 void GameOverScreen::update(float dt)
 {
-    if (m_timeStep.getTotalTimeInSeconds() >= 5)
     {
         ScreenManager::GetInstance().setScreen(ScreenType::MENU);
     }
 }
 void GameOverScreen::render()
 {
-    m_window->beginDraw(sf::Color::Blue);
     m_window->draw(m_text);
     m_window->endDraw();
 }
