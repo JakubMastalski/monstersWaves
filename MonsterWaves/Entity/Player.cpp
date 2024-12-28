@@ -398,11 +398,7 @@ int Player::getLives() const
 }
 void Player::loseLife()
 {
-     if (m_circleLives.empty())
-     {
-        ScreenManager::GetInstance().setScreen(ScreenType::MENU); 
-     }
-    else if (!m_circleLives.empty())
+    if (!m_circleLives.empty())
     {
         --m_lives;
         m_circleLives.erase(m_circleLives.end() - 1);

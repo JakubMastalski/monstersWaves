@@ -5,7 +5,7 @@ add_library(ScreenModule STATIC Window.cpp
                                 MenuScreen.cpp 
                                 GameScreen.cpp
                                 InventoryScreen.cpp 
-                                 )
+                                GameOverScreen.cpp)
 
 # Add include directories for search
 include_directories(${MONSTER_WAVES_DIR} ${SFML_INCLUDE_DIR})
