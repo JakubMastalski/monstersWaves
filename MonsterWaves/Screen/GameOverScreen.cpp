@@ -1,4 +1,5 @@
 #include "GameOverScreen.hpp"
+
 #include <Manager/ScreenManager.hpp>
 
 GameOverScreen::GameOverScreen(Window* window) : BaseScreen(window)
@@ -12,8 +13,8 @@ GameOverScreen::GameOverScreen(Window* window) : BaseScreen(window)
     m_text.setFillColor(sf::Color::White);
     m_text.setPosition(static_cast<float>(m_window->getSize().x * 0.5 - m_text.getGlobalBounds().width * 0.5),
         static_cast<float>(m_window->getSize().y * 0.5 - m_text.getGlobalBounds().height));
-
 }
+
 void GameOverScreen::handleEvents()
 {
     while (m_window->getRenderer().pollEvent(m_event))
@@ -23,26 +24,34 @@ void GameOverScreen::handleEvents()
         case sf::Event::Closed:
             m_window->close();
             break;
+
         case sf::Event::KeyPressed:
             switch (m_event.key.code)
             {
             case sf::Keyboard::Escape:
                 m_window->close();
                 break;
+
             default:
                 break;
-            }
+            };
         }
     }
 }
+
 void GameOverScreen::update(float dt)
 {
+    if (m_timeStep.getTotalTimeInSeconds() >= 15)
     {
         ScreenManager::GetInstance().setScreen(ScreenType::MENU);
     }
 }
+
 void GameOverScreen::render()
 {
+    m_window->beginDraw(sf::Color::Green);
+
     m_window->draw(m_text);
+
     m_window->endDraw();
 }
