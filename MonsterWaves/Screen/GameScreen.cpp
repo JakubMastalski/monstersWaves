@@ -155,11 +155,11 @@ void GameScreen::update(float dt)
 
         if (m_level % 2 == 0)
         {
-            m_amountOfEnemies *= 2;
+            m_amountOfEnemies *= 1.6;
         }
         else
         {
-            m_enemiesSpeed *= 1.5f;
+            m_enemiesSpeed *= 1.6f;
         }
 
         for (int i = 0; i < m_amountOfEnemies; ++i)
@@ -169,7 +169,7 @@ void GameScreen::update(float dt)
 
         if (m_level % 3 == 0)
         {
-            m_player.setSpeed(m_player.getSpeed() * 1.2f);
+            m_player.setSpeed(m_player.getSpeed() * 1.5f);
         }
     }
 }
