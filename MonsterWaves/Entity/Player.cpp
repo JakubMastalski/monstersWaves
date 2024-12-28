@@ -136,6 +136,7 @@ void Player::moveLeft(const float dt)
     m_sprite.move(-m_speed * dt, 0);
     if (!m_isMovingLeft)
     {
+        m_isAttacking = false;
         m_isMovingLeft = true;
         m_isMovingRight = false;
         m_isMovingUp = false;
@@ -156,6 +157,7 @@ void Player::moveRight(const float dt)
     m_sprite.move(m_speed * dt, 0);
     if (!m_isMovingRight)
     {
+        m_isAttacking = false;
         m_isMovingLeft = false;
         m_isMovingRight = true;
         m_isMovingUp = false;
@@ -176,6 +178,7 @@ void Player::moveUp(float dt)
     m_sprite.move(0, -m_speed * dt);
     if (!m_isMovingUp)
     {
+        m_isAttacking = false;
         m_isMovingRight = false;
         m_isMovingLeft = false;
         m_isMovingUp = true;
@@ -194,6 +197,7 @@ void Player::moveDiagonaly_UpRight(float dt)
 
     if (!m_isMovingRight)
     {
+        m_isAttacking = false;
         m_isMovingLeft = false;
         m_isMovingRight = true;
         m_isMovingUp = false;
@@ -215,6 +219,7 @@ void Player::moveDiagonaly_UpLeft(float dt)
 
     if (!m_isMovingLeft)
     {
+        m_isAttacking = false;
         m_isMovingLeft = true;
         m_isMovingRight = false;
         m_isMovingUp = false;
@@ -236,6 +241,7 @@ void Player::moveDiagonaly_DownRight(float dt)
 
     if (!m_isMovingRight)
     {
+        m_isAttacking = false;
         m_isMovingLeft = false;
         m_isMovingRight = true;
         m_isMovingUp = false;
@@ -257,6 +263,7 @@ void Player::moveDiagonaly_DownLeft(float dt)
 
     if (!m_isMovingLeft)
     {
+        m_isAttacking = false;
         m_isMovingLeft = true;
         m_isMovingRight = false;
         m_isMovingUp = false;
@@ -278,6 +285,7 @@ void Player::moveDown(float dt)
     m_sprite.move(0, m_speed * dt);
     if (!m_isMovingDown)
     {
+        m_isAttacking = false;
         m_isMovingRight = false;
         m_isMovingLeft = false;
         m_isMovingUp = false;
