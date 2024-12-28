@@ -3,6 +3,8 @@
 #include "Entity/Enemy.hpp"
 #include "Entity/Player.hpp"
 #include "Screen/BaseScreen.hpp"
+#include "Screen/ScreenType.hpp"
+#include <Manager/ScreenManager.hpp>
 #include "Utils/TimeStep.hpp"
 
 #include <cmath>
