@@ -1,6 +1,7 @@
 #include "ScreenManager.hpp"
 
 #include <Screen/GameScreen.hpp>
+#include <Screen/GameOverScreen.hpp>
 #include <Screen/MenuScreen.hpp>
 #include <Screen/SplashScreen.hpp>
 
@@ -35,6 +36,7 @@ ScreenManager::ScreenManager()
     m_screens[ScreenType::SPLASH] = std::make_unique< SplashScreen >(mainWindow);
     m_screens[ScreenType::MENU] = std::make_unique< MenuScreen >(mainWindow);
     m_screens[ScreenType::GAME] = std::make_unique< GameScreen >(mainWindow);
+    m_screens[ScreenType::GAMEOVER] = std::make_unique< GameOverScreen >(mainWindow);
 
     mainWindow->create();
 

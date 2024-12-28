@@ -24,28 +24,35 @@ private:
     float m_animationTimer{ 0.0f };
     int   m_animationDirection{ 1 };
 
-   float m_animationMoveIdleTime{ 0.0f };
-   const float m_frameDuration{ 0.07f };
+    float m_animationMoveIdleTime{ 0.0f };
+    float m_frameDuration{ 0.07f };
 
-private:
+public:
     sf::Texture m_movingTexture;
     sf::Texture m_deadTexture;
     sf::Texture m_attackTexture;
-
+public:
     sf::Sprite  m_sprite;
 private:
     std::array<sf::IntRect, 5> m_movingRects;
     std::array<sf::IntRect, 12> m_attackRects;
-    std::array<sf::IntRect, 17> m_deadRects;
+    std::array<sf::IntRect, 23> m_deadRects;
 
 private:
-    float m_frameTime{ 0.07f };
+    float m_frameTime{ 0.05f };
     int  m_currentFrame{ 0 };
-    EnemyState enemyState = EnemyState::EnemyMoving;
 private:
     void updateMoveAnimation(const float dt);
     void updateDeadAnimation(const float dt);
     void updateAttackAnimation(const float dt, const sf::Vector2f& playerPosition, const sf::Vector2f& playerSize);
-
     void updateMove(const float dt, const sf::Vector2f& playerPosition, const sf::Vector2f& playerSize);
+public:
+    bool checkCollisionWithPlayerAttack(const sf::Sprite& player) const;
+    bool checkCollisionWithPlayer(const sf::Sprite& player) const;
+    
+    bool enemyisDead = { false };
+    bool attackCasted = { false };
+
+    void enemyDie();
+    EnemyState enemyState = EnemyState::EnemyMoving;
 };

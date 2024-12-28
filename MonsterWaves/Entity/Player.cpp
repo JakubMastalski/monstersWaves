@@ -29,6 +29,15 @@ Player::Player(const Window* window)
     }
 
     m_sprite.setTextureRect(m_idleRects[m_currentFrame]);
+
+    for (int i = 0; i < 3; ++i)
+    {
+        sf::CircleShape lifeShape{ 7 };
+        lifeShape.setPosition(i * 20 + 10, 20);
+        lifeShape.setFillColor(sf::Color::Red);
+
+        m_circleLives.push_back(lifeShape);
+    }
 }
 
 void Player::update(const float dt)
@@ -66,6 +75,10 @@ void Player::stopAttack()
 
 void Player::draw(Window* window) const
 {
+    for (const auto& lifeCircle : m_circleLives)
+    {
+        window->draw(lifeCircle);
+    }
     window->draw(m_sprite);
 }
 
@@ -120,9 +133,10 @@ void Player::setDirection(const Direction direction, const float dt)
 
 void Player::moveLeft(const float dt)
 {
-    m_sprite.move(-125 * dt, 0);
+    m_sprite.move(-m_speed * dt, 0);
     if (!m_isMovingLeft)
     {
+        m_isAttacking = false;
         m_isMovingLeft = true;
         m_isMovingRight = false;
         m_isMovingUp = false;
@@ -140,9 +154,10 @@ void Player::moveLeft(const float dt)
 
 void Player::moveRight(const float dt)
 {
-    m_sprite.move(125 * dt, 0);
+    m_sprite.move(m_speed * dt, 0);
     if (!m_isMovingRight)
     {
+        m_isAttacking = false;
         m_isMovingLeft = false;
         m_isMovingRight = true;
         m_isMovingUp = false;
@@ -160,9 +175,10 @@ void Player::moveRight(const float dt)
 
 void Player::moveUp(float dt)
 {
-    m_sprite.move(0, -125 * dt);
+    m_sprite.move(0, -m_speed * dt);
     if (!m_isMovingUp)
     {
+        m_isAttacking = false;
         m_isMovingRight = false;
         m_isMovingLeft = false;
         m_isMovingUp = true;
@@ -177,10 +193,11 @@ void Player::moveUp(float dt)
 
 void Player::moveDiagonaly_UpRight(float dt)
 {
-    m_sprite.move(80 * dt, -80 * dt);
+    m_sprite.move((m_speed - 20) * dt, - (m_speed - 20) * dt);
 
     if (!m_isMovingRight)
     {
+        m_isAttacking = false;
         m_isMovingLeft = false;
         m_isMovingRight = true;
         m_isMovingUp = false;
@@ -198,10 +215,11 @@ void Player::moveDiagonaly_UpRight(float dt)
 
 void Player::moveDiagonaly_UpLeft(float dt)
 {
-    m_sprite.move(-80 * dt, -80 * dt);
+    m_sprite.move(-m_speed * dt, -m_speed * dt);
 
     if (!m_isMovingLeft)
     {
+        m_isAttacking = false;
         m_isMovingLeft = true;
         m_isMovingRight = false;
         m_isMovingUp = false;
@@ -219,10 +237,11 @@ void Player::moveDiagonaly_UpLeft(float dt)
 
 void Player::moveDiagonaly_DownRight(float dt)
 {
-    m_sprite.move(80 * dt, 80 * dt);
+    m_sprite.move(m_speed * dt, m_speed * dt);
 
     if (!m_isMovingRight)
     {
+        m_isAttacking = false;
         m_isMovingLeft = false;
         m_isMovingRight = true;
         m_isMovingUp = false;
@@ -240,10 +259,11 @@ void Player::moveDiagonaly_DownRight(float dt)
 
 void Player::moveDiagonaly_DownLeft(float dt)
 {
-    m_sprite.move(-80 * dt, 80 * dt);
+    m_sprite.move(-m_speed * dt, m_speed * dt);
 
     if (!m_isMovingLeft)
     {
+        m_isAttacking = false;
         m_isMovingLeft = true;
         m_isMovingRight = false;
         m_isMovingUp = false;
@@ -262,9 +282,10 @@ void Player::moveDiagonaly_DownLeft(float dt)
 
 void Player::moveDown(float dt)
 {
-    m_sprite.move(0, 125 * dt);
+    m_sprite.move(0, m_speed * dt);
     if (!m_isMovingDown)
     {
+        m_isAttacking = false;
         m_isMovingRight = false;
         m_isMovingLeft = false;
         m_isMovingUp = false;
@@ -295,6 +316,11 @@ void Player::stopMoving()
         m_sprite.setTexture(m_idleTexture);
         m_currentFrame = 0;
     }
+}
+
+void Player::setSpeed(const float multiplayer)
+{
+    m_speed = multiplayer;
 }
 
 bool Player::getIdle()
@@ -354,4 +380,38 @@ void Player::updateMoveAnimation(const float dt)
             }
         }
     }
+}
+
+bool Player::isAttacking() const
+{
+    return m_isAttacking;
+}
+
+const sf::Sprite& Player::getSprite() const
+{
+    return m_sprite;
+}
+
+int Player::getLives() const
+{
+    return m_lives;
+}
+void Player::loseLife()
+{
+    if (!m_circleLives.empty())
+    {
+        --m_lives;
+        m_circleLives.erase(m_circleLives.end() - 1);
+    }
+
+    if (m_circleLives.empty())
+    {
+        ScreenManager::GetInstance().setScreen(ScreenType::GAMEOVER);
+        return;
+    }
+}
+
+float Player::getSpeed()
+{
+    return m_speed;
 }

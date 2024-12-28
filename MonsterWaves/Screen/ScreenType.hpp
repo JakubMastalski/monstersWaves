@@ -6,4 +6,5 @@ enum class ScreenType
     MENU,
     GAME,
     INVENTORY,
+    GAMEOVER
 };

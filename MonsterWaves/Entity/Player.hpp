@@ -1,9 +1,11 @@
 #pragma once
 
 #include "Entity/Direction.cpp"
+#include "Manager/ScreenManager.hpp"
 #include "Screen/Window.hpp"
 
 #include <array>
+#include <vector>
 
 class Player
 {
@@ -71,4 +73,16 @@ private:
     bool m_isIdle{ true };
 
     Direction m_lastDirection{ Direction::None };
+private:
+    std::vector< sf::CircleShape > m_circleLives;
+    int       m_lives{ 3 };
+    float     m_speed{ 100.0f };
+public:
+    bool isAttacking() const;
+    const sf::Sprite& getSprite() const;
+public:
+    int getLives() const;
+    void loseLife();
+    void setSpeed(float multiplayer);
+    float getSpeed();
 };
