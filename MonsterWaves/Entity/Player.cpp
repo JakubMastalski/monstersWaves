@@ -193,7 +193,7 @@ void Player::moveUp(float dt)
 
 void Player::moveDiagonaly_UpRight(float dt)
 {
-    m_sprite.move(80 * dt, -80 * dt);
+    m_sprite.move((m_speed - 20) * dt, - (m_speed - 20) * dt);
 
     if (!m_isMovingRight)
     {
@@ -215,7 +215,7 @@ void Player::moveDiagonaly_UpRight(float dt)
 
 void Player::moveDiagonaly_UpLeft(float dt)
 {
-    m_sprite.move(-80 * dt, -80 * dt);
+    m_sprite.move(-m_speed * dt, -m_speed * dt);
 
     if (!m_isMovingLeft)
     {
@@ -237,7 +237,7 @@ void Player::moveDiagonaly_UpLeft(float dt)
 
 void Player::moveDiagonaly_DownRight(float dt)
 {
-    m_sprite.move(80 * dt, 80 * dt);
+    m_sprite.move(m_speed * dt, m_speed * dt);
 
     if (!m_isMovingRight)
     {
@@ -259,7 +259,7 @@ void Player::moveDiagonaly_DownRight(float dt)
 
 void Player::moveDiagonaly_DownLeft(float dt)
 {
-    m_sprite.move(-80 * dt, 80 * dt);
+    m_sprite.move(-m_speed * dt, m_speed * dt);
 
     if (!m_isMovingLeft)
     {
