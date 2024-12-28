@@ -403,6 +403,12 @@ void Player::loseLife()
         --m_lives;
         m_circleLives.erase(m_circleLives.end() - 1);
     }
+
+    if (m_circleLives.empty())
+    {
+        ScreenManager::GetInstance().setScreen(ScreenType::GAMEOVER);
+        return;
+    }
 }
 
 float Player::getSpeed()

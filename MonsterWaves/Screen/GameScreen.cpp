@@ -114,13 +114,6 @@ void GameScreen::handleEvents()
 
 void GameScreen::update(float dt)
 {
-
-    if (m_player.getLives() < 0)
-    {
-        ScreenManager::GetInstance().setScreen(ScreenType::GAMEOVER);
-        return;
-    }
-
     m_player.setDirection(m_playerDirection, dt);
     m_player.update(dt);
 
