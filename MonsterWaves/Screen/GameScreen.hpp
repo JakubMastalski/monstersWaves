@@ -24,6 +24,9 @@ private:
     Player m_player;
     TimeStep m_timeStep;
     Direction m_playerDirection{ Direction::None };
+private:
+    sf::Texture m_backgroundTexture;
+    sf::Sprite m_backgroundSprite;
 
     std::vector<std::unique_ptr<Enemy>> m_enemies;
     int   m_amountOfEnemies{ 5 };

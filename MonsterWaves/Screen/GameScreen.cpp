@@ -5,6 +5,14 @@ GameScreen::GameScreen(Window* window) :
 {
     m_enemies.reserve(60);
 
+    m_backgroundTexture.loadFromFile("res/images/map.png");
+
+    m_backgroundSprite.setTexture(m_backgroundTexture);
+    m_backgroundSprite.setScale(
+        static_cast<float>(m_window->getSize().x) / m_backgroundTexture.getSize().x,
+        static_cast<float>(m_window->getSize().y) / m_backgroundTexture.getSize().y
+    );
+
     for (int i = 0; i < m_amountOfEnemies; ++i)
     {
         m_enemies.push_back(std::make_unique<Enemy>(window, m_player.getPosition(), m_enemiesSpeed));
@@ -185,8 +193,11 @@ void GameScreen::render()
 {
     m_window->beginDraw();
 
+    m_window->draw(m_backgroundSprite);
+
     m_window->draw(m_scoreText);
     m_window->draw(m_levelText);
+
 
     m_player.draw(m_window.get());
 
