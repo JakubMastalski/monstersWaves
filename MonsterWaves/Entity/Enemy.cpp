@@ -6,17 +6,32 @@ Enemy::Enemy(const Window* window, const sf::Vector2f& playerPosition, const flo
 {
     RandomNumber randomGenerator;
 
-    const int side = randomGenerator.getNumber(0, 1) == 0 ? -1 : 1;
-    const float startX = side == -1
-        ? -20.0f
-        : static_cast<float>(window->getSize().x) + 20.0f;
+    // Losowanie strony: 0 = lewa, 1 = prawa, 2 = góra, 3 = dó³
+    const int edge = randomGenerator.getNumber(0, 3);
 
-    const float startY = static_cast<float>(
-        randomGenerator.getNumber(0, static_cast<int>(window->getSize().y))
-        );
+    float startX = 0.0f;
+    float startY = 0.0f;
+
+    if (edge == 0) { // Lewa strona
+        startX = -20.0f;
+        startY = static_cast<float>(randomGenerator.getNumber(0, static_cast<int>(window->getSize().y)));
+    }
+    else if (edge == 1) { // Prawa strona
+        startX = static_cast<float>(window->getSize().x) + 20.0f;
+        startY = static_cast<float>(randomGenerator.getNumber(0, static_cast<int>(window->getSize().y)));
+    }
+    else if (edge == 2) { // Górna strona
+        startX = static_cast<float>(randomGenerator.getNumber(0, static_cast<int>(window->getSize().x)));
+        startY = -20.0f;
+    }
+    else if (edge == 3) { // Dolna strona
+        startX = static_cast<float>(randomGenerator.getNumber(0, static_cast<int>(window->getSize().x)));
+        startY = static_cast<float>(window->getSize().y) + 20.0f;
+    }
 
     m_position = sf::Vector2f{ startX, startY };
 
+    // Obliczenie kierunku
     const sf::Vector2f direction = playerPosition - m_position;
     const float length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
     m_direction = direction / length;
@@ -27,7 +42,6 @@ Enemy::Enemy(const Window* window, const sf::Vector2f& playerPosition, const flo
 
     m_sprite.setTexture(m_movingTexture);
 
-
     m_sprite.setPosition(m_position);
 
     for (int i = 0; i < m_movingRects.size(); ++i)
@@ -37,7 +51,7 @@ Enemy::Enemy(const Window* window, const sf::Vector2f& playerPosition, const flo
 
     for (int i = 0; i < m_deadRects.size(); ++i)
     {
-        m_deadRects[i] = sf::IntRect{ i * 80, 35, 80, 115};
+        m_deadRects[i] = sf::IntRect{ i * 80, 35, 80, 115 };
     }
 
     for (int i = 0; i < m_attackRects.size(); ++i)
