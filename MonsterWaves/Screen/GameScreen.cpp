@@ -142,9 +142,9 @@ void GameScreen::update(float dt)
 
     m_enemies.erase(
         std::remove_if(m_enemies.begin(), m_enemies.end(),
-            [](const std::unique_ptr<Enemy>& enemy)
+            [&](const std::unique_ptr<Enemy>& enemy)
             {
-                return enemy->enemyState == EnemyDead;
+                return (enemy->enemyState == EnemyDead && enemy->enemyisDead);
             }),
         m_enemies.end());
 
