@@ -1,6 +1,7 @@
 #include "GameOverScreen.hpp"
 
 #include <Manager/ScreenManager.hpp>
+#include "Screen/GameScreen.hpp"
 
 GameOverScreen::GameOverScreen(Window* window) : BaseScreen(window)
 {
@@ -31,7 +32,9 @@ void GameOverScreen::handleEvents()
             case sf::Keyboard::Escape:
                 m_window->close();
                 break;
-
+            case sf::Keyboard::Enter:
+                ScreenManager::GetInstance().setScreen(ScreenType::MENU);
+                break;
             default:
                 break;
             };
@@ -41,10 +44,10 @@ void GameOverScreen::handleEvents()
 
 void GameOverScreen::update(float dt)
 {
-    if (m_timeStep.getTotalTimeInSeconds() >= 15)
-    {
-        ScreenManager::GetInstance().setScreen(ScreenType::MENU);
-    }
+      // if (m_timeStep.getTotalTimeInSeconds() > 15)
+//    {
+//       //ScreenManager::GetInstance().setScreen(ScreenType::MENU);
+//    }
 }
 
 void GameOverScreen::render()
