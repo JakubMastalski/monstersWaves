@@ -46,6 +46,7 @@ ScreenManager::ScreenManager()
 void ScreenManager::setScreen(const ScreenType screenType)
 {
     m_activeScreen = m_screens[screenType].get();
+    restart_timer();
 }
 
 bool ScreenManager::isRunning() const
@@ -61,6 +62,11 @@ void ScreenManager::handleEvents() const
 void ScreenManager::update(const float dt) const
 {
     m_activeScreen->update(dt);
+}
+
+void ScreenManager::restart_timer()
+{
+    m_timeStep.reset();
 }
 
 void ScreenManager::render() const

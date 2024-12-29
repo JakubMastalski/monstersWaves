@@ -25,9 +25,10 @@ private:
     ScreenManager();
     ~ScreenManager() = default;
 
+    void restart_timer();
+
 public:
     void setScreen(ScreenType screenType);
-
 public:
     bool isRunning() const;
 
