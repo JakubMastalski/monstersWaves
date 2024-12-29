@@ -44,7 +44,7 @@ void GameOverScreen::handleEvents()
 
 void GameOverScreen::update(float dt)
 {
-    if(m_timeStep.getTotalTimeInSeconds() > 5.01) m_timeStep.reset();
+    if(m_timeStep.getTotalTimeInSeconds() > 5.05) m_timeStep.reset();
 
     if (m_timeStep.getTotalTimeInSeconds() > 5)
     {
