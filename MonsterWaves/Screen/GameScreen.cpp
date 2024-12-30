@@ -117,15 +117,24 @@ void GameScreen::handleEvents()
             m_playerDirection = Direction::Diagonaly_DownLeft;
         }
     }
+}
+void GameScreen::resetGameState()
+{
+    m_score = 0;
+    m_level = 1;
 
+    m_player.m_lives = 3;
+
+    m_scoreText.setString("Score: 0");
+    m_levelText.setString("Level: 1");
 }
 
 void GameScreen::update(float dt)
 {
 
-    if (m_player.getLives() < 0)
+    if (m_player.getLives() <= 0)
     {
-        ScreenManager::GetInstance().setScreen(ScreenType::GAMEOVER);
+        //resetGameState();
         return;
     }
 

@@ -396,6 +396,7 @@ int Player::getLives() const
 {
     return m_lives;
 }
+
 void Player::loseLife()
 {
     if (!m_circleLives.empty())

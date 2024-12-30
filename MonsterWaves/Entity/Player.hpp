@@ -73,7 +73,7 @@ private:
     bool m_isIdle{ true };
 
     Direction m_lastDirection{ Direction::None };
-private:
+public:
     std::vector< sf::CircleShape > m_circleLives;
     int       m_lives{ 3 };
     float     m_speed{ 100.0f };

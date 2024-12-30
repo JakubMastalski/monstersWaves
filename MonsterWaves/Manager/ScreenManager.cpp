@@ -46,6 +46,12 @@ ScreenManager::ScreenManager()
 void ScreenManager::setScreen(const ScreenType screenType)
 {
     m_activeScreen = m_screens[screenType].get();
+
+    if (!m_activeScreen)
+    {
+        throw std::runtime_error("Active screen is not initialized!");
+    }
+
     restart_timer();
 }
 
