@@ -416,3 +416,78 @@ float Player::getSpeed()
 {
     return m_speed;
 }
+
+void Player::resetPlayer()
+{
+    m_sprite.setPosition(
+        static_cast<float>(1100 * 0.5f) - 162 * 0.5f,
+        static_cast<float>(800 * 0.5f) - 162 * 0.5f
+    );
+
+    m_sprite.setScale(1.5f, 1.5f);
+    m_sprite.setOrigin(0.0f, 0.0f);
+
+    m_sprite.setTexture(m_idleTexture);
+    m_sprite.setTextureRect(m_idleRects[0]);
+
+    m_lives = 3;
+    m_circleLives.clear();
+
+    for (int i = 0; i < m_lives; ++i)
+    {
+        sf::CircleShape lifeShape{ 7 };
+        lifeShape.setPosition(i * 20 + 10, 20);
+        lifeShape.setFillColor(sf::Color::Red);
+
+        m_circleLives.push_back(lifeShape);
+    }
+
+    m_isIdle = true;
+    m_isAttacking = false;
+    m_isMovingLeft = false;
+    m_isMovingRight = false;
+    m_isMovingUp = false;
+    m_isMovingDown = false;
+
+    m_currentFrame = 0;
+    m_animationMoveIdleTime = 0.0f;
+    m_attackAnimationTime = 0.0f;
+
+    m_speed = 100.0f; 
+
+    m_lastDirection = Direction::None;
+
+    m_movingTexture.loadFromFile("res/images/Run.png");
+    m_idleTexture.loadFromFile("res/images/Idle.png");
+    m_attackTexture.loadFromFile("res/images/Attack1.png");
+
+    m_sprite.setTexture(m_idleTexture);
+
+    m_sprite.setScale(1.5f, 1.5f);
+
+    for (int i = 0; i < m_idleRects.size(); ++i)
+    {
+        m_idleRects[i] = sf::IntRect{ i * 162, 0, 162, 162 };
+    }
+
+    for (int i = 0; i < m_movingRects.size(); ++i)
+    {
+        m_movingRects[i] = sf::IntRect{ i * 162, 0, 162, 162 };
+    }
+
+    for (int i = 0; i < m_attackRects.size(); ++i)
+    {
+        m_attackRects[i] = sf::IntRect{ i * 162, 0, 162, 162 };
+    }
+
+    m_sprite.setTextureRect(m_idleRects[m_currentFrame]);
+
+    for (int i = 0; i < 3; ++i)
+    {
+        sf::CircleShape lifeShape{ 7 };
+        lifeShape.setPosition(i * 20 + 10, 20);
+        lifeShape.setFillColor(sf::Color::Red);
+
+        m_circleLives.push_back(lifeShape);
+    }
+}

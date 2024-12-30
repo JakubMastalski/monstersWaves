@@ -17,7 +17,7 @@ public:
 
 public:
     void handleEvents() override;
-    void resetGameState();
+    void resetGameState(Window* window);
     void update(float dt) override;
     void render() override;
 

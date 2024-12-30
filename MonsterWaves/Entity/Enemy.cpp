@@ -6,32 +6,30 @@ Enemy::Enemy(const Window* window, const sf::Vector2f& playerPosition, const flo
 {
     RandomNumber randomGenerator;
 
-    // Losowanie strony: 0 = lewa, 1 = prawa, 2 = góra, 3 = dó³
     const int edge = randomGenerator.getNumber(0, 3);
 
     float startX = 0.0f;
     float startY = 0.0f;
 
-    if (edge == 0) { // Lewa strona
+    if (edge == 0) { 
         startX = -20.0f;
         startY = static_cast<float>(randomGenerator.getNumber(0, static_cast<int>(window->getSize().y)));
     }
-    else if (edge == 1) { // Prawa strona
+    else if (edge == 1) { 
         startX = static_cast<float>(window->getSize().x) + 20.0f;
         startY = static_cast<float>(randomGenerator.getNumber(0, static_cast<int>(window->getSize().y)));
     }
-    else if (edge == 2) { // Górna strona
+    else if (edge == 2) { 
         startX = static_cast<float>(randomGenerator.getNumber(0, static_cast<int>(window->getSize().x)));
         startY = -20.0f;
     }
-    else if (edge == 3) { // Dolna strona
+    else if (edge == 3) { 
         startX = static_cast<float>(randomGenerator.getNumber(0, static_cast<int>(window->getSize().x)));
         startY = static_cast<float>(window->getSize().y) + 20.0f;
     }
 
     m_position = sf::Vector2f{ startX, startY };
 
-    // Obliczenie kierunku
     const sf::Vector2f direction = playerPosition - m_position;
     const float length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
     m_direction = direction / length;
@@ -227,4 +225,49 @@ void Enemy::enemyDie()
     enemyState = EnemyState::EnemyDead;
     m_currentFrame = 0;
     m_sprite.setTexture(m_deadTexture);
+}
+
+void Enemy::resetEnemy(const Window* window, const sf::Vector2f& playerPosition)
+{
+    RandomNumber randomGenerator;
+
+    const int edge = randomGenerator.getNumber(0, 3);
+
+    float startX = 0.0f;
+    float startY = 0.0f;
+
+    if (edge == 0) {
+        startX = -20.0f;
+        startY = static_cast<float>(randomGenerator.getNumber(0, static_cast<int>(window->getSize().y)));
+    }
+    else if (edge == 1) {
+        startX = static_cast<float>(window->getSize().x) + 20.0f;
+        startY = static_cast<float>(randomGenerator.getNumber(0, static_cast<int>(window->getSize().y)));
+    }
+    else if (edge == 2) {
+        startX = static_cast<float>(randomGenerator.getNumber(0, static_cast<int>(window->getSize().x)));
+        startY = -20.0f;
+    }
+    else if (edge == 3) {
+        startX = static_cast<float>(randomGenerator.getNumber(0, static_cast<int>(window->getSize().x)));
+        startY = static_cast<float>(window->getSize().y) + 20.0f;
+    }
+
+    m_position = sf::Vector2f{ startX, startY };
+
+    const sf::Vector2f direction = playerPosition - m_position;
+    const float length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+    m_direction = direction / length;
+
+    m_sprite.setTexture(m_movingTexture);
+    m_sprite.setTextureRect(m_movingRects[m_currentFrame]);
+    m_sprite.setPosition(m_position);
+    m_sprite.setScale(1.5f, 1.5f);
+
+    enemyState = EnemyState::EnemyMoving;
+    attackCasted = false;
+    enemyisDead = false;
+    m_currentFrame = 0;
+
+    m_animationTimer = 0.0f;
 }

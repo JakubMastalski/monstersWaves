@@ -118,15 +118,19 @@ void GameScreen::handleEvents()
         }
     }
 }
-void GameScreen::resetGameState()
+void GameScreen::resetGameState(Window* window)
 {
-    m_score = 0;
-    m_level = 1;
+    m_player.resetPlayer();
 
-    m_player.m_lives = 3;
-
-    m_scoreText.setString("Score: 0");
-    m_levelText.setString("Level: 1");
+    for (int i = 0; i < m_amountOfEnemies; ++i)
+    {
+        if (i < m_enemies.size()) {
+            m_enemies[i]->resetEnemy(window, m_player.getPosition());
+        }
+        else {
+            m_enemies.push_back(std::make_unique<Enemy>(window, m_player.getPosition(), m_enemiesSpeed));
+        }
+    }
 }
 
 void GameScreen::update(float dt)
@@ -134,7 +138,7 @@ void GameScreen::update(float dt)
 
     if (m_player.getLives() <= 0)
     {
-        //resetGameState();
+        resetGameState(m_window.get());
         return;
     }
 
