@@ -131,6 +131,9 @@ void GameScreen::resetGameState(Window* window)
             m_enemies.push_back(std::make_unique<Enemy>(window, m_player.getPosition(), m_enemiesSpeed));
         }
     }
+    m_level = 1;
+    m_levelText.setString("Level  " + std::to_string(m_level));
+    m_scoreText.setString("0");
 }
 
 void GameScreen::update(float dt)
