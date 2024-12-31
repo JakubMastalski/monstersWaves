@@ -13,11 +13,11 @@ GameScreen::GameScreen(Window* window) :
         static_cast<float>(m_window->getSize().y) / m_backgroundTexture.getSize().y
     );
 
-    sf::Vector2f blockSize(220.f, 150.f);
+    sf::Vector2f blockSize(170.f, 130.f);
     block1.setSize(blockSize);
     block2.setSize(blockSize);
 
-    sf::Vector2f block3Size(60.f, 60.f);
+    sf::Vector2f block3Size(40.f, 40.f);
 
     block3.setSize(block3Size);
 
@@ -27,7 +27,7 @@ GameScreen::GameScreen(Window* window) :
 
     float windowWidth = 1000.f;
     float windowHeight = 800.f;
-    float gapBetweenBlocks = 50.f; 
+    float gapBetweenBlocks = 75.f; 
 
     float totalWidth = (blockSize.x * 2) + gapBetweenBlocks;
     float startX = (windowWidth - totalWidth) / 2.f;
@@ -35,7 +35,7 @@ GameScreen::GameScreen(Window* window) :
 
     block1.setPosition(startX - 30, centerY + 110);
     block2.setPosition(startX + blockSize.x + gapBetweenBlocks + 30, centerY + 110);
-    block3.setPosition(startX + 210, centerY - 50);
+    block3.setPosition(startX + 190, centerY - 50);
 
     for (int i = 0; i < m_amountOfEnemies; ++i)
     {
@@ -67,10 +67,8 @@ void GameScreen::handleEvents()
         switch (m_event.type)
         {
         case sf::Event::Closed:
-        {
             m_window->close();
             break;
-        }
         case sf::Event::KeyPressed:
             switch (m_event.key.code)
             {
@@ -93,52 +91,83 @@ void GameScreen::handleEvents()
     m_playerDirection = Direction::None;
 
     bool isMovingDiagonally = false;
+    sf::FloatRect playerBounds = m_player.getBounds();
+    sf::FloatRect block1Bounds = block1.getGlobalBounds();
+    sf::FloatRect block2Bounds = block2.getGlobalBounds();
 
-
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && m_player.getBounds().left > + 30)
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && playerBounds.left > 30)
     {
-        if (m_playerDirection != Direction::None) isMovingDiagonally = true;
-        m_playerDirection = Direction::Left;
+        sf::FloatRect futureBounds = playerBounds;
+        futureBounds.left -= m_player.getSpeed();
+        if (!futureBounds.intersects(block1Bounds) && !futureBounds.intersects(block2Bounds))
+        {
+            if (m_playerDirection != Direction::None) isMovingDiagonally = true;
+            m_playerDirection = Direction::Left;
+        }
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && (m_player.getBounds().left + m_player.getBounds().width < 970))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) &&
+        (playerBounds.left + playerBounds.width < 970))
     {
-        if (m_playerDirection != Direction::None) isMovingDiagonally = true;
-        m_playerDirection = Direction::Right;
+        sf::FloatRect futureBounds = playerBounds;
+        futureBounds.left += m_player.getSpeed();
+        if (!futureBounds.intersects(block1Bounds) && !futureBounds.intersects(block2Bounds))
+        {
+            if (m_playerDirection != Direction::None) isMovingDiagonally = true;
+            m_playerDirection = Direction::Right;
+        }
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && m_player.getBounds().top > 150)
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && playerBounds.top > 150)
     {
-        if (m_playerDirection != Direction::None) isMovingDiagonally = true;
-        m_playerDirection = Direction::Up;
+        sf::FloatRect futureBounds = playerBounds;
+        futureBounds.top -= m_player.getSpeed();
+        if (!futureBounds.intersects(block1Bounds) && !futureBounds.intersects(block2Bounds))
+        {
+            if (m_playerDirection != Direction::None) isMovingDiagonally = true;
+            m_playerDirection = Direction::Up;
+        }
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && (m_player.getBounds().top + m_player.getBounds().height < 800))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) &&
+        (playerBounds.top + playerBounds.height < 800))
     {
-        if (m_playerDirection != Direction::None) isMovingDiagonally = true;
-        m_playerDirection = Direction::Down;
+        sf::FloatRect futureBounds = playerBounds;
+        futureBounds.top += m_player.getSpeed();
+        if (!futureBounds.intersects(block1Bounds) && !futureBounds.intersects(block2Bounds))
+        {
+            if (m_playerDirection != Direction::None) isMovingDiagonally = true;
+            m_playerDirection = Direction::Down;
+        }
     }
 
     if (isMovingDiagonally)
     {
+        sf::FloatRect futureBounds = playerBounds;
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
         {
-            m_playerDirection = Direction::Diagonaly_UpRight;
+            futureBounds.left += m_player.getSpeed();
+            futureBounds.top -= m_player.getSpeed();
+        }
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+        {
+            futureBounds.left -= m_player.getSpeed();
+            futureBounds.top -= m_player.getSpeed();
+        }
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+        {
+            futureBounds.left += m_player.getSpeed();
+            futureBounds.top += m_player.getSpeed();
+        }
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+        {
+            futureBounds.left -= m_player.getSpeed();
+            futureBounds.top += m_player.getSpeed();
         }
 
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+        if (futureBounds.intersects(block1Bounds) || futureBounds.intersects(block2Bounds))
         {
-            m_playerDirection = Direction::Diagonaly_UpLeft;
-        }
-
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-        {
-            m_playerDirection = Direction::Diagonaly_DownRight;
-        }
-
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-        {
-            m_playerDirection = Direction::Diagonaly_DownLeft;
+            m_playerDirection = Direction::None; 
         }
     }
 }
