@@ -13,6 +13,30 @@ GameScreen::GameScreen(Window* window) :
         static_cast<float>(m_window->getSize().y) / m_backgroundTexture.getSize().y
     );
 
+    sf::Vector2f blockSize(220.f, 150.f);
+    block1.setSize(blockSize);
+    block2.setSize(blockSize);
+
+    sf::Vector2f block3Size(60.f, 60.f);
+
+    block3.setSize(block3Size);
+
+    block1.setFillColor(sf::Color::Red);
+    block2.setFillColor(sf::Color::Blue);
+    block3.setFillColor(sf::Color::Green);
+
+    float windowWidth = 1000.f;
+    float windowHeight = 800.f;
+    float gapBetweenBlocks = 50.f; 
+
+    float totalWidth = (blockSize.x * 2) + gapBetweenBlocks;
+    float startX = (windowWidth - totalWidth) / 2.f;
+    float centerY = (windowHeight - blockSize.y) / 2.f;
+
+    block1.setPosition(startX - 30, centerY + 110);
+    block2.setPosition(startX + blockSize.x + gapBetweenBlocks + 30, centerY + 110);
+    block3.setPosition(startX + 210, centerY - 50);
+
     for (int i = 0; i < m_amountOfEnemies; ++i)
     {
         m_enemies.push_back(std::make_unique<Enemy>(window, m_player.getPosition(), m_enemiesSpeed));
@@ -118,6 +142,9 @@ void GameScreen::handleEvents()
         }
     }
 }
+
+
+
 void GameScreen::resetGameState(Window* window)
 {
     m_level = 1;
@@ -221,6 +248,9 @@ void GameScreen::render()
     m_window->draw(m_scoreText);
     m_window->draw(m_levelText);
 
+    m_window->draw(block1);
+    m_window->draw(block2);
+    m_window->draw(block3);
 
     m_player.draw(m_window.get());
 

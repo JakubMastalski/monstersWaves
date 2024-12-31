@@ -39,5 +39,9 @@ private:
     int  m_score{ 0 };
     int  m_level{ 1 };
 
+    sf::RectangleShape block1;
+    sf::RectangleShape block2;
+    sf::RectangleShape block3;
+
     bool enemiesDead = { false };
 };
