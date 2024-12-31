@@ -167,7 +167,7 @@ void GameScreen::update(float dt)
             m_score += 20;
             m_scoreText.setString(std::to_string(m_score));
         }
-        else if (enemy->checkCollisionWithPlayer(m_player.getSprite()) &&
+        if (enemy->checkCollisionWithPlayer(m_player.getSprite()) &&
             !m_player.isAttacking() &&
             enemy->enemyState != EnemyDead &&
             enemy->attackCasted)
@@ -223,7 +223,12 @@ void GameScreen::render()
 
     m_player.draw(m_window.get());
 
-    for (const auto& enemy : m_enemies)
+    for (auto& enemy : m_enemies)
+    {
+        if (!enemy->enemyisDead) enemy->draw(m_window.get());
+    }
+
+    for (auto& enemy : m_enemies)
     {
         if (!enemy->enemyisDead) enemy->draw(m_window.get());
     }

@@ -481,13 +481,4 @@ void Player::resetPlayer(Window* window)
     }
 
     m_sprite.setTextureRect(m_idleRects[m_currentFrame]);
-
-    for (int i = 0; i < 3; ++i)
-    {
-        sf::CircleShape lifeShape{ 7 };
-        lifeShape.setPosition(i * 20 + 10, 20);
-        lifeShape.setFillColor(sf::Color::Red);
-
-        m_circleLives.push_back(lifeShape);
-    }
 }
