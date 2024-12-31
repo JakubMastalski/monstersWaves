@@ -399,13 +399,13 @@ int Player::getLives() const
 
 void Player::loseLife()
 {
-    if (!m_circleLives.empty())
+    if (m_lives > 0)
     {
         --m_lives;
         m_circleLives.erase(m_circleLives.end() - 1);
     }
 
-    if (m_circleLives.empty())
+    if (m_lives <= 0)
     {
         ScreenManager::GetInstance().setScreen(ScreenType::GAMEOVER);
         return;
@@ -429,8 +429,9 @@ void Player::resetPlayer(Window* window)
     m_sprite.setTexture(m_idleTexture);
     m_sprite.setTextureRect(m_idleRects[0]);
 
-    m_lives = 3;
     m_circleLives.clear();
+
+    m_lives = 3;
 
     for (int i = 0; i < m_lives; ++i)
     {

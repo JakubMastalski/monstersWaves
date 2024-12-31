@@ -124,6 +124,9 @@ void GameScreen::resetGameState(Window* window)
     m_levelText.setString("Level  " + std::to_string(m_level));
     m_scoreText.setString("0");
 
+    m_enemies.clear();
+    m_amountOfEnemies = 5;
+
     m_player.resetPlayer(window);
 
     for (int i = 0; i < m_amountOfEnemies; ++i)
@@ -135,6 +138,8 @@ void GameScreen::resetGameState(Window* window)
             m_enemies.push_back(std::make_unique<Enemy>(window, m_player.getPosition(), m_enemiesSpeed));
         }
     }
+    
+
 }
 
 void GameScreen::update(float dt)

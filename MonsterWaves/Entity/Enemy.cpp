@@ -194,6 +194,7 @@ bool Enemy::checkCollisionWithPlayer(const sf::Sprite& player) const
 {
     const sf::FloatRect enemyBounds = m_sprite.getGlobalBounds();
     const sf::FloatRect playerBounds = player.getGlobalBounds();
+
     return enemyBounds.intersects(playerBounds);
 }
 
