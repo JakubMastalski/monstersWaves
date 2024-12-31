@@ -71,6 +71,7 @@ private:
     bool m_moveDiagonaly_DownLeft{ false };
 
     bool m_isIdle{ true };
+    bool isinBorders();
 
     Direction m_lastDirection{ Direction::None };
 public:

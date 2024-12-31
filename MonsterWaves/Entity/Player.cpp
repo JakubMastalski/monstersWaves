@@ -82,6 +82,11 @@ void Player::draw(Window* window) const
     window->draw(m_sprite);
 }
 
+bool Player::isinBorders()
+{
+    return false;
+}
+
 void Player::setDirection(const Direction direction, const float dt)
 {
     switch (direction)

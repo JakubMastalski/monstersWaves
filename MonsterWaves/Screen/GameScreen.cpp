@@ -71,25 +71,25 @@ void GameScreen::handleEvents()
     bool isMovingDiagonally = false;
 
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && m_player.getBounds().left > -50)
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && m_player.getBounds().left > + 30)
     {
         if (m_playerDirection != Direction::None) isMovingDiagonally = true;
         m_playerDirection = Direction::Left;
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && (m_player.getBounds().left + m_player.getBounds().width < 1050))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && (m_player.getBounds().left + m_player.getBounds().width < 970))
     {
         if (m_playerDirection != Direction::None) isMovingDiagonally = true;
         m_playerDirection = Direction::Right;
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && m_player.getBounds().top > -50)
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && m_player.getBounds().top > 150)
     {
         if (m_playerDirection != Direction::None) isMovingDiagonally = true;
         m_playerDirection = Direction::Up;
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && (m_player.getBounds().top + m_player.getBounds().height < 850))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && (m_player.getBounds().top + m_player.getBounds().height < 800))
     {
         if (m_playerDirection != Direction::None) isMovingDiagonally = true;
         m_playerDirection = Direction::Down;
@@ -126,6 +126,7 @@ void GameScreen::resetGameState(Window* window)
 
     m_enemies.clear();
     m_amountOfEnemies = 5;
+    m_enemiesSpeed = 65.0f;
 
     m_player.resetPlayer(window);
 
@@ -206,7 +207,7 @@ void GameScreen::update(float dt)
 
         if (m_level % 3 == 0)
         {
-            m_player.setSpeed(m_player.getSpeed() * 1.5f);
+            m_player.setSpeed(m_player.getSpeed() * 1.1f);
         }
     }
 }
