@@ -203,8 +203,9 @@ bool Enemy::checkCollisionWithPlayerAttack(const sf::Sprite& player) const
     const sf::FloatRect enemyBounds = m_sprite.getGlobalBounds();
 
     sf::FloatRect playerAttackBounds = player.getGlobalBounds();
-    const float reductionX = 70.0f;
-    const float reductionY = 100.0f;
+
+    const float reductionX = 100.0f;
+    const float reductionY = 200.0f;
 
     playerAttackBounds.left += reductionX;
     playerAttackBounds.top += reductionY;
