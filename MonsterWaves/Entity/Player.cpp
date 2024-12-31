@@ -8,7 +8,7 @@ Player::Player(const Window* window)
     
     m_sprite.setTexture(m_idleTexture);
     m_sprite.setPosition(
-        static_cast<float>(window->getSize().x) * 0.5f - 162 * 0.5f,
+        static_cast<float>(window->getSize().x) * 0.5f - 162 * 0.5f - 40,
         static_cast<float>(window->getSize().y) * 0.5f - 162 * 0.5f
     );
     m_sprite.setScale(1.5f, 1.5f);
@@ -417,13 +417,12 @@ float Player::getSpeed()
     return m_speed;
 }
 
-void Player::resetPlayer()
+void Player::resetPlayer(Window* window)
 {
     m_sprite.setPosition(
-        static_cast<float>(1100 * 0.5f) - 162 * 0.5f,
-        static_cast<float>(800 * 0.5f) - 162 * 0.5f
+        static_cast<float>(window->getSize().x) * 0.5f - 162 * 0.5f - 40,
+        static_cast<float>(window->getSize().y) * 0.5f - 162 * 0.5f
     );
-
     m_sprite.setScale(1.5f, 1.5f);
     m_sprite.setOrigin(0.0f, 0.0f);
 

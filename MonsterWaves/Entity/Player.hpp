@@ -85,5 +85,5 @@ public:
     void loseLife();
     void setSpeed(float multiplayer);
     float getSpeed();
-    void resetPlayer();
+    void resetPlayer(Window* window);
 };
