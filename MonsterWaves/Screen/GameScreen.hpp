@@ -25,6 +25,7 @@ private:
     Player m_player;
     TimeStep m_timeStep;
     Direction m_playerDirection{ Direction::None };
+    sf::FloatRect getReducedBounds(const sf::Sprite& sprite, float offset);
 private:
     sf::Texture m_backgroundTexture;
     sf::Sprite m_backgroundSprite;
@@ -41,7 +42,6 @@ private:
 
     sf::RectangleShape block1;
     sf::RectangleShape block2;
-    sf::RectangleShape block3;
 
     bool enemiesDead = { false };
 };

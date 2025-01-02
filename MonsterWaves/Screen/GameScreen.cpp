@@ -13,29 +13,24 @@ GameScreen::GameScreen(Window* window) :
         static_cast<float>(m_window->getSize().y) / m_backgroundTexture.getSize().y
     );
 
-    sf::Vector2f blockSize(170.f, 130.f);
+    sf::Vector2f blockSize(15.0f, 50.0f);
+
     block1.setSize(blockSize);
     block2.setSize(blockSize);
 
-    sf::Vector2f block3Size(40.f, 40.f);
-
-    block3.setSize(block3Size);
-
     block1.setFillColor(sf::Color::Red);
     block2.setFillColor(sf::Color::Blue);
-    block3.setFillColor(sf::Color::Green);
 
-    float windowWidth = 1000.f;
-    float windowHeight = 800.f;
+    float windowWidth = static_cast<float>(m_window->getSize().x);
+    float windowHeight = static_cast<float>(m_window->getSize().y);
     float gapBetweenBlocks = 75.f; 
 
     float totalWidth = (blockSize.x * 2) + gapBetweenBlocks;
     float startX = (windowWidth - totalWidth) / 2.f;
-    float centerY = (windowHeight - blockSize.y) / 2.f;
+    float centerY = (windowHeight - blockSize.y) / 2.f; 
 
-    block1.setPosition(startX - 30, centerY + 110);
-    block2.setPosition(startX + blockSize.x + gapBetweenBlocks + 30, centerY + 110);
-    block3.setPosition(startX + 190, centerY - 50);
+    block1.setPosition(startX - 150.f, centerY + 110.f); 
+    block2.setPosition(startX + blockSize.x - 40  + gapBetweenBlocks + 150.f, centerY + 110.f); 
 
     for (int i = 0; i < m_amountOfEnemies; ++i)
     {
@@ -57,6 +52,18 @@ GameScreen::GameScreen(Window* window) :
     m_levelText.setPosition(
         static_cast<float>(m_window->getSize().x - m_levelText.getGlobalBounds().width * 0.5 - 60),
         10);
+}
+
+sf::FloatRect GameScreen::getReducedBounds(const sf::Sprite& sprite, float offset) {
+
+    sf::FloatRect originalBounds = sprite.getGlobalBounds();
+    return sf::FloatRect(
+
+        originalBounds.left + offset,
+        originalBounds.top + offset,
+        originalBounds.width - 2 * offset - 50,
+        originalBounds.height - 2 * offset
+    );
 }
 
 void GameScreen::handleEvents()
@@ -91,11 +98,14 @@ void GameScreen::handleEvents()
     m_playerDirection = Direction::None;
 
     bool isMovingDiagonally = false;
+
     sf::FloatRect playerBounds = m_player.getBounds();
+    playerBounds = getReducedBounds(m_player.getSprite(), 50.0f);
+
     sf::FloatRect block1Bounds = block1.getGlobalBounds();
     sf::FloatRect block2Bounds = block2.getGlobalBounds();
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && playerBounds.left > 30)
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && playerBounds.left > 40)
     {
         sf::FloatRect futureBounds = playerBounds;
         futureBounds.left -= m_player.getSpeed();
@@ -167,7 +177,7 @@ void GameScreen::handleEvents()
 
         if (futureBounds.intersects(block1Bounds) || futureBounds.intersects(block2Bounds))
         {
-            m_playerDirection = Direction::None; 
+            m_playerDirection = Direction::None;
         }
     }
 }
@@ -279,7 +289,6 @@ void GameScreen::render()
 
     m_window->draw(block1);
     m_window->draw(block2);
-    m_window->draw(block3);
 
     m_player.draw(m_window.get());
 

@@ -19,7 +19,6 @@ public:
 
 public:
     void setDirection(Direction direction, float dt);
-
     void moveLeft(float dt);
     void moveRight(float dt);
     void moveUp(float dt);
