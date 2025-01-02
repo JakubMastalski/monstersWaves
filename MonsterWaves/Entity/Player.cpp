@@ -331,7 +331,7 @@ bool Player::getIdle()
 
 bool Player::attackCooldown()
 {
-    if (playerAttackCooldown.getTotalTimeInSeconds() >= 2.0f)
+    if (playerAttackCooldown.getTotalTimeInSeconds() >= 2.5f)
     {
         attackReady = true;
     }

@@ -287,9 +287,6 @@ void GameScreen::render()
     m_window->draw(m_scoreText);
     m_window->draw(m_levelText);
 
-    m_window->draw(block1);
-    m_window->draw(block2);
-
     m_player.draw(m_window.get());
 
     for (auto& enemy : m_enemies)
