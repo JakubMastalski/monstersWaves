@@ -71,6 +71,7 @@ private:
 
     bool m_isIdle{ true };
     bool isinBorders();
+    bool attackCooldown();
 
     Direction m_lastDirection{ Direction::None };
 public:
@@ -86,4 +87,7 @@ public:
     void setSpeed(float multiplayer);
     float getSpeed();
     void resetPlayer(Window* window);
+    bool attackReady = { false };
+
+    TimeStep playerAttackCooldown;
 };

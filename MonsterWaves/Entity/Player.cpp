@@ -5,7 +5,7 @@ Player::Player(const Window* window)
     m_movingTexture.loadFromFile("res/images/Run.png");
     m_idleTexture.loadFromFile("res/images/Idle.png");
     m_attackTexture.loadFromFile("res/images/Attack1.png");
-    
+
     m_sprite.setTexture(m_idleTexture);
     m_sprite.setPosition(
         static_cast<float>(window->getSize().x) * 0.5f - 162 * 0.5f - 40,
@@ -44,6 +44,7 @@ void Player::update(const float dt)
 {
     updateAttackAnimation(dt);
     updateMoveAnimation(dt);
+    attackCooldown();
 }
 void Player::updateAttackAnimation(const float dt)
 {
@@ -328,10 +329,24 @@ bool Player::getIdle()
     return this->m_isIdle;
 }
 
+bool Player::attackCooldown()
+{
+    if (playerAttackCooldown.getTotalTimeInSeconds() >= 2.0f)
+    {
+        attackReady = true;
+    }
+    else
+    {
+        attackReady = false;
+    }
+    return attackReady;
+}
+
 void Player::attack()
 {
-    if (!m_isAttacking)
+    if (!m_isAttacking && attackCooldown())
     {
+        playerAttackCooldown.reset();
         m_isAttacking = true;
         m_currentFrame = 0;
         m_sprite.setTexture(m_attackTexture);
