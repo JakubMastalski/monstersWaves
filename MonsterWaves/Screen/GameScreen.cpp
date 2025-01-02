@@ -13,6 +13,25 @@ GameScreen::GameScreen(Window* window) :
         static_cast<float>(m_window->getSize().y) / m_backgroundTexture.getSize().y
     );
 
+    sf::Vector2f blockSize(15.0f, 50.0f);
+
+    block1.setSize(blockSize);
+    block2.setSize(blockSize);
+
+    block1.setFillColor(sf::Color::Red);
+    block2.setFillColor(sf::Color::Blue);
+
+    float windowWidth = static_cast<float>(m_window->getSize().x);
+    float windowHeight = static_cast<float>(m_window->getSize().y);
+    float gapBetweenBlocks = 75.f; 
+
+    float totalWidth = (blockSize.x * 2) + gapBetweenBlocks;
+    float startX = (windowWidth - totalWidth) / 2.f;
+    float centerY = (windowHeight - blockSize.y) / 2.f; 
+
+    block1.setPosition(startX - 150.f, centerY + 110.f); 
+    block2.setPosition(startX + blockSize.x - 40  + gapBetweenBlocks + 150.f, centerY + 110.f); 
+
     for (int i = 0; i < m_amountOfEnemies; ++i)
     {
         m_enemies.push_back(std::make_unique<Enemy>(window, m_player.getPosition(), m_enemiesSpeed));
@@ -35,6 +54,18 @@ GameScreen::GameScreen(Window* window) :
         10);
 }
 
+sf::FloatRect GameScreen::getReducedBounds(const sf::Sprite& sprite, float offset) {
+
+    sf::FloatRect originalBounds = sprite.getGlobalBounds();
+    return sf::FloatRect(
+
+        originalBounds.left + offset,
+        originalBounds.top + offset,
+        originalBounds.width - 2 * offset - 50,
+        originalBounds.height - 2 * offset
+    );
+}
+
 void GameScreen::handleEvents()
 {
 
@@ -43,10 +74,8 @@ void GameScreen::handleEvents()
         switch (m_event.type)
         {
         case sf::Event::Closed:
-        {
             m_window->close();
             break;
-        }
         case sf::Event::KeyPressed:
             switch (m_event.key.code)
             {
@@ -70,62 +99,122 @@ void GameScreen::handleEvents()
 
     bool isMovingDiagonally = false;
 
+    sf::FloatRect playerBounds = m_player.getBounds();
+    playerBounds = getReducedBounds(m_player.getSprite(), 50.0f);
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && m_player.getBounds().left > -50)
+    sf::FloatRect block1Bounds = block1.getGlobalBounds();
+    sf::FloatRect block2Bounds = block2.getGlobalBounds();
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && playerBounds.left > 40)
     {
-        if (m_playerDirection != Direction::None) isMovingDiagonally = true;
-        m_playerDirection = Direction::Left;
+        sf::FloatRect futureBounds = playerBounds;
+        futureBounds.left -= m_player.getSpeed();
+        if (!futureBounds.intersects(block1Bounds) && !futureBounds.intersects(block2Bounds))
+        {
+            if (m_playerDirection != Direction::None) isMovingDiagonally = true;
+            m_playerDirection = Direction::Left;
+        }
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && (m_player.getBounds().left + m_player.getBounds().width < 1050))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) &&
+        (playerBounds.left + playerBounds.width < 970))
     {
-        if (m_playerDirection != Direction::None) isMovingDiagonally = true;
-        m_playerDirection = Direction::Right;
+        sf::FloatRect futureBounds = playerBounds;
+        futureBounds.left += m_player.getSpeed();
+        if (!futureBounds.intersects(block1Bounds) && !futureBounds.intersects(block2Bounds))
+        {
+            if (m_playerDirection != Direction::None) isMovingDiagonally = true;
+            m_playerDirection = Direction::Right;
+        }
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && m_player.getBounds().top > -50)
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && playerBounds.top > 150)
     {
-        if (m_playerDirection != Direction::None) isMovingDiagonally = true;
-        m_playerDirection = Direction::Up;
+        sf::FloatRect futureBounds = playerBounds;
+        futureBounds.top -= m_player.getSpeed();
+        if (!futureBounds.intersects(block1Bounds) && !futureBounds.intersects(block2Bounds))
+        {
+            if (m_playerDirection != Direction::None) isMovingDiagonally = true;
+            m_playerDirection = Direction::Up;
+        }
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && (m_player.getBounds().top + m_player.getBounds().height < 850))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) &&
+        (playerBounds.top + playerBounds.height < 800))
     {
-        if (m_playerDirection != Direction::None) isMovingDiagonally = true;
-        m_playerDirection = Direction::Down;
+        sf::FloatRect futureBounds = playerBounds;
+        futureBounds.top += m_player.getSpeed();
+        if (!futureBounds.intersects(block1Bounds) && !futureBounds.intersects(block2Bounds))
+        {
+            if (m_playerDirection != Direction::None) isMovingDiagonally = true;
+            m_playerDirection = Direction::Down;
+        }
     }
 
     if (isMovingDiagonally)
     {
+        sf::FloatRect futureBounds = playerBounds;
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
         {
-            m_playerDirection = Direction::Diagonaly_UpRight;
+            futureBounds.left += m_player.getSpeed();
+            futureBounds.top -= m_player.getSpeed();
+        }
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+        {
+            futureBounds.left -= m_player.getSpeed();
+            futureBounds.top -= m_player.getSpeed();
+        }
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+        {
+            futureBounds.left += m_player.getSpeed();
+            futureBounds.top += m_player.getSpeed();
+        }
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+        {
+            futureBounds.left -= m_player.getSpeed();
+            futureBounds.top += m_player.getSpeed();
         }
 
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+        if (futureBounds.intersects(block1Bounds) || futureBounds.intersects(block2Bounds))
         {
-            m_playerDirection = Direction::Diagonaly_UpLeft;
-        }
-
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-        {
-            m_playerDirection = Direction::Diagonaly_DownRight;
-        }
-
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-        {
-            m_playerDirection = Direction::Diagonaly_DownLeft;
+            m_playerDirection = Direction::None;
         }
     }
+}
+
+
+
+void GameScreen::resetGameState(Window* window)
+{
+    m_level = 1;
+    m_levelText.setString("Level  " + std::to_string(m_level));
+    m_scoreText.setString("0");
+
+    m_enemies.clear();
+    m_amountOfEnemies = 5;
+    m_enemiesSpeed = 65.0f;
+
+    m_player.resetPlayer(window);
+
+    for (int i = 0; i < m_amountOfEnemies; ++i)
+    {
+        if (i < m_enemies.size()) {
+            m_enemies[i]->resetEnemy(window, m_player.getPosition());
+        }
+        else {
+            m_enemies.push_back(std::make_unique<Enemy>(window, m_player.getPosition(), m_enemiesSpeed));
+        }
+    }
+    
 
 }
 
 void GameScreen::update(float dt)
 {
 
-    if (m_player.getLives() < 0)
+    if (m_player.getLives() <= 0)
     {
-        ScreenManager::GetInstance().setScreen(ScreenType::GAMEOVER);
+        resetGameState(m_window.get());
         return;
     }
 
@@ -145,7 +234,7 @@ void GameScreen::update(float dt)
             m_score += 20;
             m_scoreText.setString(std::to_string(m_score));
         }
-        else if (enemy->checkCollisionWithPlayer(m_player.getSprite()) &&
+        if (enemy->checkCollisionWithPlayer(m_player.getSprite()) &&
             !m_player.isAttacking() &&
             enemy->enemyState != EnemyDead &&
             enemy->attackCasted)
@@ -184,7 +273,7 @@ void GameScreen::update(float dt)
 
         if (m_level % 3 == 0)
         {
-            m_player.setSpeed(m_player.getSpeed() * 1.5f);
+            m_player.setSpeed(m_player.getSpeed() * 1.1f);
         }
     }
 }
@@ -198,10 +287,17 @@ void GameScreen::render()
     m_window->draw(m_scoreText);
     m_window->draw(m_levelText);
 
+    m_window->draw(block1);
+    m_window->draw(block2);
 
     m_player.draw(m_window.get());
 
-    for (const auto& enemy : m_enemies)
+    for (auto& enemy : m_enemies)
+    {
+        if (!enemy->enemyisDead) enemy->draw(m_window.get());
+    }
+
+    for (auto& enemy : m_enemies)
     {
         if (!enemy->enemyisDead) enemy->draw(m_window.get());
     }

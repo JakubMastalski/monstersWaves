@@ -17,6 +17,7 @@ public:
 
 public:
     void handleEvents() override;
+    void resetGameState(Window* window);
     void update(float dt) override;
     void render() override;
 
@@ -24,6 +25,7 @@ private:
     Player m_player;
     TimeStep m_timeStep;
     Direction m_playerDirection{ Direction::None };
+    sf::FloatRect getReducedBounds(const sf::Sprite& sprite, float offset);
 private:
     sf::Texture m_backgroundTexture;
     sf::Sprite m_backgroundSprite;
@@ -37,6 +39,9 @@ private:
     sf::Text m_levelText;
     int  m_score{ 0 };
     int  m_level{ 1 };
+
+    sf::RectangleShape block1;
+    sf::RectangleShape block2;
 
     bool enemiesDead = { false };
 };

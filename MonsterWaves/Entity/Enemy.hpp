@@ -55,4 +55,6 @@ public:
 
     void enemyDie();
     EnemyState enemyState = EnemyState::EnemyMoving;
+
+    void resetEnemy(const Window* window, const sf::Vector2f& playerPosition);
 };

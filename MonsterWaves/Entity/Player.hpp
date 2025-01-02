@@ -19,7 +19,6 @@ public:
 
 public:
     void setDirection(Direction direction, float dt);
-
     void moveLeft(float dt);
     void moveRight(float dt);
     void moveUp(float dt);
@@ -71,9 +70,10 @@ private:
     bool m_moveDiagonaly_DownLeft{ false };
 
     bool m_isIdle{ true };
+    bool isinBorders();
 
     Direction m_lastDirection{ Direction::None };
-private:
+public:
     std::vector< sf::CircleShape > m_circleLives;
     int       m_lives{ 3 };
     float     m_speed{ 100.0f };
@@ -85,4 +85,5 @@ public:
     void loseLife();
     void setSpeed(float multiplayer);
     float getSpeed();
+    void resetPlayer(Window* window);
 };
