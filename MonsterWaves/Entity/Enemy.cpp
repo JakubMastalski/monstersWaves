@@ -1,4 +1,4 @@
-#include "Enemy.hpp"
+#include "Entity/Enemy.hpp"
 #include "Utils/RandomGenerator.hpp"
 
 Enemy::Enemy(const Window* window, const sf::Vector2f& playerPosition, const float speed)
@@ -39,7 +39,6 @@ Enemy::Enemy(const Window* window, const sf::Vector2f& playerPosition, const flo
     m_attackTexture.loadFromFile("res/images/EnemyAttack.png");
 
     m_sprite.setTexture(m_movingTexture);
-
     m_sprite.setPosition(m_position);
 
     for (int i = 0; i < m_movingRects.size(); ++i)
@@ -181,6 +180,7 @@ void Enemy::updateDeadAnimation(const float dt)
             m_currentFrame = m_deadRects.size() -1;
             enemyisDead = true;
         }
+
         m_sprite.setTextureRect(m_deadRects[m_currentFrame]);
     }
 }
@@ -212,12 +212,11 @@ bool Enemy::checkCollisionWithPlayerAttack(const sf::Sprite& player) const
     playerAttackBounds.width -= 2 * reductionX;
     playerAttackBounds.height -= 2 * reductionY;
 
-    if (!enemyBounds.intersects(playerAttackBounds))
-        return false;
+    if (!enemyBounds.intersects(playerAttackBounds))  return false;
 
     const float windowHeight = 1000.0f;
-    if (m_position.y <= 0.0f || m_position.y >= windowHeight)
-        return false;
+
+    if (m_position.y <= 0.0f || m_position.y >= windowHeight) return false;
 
     return true;
 }
@@ -241,24 +240,29 @@ void Enemy::resetEnemy(const Window* window, const sf::Vector2f& playerPosition)
     if (edge == 0) {
         startX = -20.0f;
         startY = static_cast<float>(randomGenerator.getNumber(0, static_cast<int>(window->getSize().y)));
+
     }
     else if (edge == 1) {
         startX = static_cast<float>(window->getSize().x) + 20.0f;
         startY = static_cast<float>(randomGenerator.getNumber(0, static_cast<int>(window->getSize().y)));
+
     }
     else if (edge == 2) {
         startX = static_cast<float>(randomGenerator.getNumber(0, static_cast<int>(window->getSize().x)));
+
         startY = -20.0f;
     }
     else if (edge == 3) {
         startX = static_cast<float>(randomGenerator.getNumber(0, static_cast<int>(window->getSize().x)));
         startY = static_cast<float>(window->getSize().y) + 20.0f;
+
     }
 
     m_position = sf::Vector2f{ startX, startY };
 
     const sf::Vector2f direction = playerPosition - m_position;
     const float length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+
     m_direction = direction / length;
 
     m_sprite.setTexture(m_movingTexture);

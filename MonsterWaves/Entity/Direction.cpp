@@ -1,4 +1,3 @@
-
 enum class Direction
 {
     None,
