@@ -105,7 +105,7 @@ void GameScreen::handleEvents()
     sf::FloatRect block1Bounds = block1.getGlobalBounds();
     sf::FloatRect block2Bounds = block2.getGlobalBounds();
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && playerBounds.left > 40)
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && playerBounds.left > 60)
     {
         sf::FloatRect futureBounds = playerBounds;
         futureBounds.left -= m_player.getSpeed();
@@ -117,7 +117,7 @@ void GameScreen::handleEvents()
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) &&
-        (playerBounds.left + playerBounds.width < 970))
+        (playerBounds.left + playerBounds.width < 920))
     {
         sf::FloatRect futureBounds = playerBounds;
         futureBounds.left += m_player.getSpeed();
@@ -140,7 +140,7 @@ void GameScreen::handleEvents()
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) &&
-        (playerBounds.top + playerBounds.height < 800))
+        (playerBounds.top + playerBounds.height < 750))
     {
         sf::FloatRect futureBounds = playerBounds;
         futureBounds.top += m_player.getSpeed();
@@ -187,6 +187,7 @@ void GameScreen::handleEvents()
 void GameScreen::resetGameState(Window* window)
 {
     m_level = 1;
+    m_score = 0;
     m_levelText.setString("Level  " + std::to_string(m_level));
     m_scoreText.setString("0");
 
