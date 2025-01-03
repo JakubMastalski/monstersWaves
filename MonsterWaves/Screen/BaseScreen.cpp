@@ -1,4 +1,4 @@
-#include "BaseScreen.hpp"
+#include "Screen/BaseScreen.hpp"
 
 BaseScreen::BaseScreen(Window* window) : m_window(window)
 {
