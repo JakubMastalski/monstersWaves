@@ -15,11 +15,8 @@ GameScreen::GameScreen(Window* window) :
 
     sf::Vector2f blockSize(15.0f, 50.0f);
 
-    block1.setSize(blockSize);
-    block2.setSize(blockSize);
-
-    block1.setFillColor(sf::Color::Red);
-    block2.setFillColor(sf::Color::Blue);
+    fountainRight.setSize(blockSize);
+    fountainLeft.setSize(blockSize);
 
     float windowWidth = static_cast<float>(m_window->getSize().x);
     float windowHeight = static_cast<float>(m_window->getSize().y);
@@ -29,8 +26,8 @@ GameScreen::GameScreen(Window* window) :
     float startX = (windowWidth - totalWidth) / 2.f;
     float centerY = (windowHeight - blockSize.y) / 2.f; 
 
-    block1.setPosition(startX - 150.f, centerY + 110.f); 
-    block2.setPosition(startX + blockSize.x - 40  + gapBetweenBlocks + 150.f, centerY + 110.f); 
+    fountainRight.setPosition(startX - 150.f, centerY + 110.f);
+    fountainLeft.setPosition(startX + blockSize.x - 40  + gapBetweenBlocks + 150.f, centerY + 110.f);
 
     for (int i = 0; i < m_amountOfEnemies; ++i)
     {
@@ -102,14 +99,14 @@ void GameScreen::handleEvents()
     sf::FloatRect playerBounds = m_player.getBounds();
     playerBounds = getReducedBounds(m_player.getSprite(), 50.0f);
 
-    sf::FloatRect block1Bounds = block1.getGlobalBounds();
-    sf::FloatRect block2Bounds = block2.getGlobalBounds();
+    sf::FloatRect fountainRightBounds = fountainRight.getGlobalBounds();
+    sf::FloatRect fountainLeftBounds = fountainLeft.getGlobalBounds();
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && playerBounds.left > 60)
     {
         sf::FloatRect futureBounds = playerBounds;
         futureBounds.left -= m_player.getSpeed();
-        if (!futureBounds.intersects(block1Bounds) && !futureBounds.intersects(block2Bounds))
+        if (!futureBounds.intersects(fountainRightBounds) && !futureBounds.intersects(fountainLeftBounds))
         {
             if (m_playerDirection != Direction::None) isMovingDiagonally = true;
             m_playerDirection = Direction::Left;
@@ -121,7 +118,7 @@ void GameScreen::handleEvents()
     {
         sf::FloatRect futureBounds = playerBounds;
         futureBounds.left += m_player.getSpeed();
-        if (!futureBounds.intersects(block1Bounds) && !futureBounds.intersects(block2Bounds))
+        if (!futureBounds.intersects(fountainRightBounds) && !futureBounds.intersects(fountainLeftBounds))
         {
             if (m_playerDirection != Direction::None) isMovingDiagonally = true;
             m_playerDirection = Direction::Right;
@@ -132,7 +129,7 @@ void GameScreen::handleEvents()
     {
         sf::FloatRect futureBounds = playerBounds;
         futureBounds.top -= m_player.getSpeed();
-        if (!futureBounds.intersects(block1Bounds) && !futureBounds.intersects(block2Bounds))
+        if (!futureBounds.intersects(fountainRightBounds) && !futureBounds.intersects(fountainLeftBounds))
         {
             if (m_playerDirection != Direction::None) isMovingDiagonally = true;
             m_playerDirection = Direction::Up;
@@ -144,7 +141,7 @@ void GameScreen::handleEvents()
     {
         sf::FloatRect futureBounds = playerBounds;
         futureBounds.top += m_player.getSpeed();
-        if (!futureBounds.intersects(block1Bounds) && !futureBounds.intersects(block2Bounds))
+        if (!futureBounds.intersects(fountainRightBounds) && !futureBounds.intersects(fountainLeftBounds))
         {
             if (m_playerDirection != Direction::None) isMovingDiagonally = true;
             m_playerDirection = Direction::Down;
@@ -175,7 +172,7 @@ void GameScreen::handleEvents()
             futureBounds.top += m_player.getSpeed();
         }
 
-        if (futureBounds.intersects(block1Bounds) || futureBounds.intersects(block2Bounds))
+        if (futureBounds.intersects(fountainRightBounds) || futureBounds.intersects(fountainLeftBounds))
         {
             m_playerDirection = Direction::None;
         }
@@ -188,6 +185,7 @@ void GameScreen::resetGameState(Window* window)
 {
     m_level = 1;
     m_score = 0;
+
     m_levelText.setString("Level  " + std::to_string(m_level));
     m_scoreText.setString("0");
 
@@ -206,8 +204,6 @@ void GameScreen::resetGameState(Window* window)
             m_enemies.push_back(std::make_unique<Enemy>(window, m_player.getPosition(), m_enemiesSpeed));
         }
     }
-    
-
 }
 
 void GameScreen::update(float dt)
