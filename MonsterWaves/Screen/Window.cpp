@@ -33,12 +33,14 @@ void Window::handleEvents()
         case sf::Event::Closed:
             close();
             break;
+
         case sf::Event::KeyPressed:
             if (event.key.code == sf::Keyboard::Escape)
             {
                 close();
             }
             break;
+
         }
     }
 }
