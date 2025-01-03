@@ -10,6 +10,7 @@ public:
     void handleEvents() override;
     void update(float dt) override;
     void render() override;
+
 private:
     sf::Font m_font;
     sf::Text m_text;

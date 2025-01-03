@@ -11,6 +11,7 @@ MenuScreen::MenuScreen(Window* window) : BaseScreen(window)
     m_text.setFillColor(sf::Color::White);
     m_text.setPosition(static_cast<float>(m_window->getSize().x * 0.5 - m_text.getGlobalBounds().width * 0.5),
         static_cast<float>(m_window->getSize().y * 0.5 - m_text.getGlobalBounds().height));
+
 }
 
 void MenuScreen::handleEvents()
@@ -23,15 +24,18 @@ void MenuScreen::handleEvents()
             {
                 m_window->close();
                 break;
+
         case sf::Event::KeyPressed:
             switch (m_event.key.code)
             {
             case sf::Keyboard::Escape:
                 m_window->close();
                 break;
+
             case sf::Keyboard::Enter:
                 ScreenManager::GetInstance().setScreen(ScreenType::GAME);
                 return;
+
             }
             }
         }
@@ -40,7 +44,7 @@ void MenuScreen::handleEvents()
 
 void MenuScreen::update(float dt)
 {
-
+    //EMPTY BODY
 }
 
 void MenuScreen::render()
