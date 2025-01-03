@@ -11,6 +11,7 @@ public:
     void handleEvents() override;
     void update(float dt) override;
     void render() override;
+
 private:
     TimeStep    m_timeStep;
     sf::Font    m_font;
