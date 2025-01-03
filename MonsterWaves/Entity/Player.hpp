@@ -14,8 +14,9 @@ public:
 
 public:
     void update(float dt);
-    void stopAttack();
     void draw(Window* window) const;
+
+    Direction m_lastDirection{ Direction::None };
 
 public:
     void setDirection(Direction direction, float dt);
@@ -23,9 +24,27 @@ public:
     void moveRight(float dt);
     void moveUp(float dt);
     void moveDown(float dt);
+
+public:
     void stopMoving();
+    void stopAttack();
     void attack();
 
+    bool attackCooldown();
+    bool attackReady = { false };
+    bool isAttacking() const;
+
+public:
+    int getLives() const;
+    void loseLife();
+
+    void setSpeed(float multiplayer);
+    float getSpeed();
+
+public:
+    void resetPlayer(Window* window);
+
+public:
     void moveDiagonaly_UpRight(float dt);
     void moveDiagonaly_UpLeft(float dt);
     void moveDiagonaly_DownRight(float dt);
@@ -34,7 +53,11 @@ public:
 public:
     sf::Vector2f getPosition() const;
     sf::FloatRect getBounds() const;
+    const sf::Sprite& getSprite() const;
+
+    bool isinBorders();
     bool getIdle();
+    bool m_isIdle{ true };
 
 private:
     void updateMoveAnimation(const float dt);
@@ -45,6 +68,13 @@ private:
     sf::Texture m_idleTexture;
     sf::Texture m_attackTexture;
     sf::Sprite  m_sprite;
+    TimeStep playerAttackCooldown;
+
+    int       m_lives{ 3 };
+    float     m_speed{ 100.0f };
+
+public:
+    std::vector< sf::CircleShape > m_circleLives;
 
 private:
     std::array< sf::IntRect, 8 >    m_movingRects;
@@ -68,26 +98,4 @@ private:
     bool m_moveDiagonaly_UpLeft{ false };
     bool m_moveDiagonaly_DownRight{ false };
     bool m_moveDiagonaly_DownLeft{ false };
-
-    bool m_isIdle{ true };
-    bool isinBorders();
-    bool attackCooldown();
-
-    Direction m_lastDirection{ Direction::None };
-public:
-    std::vector< sf::CircleShape > m_circleLives;
-    int       m_lives{ 3 };
-    float     m_speed{ 100.0f };
-public:
-    bool isAttacking() const;
-    const sf::Sprite& getSprite() const;
-public:
-    int getLives() const;
-    void loseLife();
-    void setSpeed(float multiplayer);
-    float getSpeed();
-    void resetPlayer(Window* window);
-    bool attackReady = { false };
-
-    TimeStep playerAttackCooldown;
 };

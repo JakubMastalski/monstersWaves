@@ -1,4 +1,3 @@
-
 enum EnemyState
 {
 	EnemyMoving,
