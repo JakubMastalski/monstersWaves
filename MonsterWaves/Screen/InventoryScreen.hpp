@@ -1,4 +1,5 @@
 #pragma once
+
 #include "Screen/BaseScreen.hpp"
 
 class InventoryScreen final : public BaseScreen

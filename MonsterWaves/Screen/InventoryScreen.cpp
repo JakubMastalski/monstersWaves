@@ -6,10 +6,12 @@ InventoryScreen::InventoryScreen(Window* window) : BaseScreen(window)
 {
     constexpr int   gridSize{ 100 };
     constexpr float radius{ gridSize * 0.25 };
+
     std::vector colors = { sf::Color::Green, sf::Color::Blue, sf::Color::Yellow, sf::Color::Red };
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> distribution(0, static_cast<int>(colors.size() - 1));
+
     for (int x = 0; x < m_window->getSize().x; x += gridSize)
     {
         for (int y = 0; y < m_window->getSize().y; y += gridSize)
@@ -39,12 +41,14 @@ void InventoryScreen::handleEvents()
         case sf::Event::Closed:
             m_window->close();
             break;
+
         case sf::Event::KeyPressed:
             switch (m_event.key.code)
             {
             case sf::Keyboard::Escape:
                 m_window->close();
                 break;
+
             case sf::Keyboard::G:
                 // Back to the Game Screen
                 return;
@@ -67,5 +71,6 @@ void InventoryScreen::render()
     {
         m_window->draw(circle);
     }
+
     m_window->endDraw();
 }
