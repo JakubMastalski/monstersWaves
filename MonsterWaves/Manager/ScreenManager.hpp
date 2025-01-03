@@ -29,15 +29,16 @@ private:
 
 public:
     void setScreen(ScreenType screenType);
-public:
-    bool isRunning() const;
 
+public:
     void handleEvents() const;
     void update(float dt) const;
     void render() const;
 
+    bool isRunning() const;
+
 private:
     std::unordered_map< ScreenType, ScreenPointer >     m_screens;
-    BaseScreen* m_activeScreen{ nullptr };
+    BaseScreen* m_activeScreen                          { nullptr };
     TimeStep                                            m_timeStep;
 };

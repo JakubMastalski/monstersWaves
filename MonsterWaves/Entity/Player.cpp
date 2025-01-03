@@ -6,12 +6,12 @@ Player::Player(const Window* window)
     m_idleTexture.loadFromFile("res/images/Idle.png");
     m_attackTexture.loadFromFile("res/images/Attack1.png");
 
+    m_sprite.setScale(1.5f, 1.5f);
     m_sprite.setTexture(m_idleTexture);
     m_sprite.setPosition(
         static_cast<float>(window->getSize().x) * 0.5f - 162 * 0.5f - 40,
         static_cast<float>(window->getSize().y) * 0.5f - 162 * 0.5f
     );
-    m_sprite.setScale(1.5f, 1.5f);
 
     for (int i = 0; i < m_idleRects.size(); ++i)
     {
@@ -135,18 +135,20 @@ void Player::setDirection(const Direction direction, const float dt)
 void Player::moveLeft(const float dt)
 {
     m_sprite.move(-m_speed * dt, 0);
+
     if (!m_isMovingLeft)
     {
+        m_lastDirection = Direction::Left;
+
         m_isAttacking = false;
         m_isMovingLeft = true;
         m_isMovingRight = false;
         m_isMovingUp = false;
         m_isMovingDown = false;
         m_isIdle = false;
+
         m_currentFrame = 0;
         m_sprite.setTexture(m_movingTexture);
-
-        m_lastDirection = Direction::Left;
 
         m_sprite.setScale(-1.5f, 1.5f);
         m_sprite.setOrigin(162.0f, 0.0f);
@@ -156,18 +158,20 @@ void Player::moveLeft(const float dt)
 void Player::moveRight(const float dt)
 {
     m_sprite.move(m_speed * dt, 0);
+
     if (!m_isMovingRight)
     {
+        m_lastDirection = Direction::Right;
+
         m_isAttacking = false;
         m_isMovingLeft = false;
         m_isMovingRight = true;
         m_isMovingUp = false;
         m_isMovingDown = false;
         m_isIdle = false;
-        m_currentFrame = 0;
 
+        m_currentFrame = 0;
         m_sprite.setTexture(m_movingTexture); 
-        m_lastDirection = Direction::Right;
 
         m_sprite.setScale(1.5f, 1.5f); 
         m_sprite.setOrigin(0.0f, 0.0f);
@@ -177,18 +181,20 @@ void Player::moveRight(const float dt)
 void Player::moveUp(float dt)
 {
     m_sprite.move(0, -m_speed * dt);
+
     if (!m_isMovingUp)
     {
+        m_lastDirection = Direction::Up;
+
         m_isAttacking = false;
         m_isMovingRight = false;
         m_isMovingLeft = false;
         m_isMovingUp = true;
         m_isMovingDown = false;
         m_isIdle = false;
+
         m_currentFrame = 0;
         m_sprite.setTexture(m_movingTexture);
-
-        m_lastDirection = Direction::Up;
     }
 }
 
@@ -198,16 +204,17 @@ void Player::moveDiagonaly_UpRight(float dt)
 
     if (!m_isMovingRight)
     {
+        m_lastDirection = Direction::Right;
+
         m_isAttacking = false;
         m_isMovingLeft = false;
         m_isMovingRight = true;
         m_isMovingUp = false;
         m_isMovingDown = false;
         m_isIdle = false;
-        m_currentFrame = 0;
 
+        m_currentFrame = 0;
         m_sprite.setTexture(m_movingTexture);
-        m_lastDirection = Direction::Right;
 
         m_sprite.setScale(1.5f, 1.5f);
         m_sprite.setOrigin(0.0f, 0.0f);
@@ -220,16 +227,17 @@ void Player::moveDiagonaly_UpLeft(float dt)
 
     if (!m_isMovingLeft)
     {
+        m_lastDirection = Direction::Left;
+
         m_isAttacking = false;
         m_isMovingLeft = true;
         m_isMovingRight = false;
         m_isMovingUp = false;
         m_isMovingDown = false;
         m_isIdle = false;
+
         m_currentFrame = 0;
         m_sprite.setTexture(m_movingTexture);
-
-        m_lastDirection = Direction::Left;
 
         m_sprite.setScale(-1.5f, 1.5f);
         m_sprite.setOrigin(162.0f, 0.0f);
@@ -242,16 +250,17 @@ void Player::moveDiagonaly_DownRight(float dt)
 
     if (!m_isMovingRight)
     {
+        m_lastDirection = Direction::Right;
+
         m_isAttacking = false;
         m_isMovingLeft = false;
         m_isMovingRight = true;
         m_isMovingUp = false;
         m_isMovingDown = false;
         m_isIdle = false;
-        m_currentFrame = 0;
 
+        m_currentFrame = 0;
         m_sprite.setTexture(m_movingTexture);
-        m_lastDirection = Direction::Right;
 
         m_sprite.setScale(1.5f, 1.5f);
         m_sprite.setOrigin(0.0f, 0.0f);
@@ -264,16 +273,17 @@ void Player::moveDiagonaly_DownLeft(float dt)
 
     if (!m_isMovingLeft)
     {
+        m_lastDirection = Direction::Left;
+
         m_isAttacking = false;
         m_isMovingLeft = true;
         m_isMovingRight = false;
         m_isMovingUp = false;
         m_isMovingDown = false;
         m_isIdle = false;
+
         m_currentFrame = 0;
         m_sprite.setTexture(m_movingTexture);
-
-        m_lastDirection = Direction::Left;
 
         m_sprite.setScale(-1.5f, 1.5f);
         m_sprite.setOrigin(162.0f, 0.0f);
@@ -286,16 +296,17 @@ void Player::moveDown(float dt)
     m_sprite.move(0, m_speed * dt);
     if (!m_isMovingDown)
     {
+        m_lastDirection = Direction::Down;
+
         m_isAttacking = false;
         m_isMovingRight = false;
         m_isMovingLeft = false;
         m_isMovingUp = false;
         m_isMovingDown = true;
         m_isIdle = false;
+
         m_currentFrame = 0;
         m_sprite.setTexture(m_movingTexture);
-
-        m_lastDirection = Direction::Down;
     }
 }
 
@@ -314,8 +325,8 @@ void Player::stopMoving()
         m_moveDiagonaly_UpRight = false;
         m_moveDiagonaly_UpLeft = false;
 
-        m_sprite.setTexture(m_idleTexture);
         m_currentFrame = 0;
+        m_sprite.setTexture(m_idleTexture);
     }
 }
 
