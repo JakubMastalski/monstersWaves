@@ -18,9 +18,6 @@ GameScreen::GameScreen(Window* window) :
     fountainRight.setSize(blockSize);
     fountainLeft.setSize(blockSize);
 
-    fountainRight.setFillColor(sf::Color::Red);
-    fountainRight.setFillColor(sf::Color::Blue);
-
     float windowWidth = static_cast<float>(m_window->getSize().x);
     float windowHeight = static_cast<float>(m_window->getSize().y);
     float gapBetweenBlocks = 75.f; 
@@ -288,9 +285,6 @@ void GameScreen::render()
     m_window->beginDraw();
 
     m_window->draw(m_backgroundSprite);
-
-    m_window->draw(fountainLeft);
-    m_window->draw(fountainRight);
 
     m_window->draw(m_scoreText);
     m_window->draw(m_levelText);
